@@ -1,8 +1,7 @@
 #include "Exception.h"
 
 static int32_t GenerateSignal() {
-	E._SIGNAL_MAX += 1;
-	return E._SIGNAL_MAX;
+	return E._SIGNAL_MAX++;
 }
 
 static void Try(E_t *self, void (* Code)(), void (* Catch)(), void (* Finally)()) {
