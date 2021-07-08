@@ -4,39 +4,28 @@ static int32_t GenerateSignal() {
 	return E._SIGNAL_MAX++;
 }
 
-static void Try(E_t *self, void (* Code)(), void (* Catch)(), void (* Finally)()) {
-	if (setjmp(self->_Context) == 0) {
-		Code();
+static void Try(void (* Try)(), void (* Catch)(), void (* Finally)()) {
+	if (setjmp(E._Context) == 0) {
+		Try();
 	} else {
 		Catch();
 	}
 	Finally();
 }
 
-static void Throw(E_t *self, int32_t sig) {
-	self->_Signal = sig;
-	longjmp(self->_Context, 1);
+static void Throw(int32_t sig) {
+	E._Signal = sig;
+	longjmp(E._Context, 1);
 }
 
-static int32_t ElicitSignal(E_t *self) {
-	return self->_Signal;
-}
-
-static E_t *Begin() {
-	return (E_t *)(Memory.Allocate(sizeof(E_t)));;
-}
-
-static void End(E_t *e) {
-	free(e);
+static int32_t ElicitSignal() {
+	return E._Signal;
 }
 
 _E E = {
 	._SIGNAL_MAX			= 0,
 
 	.GenerateSignal			= GenerateSignal,
-
-	.Begin					= Begin,
-	.End					= End,
 
 	.Try					= Try,
 	.Throw					= Throw,
