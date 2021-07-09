@@ -44,3 +44,7 @@ $ sh all.sh
 $ cd examples
 $ ./XXX
 ```
+<br><br>
+
+## License
+[AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html)
