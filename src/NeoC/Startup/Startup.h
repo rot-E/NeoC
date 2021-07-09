@@ -8,5 +8,9 @@ typedef struct {
 
 extern _S S;
 
-#define $NeoC 			\
-	S.Startup();
+#define $NeoC 				\
+	{						\
+		S.Startup();
+
+#define NeoC$				\
+	}

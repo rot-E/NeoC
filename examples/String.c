@@ -3,9 +3,7 @@
 
 #include <stdio.h>
 
-void main() {
-	$NeoC
-
+void main() $NeoC {
 	try {
 		String_t *s = String.New("test string");
 
@@ -105,4 +103,4 @@ void main() {
 	} finally {
 		printf("finally\n");
 	} end
-}
+} NeoC$
