@@ -70,42 +70,42 @@ static int32_t GetLength(String_t *str) {
 	return strlen(str->_String);
 }
 
-static uint8_t GetCharAt(String_t *str, const int32_t index) {
+static uint8_t GetCharAt(String_t *str, const int32_t index) throws (String.Exception) {
 	if (String.GetLength(str) < index) throw (String.Exception);
 
 	return String.Unpack(str)[index];
 }
 
-static uint8_t GetHeadChar(String_t *str) {
+static uint8_t GetHeadChar(String_t *str) throws (String.Exception) {
 	if (String.GetLength(str) < 1) throw (String.Exception);
 
 	return String.GetCharAt(str, 0);
 }
 
-static uint8_t GetLastChar(String_t *str) {
+static uint8_t GetLastChar(String_t *str) throws (String.Exception) {
 	if (String.GetLength(str) < 1) throw (String.Exception);
 
 	return String.GetCharAt(str, String.GetLength(str) - 1);
 }
 
-static int32_t FirstIndexOf(String_t *str, const uint8_t ch) {
+static int32_t FirstIndexOf(String_t *str, const uint8_t ch) throws (String.Exception, String.RuntimeException) {
 	for (int32_t i = 0; i < String.GetLength(str); i++)
 		if (String.GetCharAt(str, i) == ch) return i;
 
 	throw (String.RuntimeException);
 }
 
-static int32_t LastIndexOf(String_t *str, const uint8_t ch) {
+static int32_t LastIndexOf(String_t *str, const uint8_t ch) throws (String.Exception, String.RuntimeException) {
 	for (int32_t i = String.GetLength(str); 0 <= i; i--)
 		if (String.GetCharAt(str, i) == ch) return i;
 
 	throw (String.RuntimeException);
 }
 
-static String_t *Substring(String_t *str, const int32_t beginIndex, const int32_t lastIndex) {
+static String_t *Substring(String_t *str, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception) {
 	if (   String.GetLength(str) + 1 < beginIndex
 		|| String.GetLength(str) + 1 < lastIndex
-		|| beginIndex > lastIndex ) throw (String.RuntimeException);
+		|| beginIndex > lastIndex ) throw (String.Exception);
 
 	uint8_t *s = (uint8_t *)(
 		Memory.CountedAllocate(1 + lastIndex - beginIndex, sizeof(uint8_t))
@@ -116,11 +116,11 @@ static String_t *Substring(String_t *str, const int32_t beginIndex, const int32_
 	return String.New(s);
 }
 
-static String_t *DropLastChar(String_t *str) {
+static String_t *DropLastChar(String_t *str) throws (String.Exception) {
 	return String.Substring(str, 0, String.GetLength(str));
 }
 
-static String_t *ReplaceWithChar(String_t *str, const uint8_t oldChar, const uint8_t newChar) {
+static String_t *ReplaceWithChar(String_t *str, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception) {
 	uint8_t *s = (uint8_t *)(
 		Memory.CountedAllocate(String.GetLength(str) + 1, sizeof(uint8_t))
 	);
@@ -168,7 +168,7 @@ static bool Equals(String_t *str, String_t *anString) {
 	) == 1;
 }
 
-static bool StartsWith(String_t *str, String_t *prefix) {
+static bool StartsWith(String_t *str, String_t *prefix) throws (String.Exception) {
 	if (String.GetLength(str) < String.GetLength(prefix))
 		throw (String.Exception);
 
@@ -179,11 +179,11 @@ static bool StartsWith(String_t *str, String_t *prefix) {
 	return true;
 }
 
-static bool StartsWithChar(String_t *str, const uint8_t ch) {
+static bool StartsWithChar(String_t *str, const uint8_t ch) throws (String.Exception) {
 	return String.GetHeadChar(str) == ch;
 }
 
-static bool EndsWith(String_t *str, String_t *suffix) {
+static bool EndsWith(String_t *str, String_t *suffix) throws (String.Exception) {
 	if (String.GetLength(str) < String.GetLength(suffix))
 		throw (String.Exception);
 
@@ -194,7 +194,7 @@ static bool EndsWith(String_t *str, String_t *suffix) {
 	) == 1;
 }
 
-static bool EndsWithChar(String_t *str, const uint8_t ch) {
+static bool EndsWithChar(String_t *str, const uint8_t ch) throws (String.Exception) {
 	return String.GetLastChar(str) == ch;
 }
 

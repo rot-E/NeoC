@@ -3,9 +3,9 @@
 #include <stdio.h>
 
 void main() $NeoC {
-	int32_t HogeException = E.GenerateSignal();
-	int32_t FugaException = E.GenerateSignal();
-	int32_t PiyoException = E.GenerateSignal();
+	int32_t HogeException signal;
+	int32_t FugaException signal;
+	int32_t PiyoException signal;
 
 	int32_t result;
 

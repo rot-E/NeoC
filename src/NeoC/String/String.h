@@ -35,27 +35,27 @@ typedef struct {
 	/* 取得系 */
 	uint8_t *(* Unpack)(String_t *);
 	int32_t (* GetLength)(String_t *);
-	uint8_t (* GetCharAt)(String_t *, const int32_t index);
-	uint8_t (* GetHeadChar)(String_t *);
-	uint8_t (* GetLastChar)(String_t *);
+	uint8_t (* GetCharAt)(String_t *, const int32_t index) throws (String.Exception);
+	uint8_t (* GetHeadChar)(String_t *) throws (String.Exception);
+	uint8_t (* GetLastChar)(String_t *) throws (String.Exception);
 
-	int32_t (* FirstIndexOf)(String_t *, const uint8_t ch);
-	int32_t (* LastIndexOf)(String_t *, const uint8_t ch);
+	int32_t (* FirstIndexOf)(String_t *, const uint8_t ch) throws (String.Exception, String.RuntimeException);
+	int32_t (* LastIndexOf)(String_t *, const uint8_t ch) throws (String.Exception, String.RuntimeException);
 
 	/* 加工系 */
-	String_t *(* Substring)(String_t *, const int32_t beginIndex, const int32_t lastIndex);
-	String_t *(* DropLastChar)(String_t *);
-	String_t *(* ReplaceWithChar)(String_t *, const uint8_t oldChar, const uint8_t newChar);
+	String_t *(* Substring)(String_t *, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception);
+	String_t *(* DropLastChar)(String_t *) throws (String.Exception);
+	String_t *(* ReplaceWithChar)(String_t *, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception);
 	String_t *(* Concat)(String_t *, String_t *str);
 	String_t *(* ConcatChar)(String_t *, const uint8_t ch);
 
 	/* 検査系 */
 	bool (* IsEmpty)(String_t *);
 	bool (* Equals)(String_t *, String_t *anString);
-	bool (* StartsWith)(String_t *, String_t *prefix);
-	bool (* StartsWithChar)(String_t *, const uint8_t ch);
-	bool (* EndsWith)(String_t *, String_t *suffix);
-	bool (* EndsWithChar)(String_t *, const uint8_t ch);
+	bool (* StartsWith)(String_t *, String_t *prefix) throws (String.Exception);
+	bool (* StartsWithChar)(String_t *, const uint8_t ch) throws (String.Exception);
+	bool (* EndsWith)(String_t *, String_t *suffix) throws (String.Exception);
+	bool (* EndsWithChar)(String_t *, const uint8_t ch) throws (String.Exception);
 } _String;
 
 extern _String String;

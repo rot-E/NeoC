@@ -1,5 +1,12 @@
 #pragma once
 
+/* ------------------------------------------------------ */
+/* 環境下宣言 */
+#define $NeoC { _S._Setup();
+
+#define NeoC$ }
+/* ------------------------------------------------------ */
+
 #include "Exception.h"
 #include "CSI.h"
 #include "SGR.h"
@@ -10,7 +17,3 @@ typedef struct {
 } __S;
 
 extern __S _S;
-
-#define $NeoC { _S._Setup();
-
-#define NeoC$ }
