@@ -13,7 +13,7 @@
 #include "Exception.h"
 #include "CC.h"
 
-typedef struct String_t {
+typedef struct {
 	private int32_t _Size;
 	private uint8_t *_String;
 } String_t;
