@@ -14,7 +14,7 @@ void main() $NeoC {
 			throw (FugaException);
 		} catch (FugaException) {
 			printf("Inner: Catch FugaException\n");
-		} endX
+		} end
 
 		try {
 			throw (HogeException);
@@ -22,7 +22,7 @@ void main() $NeoC {
 			printf("Inner: Catch FugaException\n");
 		} finally {
 			printf("Caught HogeException? (Ans:No) ;-)\n");
-		} end
+		} endX
 
 		throw (PiyoException);
 	} catch (HogeException) {
@@ -35,7 +35,7 @@ void main() $NeoC {
 		printf("Outer: Catch Other Exception\n");
 	} finally {
 		result = -1;
-	} end
+	} endX
 
 	printf("%d\n", result);
 } NeoC$

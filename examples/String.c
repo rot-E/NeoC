@@ -102,5 +102,5 @@ void main() $NeoC {
 		printf("String.RuntimeException\n");
 	} finally {
 		printf("finally\n");
-	} end
+	} endX
 } NeoC$

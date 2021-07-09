@@ -13,7 +13,7 @@ typedef struct {
 	uint8_t BS; // 一字後退
 	uint8_t LF; // 改行
 	uint8_t HT; // 水平タブ
-	uint8_t VY; // 垂直タブ
+	uint8_t VT; // 垂直タブ
 	uint8_t FF; // 改ページ
 	uint8_t CR; // 行頭復帰
 	uint8_t ESC; // エスケープシーケンス開始

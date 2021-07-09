@@ -2,6 +2,6 @@ set -eu
 
 cd examples
 
-rm -rf NeoC NeoC.a Exception ExceptionNested String
+rm -rf NeoC NeoC.a Exception ExceptionNested String Theme
 
 cd ../

@@ -31,7 +31,7 @@ void main() $NeoC {
 		printf("Catch Other Exception\n");
 	} finally {
 		result = -1;
-	} end
+	} endX
 
 	printf("%d\n", result);
 } NeoC$

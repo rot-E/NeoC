@@ -13,7 +13,7 @@ void _Setup() {
 
 		.RESET = {
 			.ALL				= CSI.GenerateSGR(0),
-			.BOLD				= CSI.GenerateSGR(21),
+			.BOLD				= CSI.GenerateSGR(22),
 			.DIM				= CSI.GenerateSGR(22),
 			.UNDERLINED			= CSI.GenerateSGR(24),
 			.BLINK				= CSI.GenerateSGR(25),

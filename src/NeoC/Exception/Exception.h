@@ -17,11 +17,11 @@
 
 #define catchAll } else {
 
+#define end }}; Catch; }), ({ void Finally() {}; Finally; }));
+
 #define finally }}; Catch; }), ({ void Finally() {
 
-#define end }; Finally; }));
-
-#define endX }}; Catch; }), ({ void Finally() {}; Finally; }));
+#define endX }; Finally; }));
 
 /* 函数宣言定義時補足宣言 */
 #define throws(...)
