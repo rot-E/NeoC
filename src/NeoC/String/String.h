@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#include "Startup.h"
 #include "Memory.h"
 #include "Exception.h"
 
@@ -16,7 +17,8 @@ typedef struct String_t {
 } String_t;
 
 typedef struct {
-	bool _INITIALISED;
+	void (* Startup)();
+
 	int32_t Exception;
 	int32_t RuntimeException;
 

@@ -1,12 +1,11 @@
 #include "String.h"
 
-static String_t *New(const uint8_t *string) {
-	if (!String._INITIALISED) {
-		String.Exception			= E.GenerateSignal();
-		String.RuntimeException		= E.GenerateSignal();
-		String._INITIALISED			= true;
-	}
+static void Startup() {
+	String.Exception			= E.GenerateSignal();
+	String.RuntimeException		= E.GenerateSignal();
+}
 
+static String_t *New(const uint8_t *string) {
 	String_t *str = (String_t *)(Memory.Allocate(sizeof(String_t)));
 	str->_Size		= (string != NULL)? strlen(string) + 1 : 1;
 	str->_String	= (uint8_t *)(Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
@@ -200,7 +199,7 @@ static bool EndsWithChar(String_t *str, const uint8_t ch) {
 }
 
 _String String = {
-	._INITIALISED						= false,
+	.Startup							= Startup,
 
 	.NEW_FORMAT_MAX_ALLOCATION_SIZE		= 100000,
 

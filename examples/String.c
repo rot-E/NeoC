@@ -4,6 +4,8 @@
 #include <stdio.h>
 
 void main() {
+	$NeoC
+
 	try {
 		String_t *s = String.New("test string");
 
@@ -94,6 +96,8 @@ void main() {
 		printf("%s\n", String.Unpack(s));
 
 		String.New(NULL); // chars[0] = '\0'
+
+		throw (String.RuntimeException);
 	} catch (String.Exception) {
 		printf("String.Exception\n");
 	} catchN (String.RuntimeException) {
