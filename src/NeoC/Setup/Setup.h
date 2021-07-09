@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Exception.h"
 #include "CSI.h"
 #include "SGR.h"
 #include "String.h"

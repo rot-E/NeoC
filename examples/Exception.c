@@ -1,9 +1,8 @@
 #include "NeoC/Exception.h"
 
 #include <stdio.h>
-#include <stdint.h>
 
-void main() {
+void main() $NeoC {
 	struct {
 		int32_t FooException;
 		int32_t BarException;
@@ -38,4 +37,4 @@ void main() {
 	} end
 
 	printf("%d\n", result);
-}
+} NeoC$

@@ -8,12 +8,14 @@ cp -p src/NeoC/*/*.c NeoC
 
 cd NeoC
 
-# 環境
+# 環境 (Setup非依存)
 gcc -c Memory.c -o Memory.o -g
-gcc -c Exception.c -o Exception.o -g
 
-# ライブラリ用環境
+# ライブラリ用初期化環境
 gcc -c Setup.c -o Setup.o -g
+
+# 環境 (Setup依存)
+gcc -c Exception.c -o Exception.o -g
 
 # 定義値
 gcc -c CC.c -o CC.o -g

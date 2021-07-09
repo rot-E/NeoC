@@ -1,6 +1,8 @@
 #include "Setup.h"
 
 static void _Setup() {
+	E._Setup();
+
 	CSI._Setup();
 	SGR._Setup();
 

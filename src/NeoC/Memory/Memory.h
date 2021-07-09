@@ -4,7 +4,7 @@
 #include <sys/mman.h>
 
 typedef struct {
-	void (* HANDLER)();
+	void (* _HANDLER)();
 	void *(* Allocate)(const size_t size);
 	void *(* CountedAllocate)(const size_t num, const size_t size);
 	void *(* SharedAllocate)(const size_t size);
