@@ -4,7 +4,7 @@ static int32_t GenerateSignal() {
 	return E._SIGNAL_MAX++;
 }
 
-static void Try(void (* Try)(), void (* Catch)(), void (* Finally)()) {
+static void Try(const void (* Try)(), const void (* Catch)(), const void (* Finally)()) {
 	if (setjmp(E._Context) == 0) {
 		Try();
 	} else {
@@ -13,7 +13,7 @@ static void Try(void (* Try)(), void (* Catch)(), void (* Finally)()) {
 	Finally();
 }
 
-static void Throw(int32_t sig) {
+static void Throw(const int32_t sig) {
 	E._Signal = sig;
 	longjmp(E._Context, 1);
 }

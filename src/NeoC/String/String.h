@@ -7,9 +7,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "Startup.h"
+#include "Setup.h"
 #include "Memory.h"
 #include "Exception.h"
+#include "CC.h"
 
 typedef struct String_t {
 	int32_t _Size;
@@ -17,18 +18,12 @@ typedef struct String_t {
 } String_t;
 
 typedef struct {
-	void (* Startup)();
+	void (* _Setup)();
 
 	int32_t Exception;
 	int32_t RuntimeException;
 
 	int32_t NEW_FORMAT_MAX_ALLOCATION_SIZE;
-
-	struct {
-		uint8_t Null;
-		uint8_t CR;
-		uint8_t LF;
-	} CHARSET;
 
 	String_t *(* New)(const uint8_t *str);
 	String_t *(* NewN)(const size_t size);

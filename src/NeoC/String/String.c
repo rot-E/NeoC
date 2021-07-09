@@ -1,6 +1,6 @@
 #include "String.h"
 
-static void Startup() {
+static void _Setup() {
 	String.Exception			= E.GenerateSignal();
 	String.RuntimeException		= E.GenerateSignal();
 }
@@ -10,7 +10,7 @@ static String_t *New(const uint8_t *string) {
 	str->_Size		= (string != NULL)? strlen(string) + 1 : 1;
 	str->_String	= (uint8_t *)(Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
 	if (string != NULL) strncpy(str->_String, string, strlen(string));
-	str->_String[(string != NULL)? str->_Size - 1 : 0] = String.CHARSET.Null;
+	str->_String[(string != NULL)? str->_Size - 1 : 0] = CC.NUL;
 
 	return str;
 }
@@ -34,7 +34,7 @@ static String_t *NewFormat(const uint8_t *format, ...) {
 	vsprintf(str->_String, format, ap);
 	va_end(ap);
 
-	str->_String[str->_Size - 1] = String.CHARSET.Null; //
+	str->_String[str->_Size - 1] = CC.NUL; //
 	String.Reduce(str);
 
 	return str;
@@ -48,7 +48,7 @@ static void Reduce(String_t *str) {
 	String.Release(str);
 	str->_String = (uint8_t *)(Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
 	strncpy(str->_String, tmp, str->_Size);
-	str->_String[str->_Size - 1] = String.CHARSET.Null;
+	str->_String[str->_Size - 1] = CC.NUL;
 
 	free(tmp);
 }
@@ -111,7 +111,7 @@ static String_t *Substring(String_t *str, const int32_t beginIndex, const int32_
 		Memory.CountedAllocate(1 + lastIndex - beginIndex, sizeof(uint8_t))
 	);
 	strncpy(s, str->_String + beginIndex, lastIndex - beginIndex);
-	s[lastIndex - beginIndex - 1] = String.CHARSET.Null;
+	s[lastIndex - beginIndex - 1] = CC.NUL;
 
 	return String.New(s);
 }
@@ -199,15 +199,9 @@ static bool EndsWithChar(String_t *str, const uint8_t ch) {
 }
 
 _String String = {
-	.Startup							= Startup,
+	._Setup								= _Setup,
 
 	.NEW_FORMAT_MAX_ALLOCATION_SIZE		= 100000,
-
-	.CHARSET = {
-		.Null							= '\0',
-		.CR								= '\r',
-		.LF								= '\n',
-	},
 
 	.New								= New,
 	.NewN								= NewN,

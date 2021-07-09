@@ -12,8 +12,8 @@ typedef struct {
 	int32_t _SIGNAL_MAX;
 	int32_t (* GenerateSignal)();
 
-	void (* Try)(void (* Try)(), void (* Catch)(), void (* Finally)());
-	void (* Throw)(int32_t);
+	void (* Try)(const void (* Try)(), const void (* Catch)(), const void (* Finally)());
+	void (* Throw)(const int32_t);
 	int32_t (* ElicitSignal)();
 } _E;
 
