@@ -1,5 +1,5 @@
-#include "NeoCEnvLib/Exception.h"
-#include "NeoCEnvLib/String.h"
+#include "NeoC/Exception.h"
+#include "NeoC/String.h"
 
 #include <stdio.h>
 

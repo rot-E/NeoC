@@ -1,13 +1,15 @@
 set -eu
 
-mkdir -p NeoCEnvLib
-cp -p src/NeoCEnvLib/*/*.h NeoCEnvLib
-cp -p src/NeoCEnvLib/*/*.c NeoCEnvLib
+sh clean.sh
 
-cd NeoCEnvLib
+mkdir -p NeoC
+cp -p src/NeoC/*/*.h NeoC
+cp -p src/NeoC/*/*.c NeoC
+
+cd NeoC
 gcc -c Memory.c -o Memory.o -g
 gcc -c Exception.c -o Exception.o -g
 gcc -c String.c -o String.o -g
 rm *.c
-ar -cq ../NeoCEnvLib.a *.o
+ar -cq ../NeoC.a *.o
 rm *.o

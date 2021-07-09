@@ -1,3 +1,9 @@
 set -eu
 
-rm -r NeoCEnvLib NeoCEnvLib.a
+if [ -e NeoC ]; then
+	rm -r NeoC
+fi
+
+if [ -e NeoC.a ]; then
+	rm -r NeoC.a
+fi

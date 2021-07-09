@@ -1,4 +1,4 @@
-#include "NeoCEnvLib/Exception.h"
+#include "NeoC/Exception.h"
 
 #include <stdio.h>
 #include <stdint.h>

@@ -2,6 +2,6 @@ set -eu
 
 cd examples
 
-rm -rf NeoCEnvLib NeoCEnvLib.a Exception String
+rm -rf NeoC NeoC.a Exception String
 
 cd ../
