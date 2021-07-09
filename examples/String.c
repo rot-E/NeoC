@@ -95,6 +95,8 @@ void main() $NeoC {
 
 		String.New(NULL); // chars[0] = '\0'
 
+		printf("%s\n", String.Unpack(String.NewChar('t')));
+
 		throw (String.RuntimeException);
 	} catch (String.Exception) {
 		printf("String.Exception\n");

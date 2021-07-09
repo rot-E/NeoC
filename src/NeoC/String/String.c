@@ -40,6 +40,11 @@ static String_t *NewFormat(const uint8_t *format, ...) {
 	return str;
 }
 
+static String_t *NewChar(const uint8_t ch) {
+	uint8_t tmp[] = { ch };
+	return String.New(tmp);
+}
+
 static void Reduce(String_t *str) {
 	uint8_t *tmp = (uint8_t *)(Memory.CountedAllocate(String.GetLength(str) + 1, sizeof(uint8_t)));
 	strncpy(tmp, String.Unpack(str), String.GetLength(str) + 1);
@@ -206,6 +211,7 @@ _String String = {
 	.New								= New,
 	.NewN								= NewN,
 	.NewFormat							= NewFormat,
+	.NewChar							= NewChar,
 	.Reduce								= Reduce,
 	.Release							= Release,
 	.Delete								= Delete,

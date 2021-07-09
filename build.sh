@@ -24,7 +24,7 @@ gcc -c SGR.c -o SGR.o -g
 
 # 部品
 gcc -c String.c -o String.o -g
-#gcc -c Console.c -o Console.o -g
+gcc -c Console.c -o Console.o -g
 
 rm *.c
 ar -cq ../NeoC.a *.o

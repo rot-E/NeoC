@@ -29,6 +29,7 @@ typedef struct {
 	public String_t *(* New)(const uint8_t *str);
 	public String_t *(* NewN)(const size_t size);
 	public String_t *(* NewFormat)(const uint8_t *format, ...);
+	public String_t *(* NewChar)(const uint8_t ch);
 	public void (* Reduce)(String_t *);
 	public void (* Release)(String_t *);
 	public void (* Delete)(String_t *);
