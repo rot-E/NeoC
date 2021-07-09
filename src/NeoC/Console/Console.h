@@ -14,6 +14,7 @@ typedef struct {
 	public void (* SetDefaultColour)();
 
 	public void (* Write)(String_t *str);
+	public void (* WriteChar)(uint8_t ch);
 	public void (* WriteLine)(String_t *str);
 	public void (* NewLine)();
 	public void (* WriteColourLine)(uint8_t *colour, String_t *str);

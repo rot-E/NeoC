@@ -17,6 +17,10 @@ static void Write(String_t *str) {
 	fflush(stdout);
 }
 
+static void WriteChar(uint8_t ch) {
+	Console.Write(String.NewChar(ch));
+}
+
 static void WriteLine(String_t *str) {
 	Console.Write(str);
 	Console.NewLine();
@@ -33,7 +37,7 @@ static void WriteColourLine(uint8_t *colour, String_t *str) {
 }
 
 static void WriteErrorLine(String_t *str) {
-	fprintf(stderr, "%s\n", String.Unpack(str));
+	fprintf(stderr, "%s%c", String.Unpack(str), CC.LF);
 	fflush(stderr);
 }
 
@@ -62,6 +66,7 @@ _Console Console = {
 	.SetDefaultColour		= SetDefaultColour,
 
 	.Write					= Write,
+	.WriteChar				= WriteChar,
 	.WriteLine				= WriteLine,
 	.NewLine				= NewLine,
 	.WriteColourLine		= WriteColourLine,
