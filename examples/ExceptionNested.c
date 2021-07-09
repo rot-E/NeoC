@@ -1,6 +1,5 @@
 #include "NeoC/Exception.h"
-
-#include <stdio.h>
+#include "NeoC/Console.h"
 
 void main() $NeoC {
 	int32_t HogeException signal;
@@ -13,29 +12,29 @@ void main() $NeoC {
 		try {
 			throw (FugaException);
 		} catch (FugaException) {
-			printf("Inner: Catch FugaException\n");
+			Console.WriteLine(String.New("Inner: Catch FugaException"));
 		} end
 
 		try {
 			throw (HogeException);
 		} catch (FugaException) {
-			printf("Inner: Catch FugaException\n");
+			Console.WriteLine(String.New("Inner: Catch FugaException"));
 		} finally {
-			printf("Caught HogeException? (Ans:No) ;-)\n");
+			Console.WriteLine(String.New("Caught HogeException? (Ans:No) ;-)"));
 		} endX
 
 		throw (PiyoException);
 	} catch (HogeException) {
-		printf("Outer: Catch HogeException\n");
+		Console.WriteLine(String.New("Outer: Catch HogeException"));
 	} catchN (FugaException) {
-		printf("Outer: Catch FugaException\n");
+		Console.WriteLine(String.New("Outer: Catch FugaException"));
 	} catchN (PiyoException) {
-		printf("Outer: Catch PiyoException\n");
+		Console.WriteLine(String.New("Outer: Catch PiyoException"));
 	} catchAll {
-		printf("Outer: Catch Other Exception\n");
+		Console.WriteLine(String.New("Outer: Catch Other Exception"));
 	} finally {
 		result = -1;
 	} endX
 
-	printf("%d\n", result);
+	Console.WriteLine(String.NewFormat("%d\n", result));
 } NeoC$

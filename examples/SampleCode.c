@@ -7,11 +7,11 @@ void main() $NeoC {
    Console.WriteLine(text);
 
    try {
-      int32_t fm = String.FirstIndexOf(text, 'i');
-      int32_t lm = String.LastIndexOf(text, 'i');
+      int32_t fi = String.FirstIndexOf(text, 'i');
+      int32_t li = String.LastIndexOf(text, 'i');
 
       for (int32_t i = 0; i < String.GetLength(text); i++) {
-         Console.WriteChar((i == fm || i == lm)? '^' : ' ');
+         Console.WriteChar((i == fi || i == li)? '^' : ' ');
       }
       Console.NewLine();
 

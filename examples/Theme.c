@@ -1,9 +1,8 @@
-#include "NeoC/Exception.h"
 #include "NeoC/String.h"
-#include "NeoC/SGR.h"
 #include "NeoC/CC.h"
-
-#include <stdio.h>
+#include "NeoC/SGR.h"
+#include "NeoC/Console.h"
+#include "NeoC/Exception.h"
 
 void main() $NeoC {
 	String_t *neoC = String.New("NeoC");
@@ -12,7 +11,7 @@ void main() $NeoC {
 	String_t *CPEL = String.New("C Programming Environment Library");
 	String_t *exc = String.New(" !");
 
-	String_t *msg = String.NewFormat(
+	Console.WriteLine(String.NewFormat(
 		"%c%c%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 		CC.HT, CC.HT, SGR.SET.BOLD, SGR.TEXT.LIGHT_YELLOW,
 		String.Unpack(neoC), SGR.RESET.BOLD, SGR.TEXT.YELLOW,
@@ -22,31 +21,29 @@ void main() $NeoC {
 		String.Unpack(CPEL), SGR.RESET.UNDERLINED, SGR.SET.BOLD,
 		SGR.TEXT.LIGHT_CYAN, String.Unpack(exc), SGR.RESET.BOLD,
 		SGR.TEXT.DEFAULT
-	);
+	));
 
-	printf("%s%c", String.Unpack(msg), CC.LF); // Console.WriteLine(msg);
-	printf("%c%c", CC.HT, CC.HT);
+	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
 
 	String_t *text = String.NewFormat(
 		"%s%s%s%s%s", String.Unpack(neoC), String.Unpack(isA),
 		String.Unpack(neo), String.Unpack(CPEL), String.Unpack(exc)
 	);
 
-	for (int32_t i = 0; i < String.GetLength(text); i++) { // foreach () {
-		printf("%c", (String.GetCharAt(text, i) == 'm')? '^' : '.');
-	}
+	for (int32_t i = 0; i < String.GetLength(text); i++)
+		Console.WriteChar((String.GetCharAt(text, i) == 'm')? '^' : '.');
+	Console.NewLine();
 
-	printf("%c%c%c", CC.LF, CC.HT, CC.HT);
+	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
 
 	try {
 		int32_t fm = String.FirstIndexOf(text, 'i');
 		int32_t lm = String.LastIndexOf(text, 'i');
 
 		for (int32_t i = 0; i < String.GetLength(text); i++)
-			printf("%c", (i == fm || i == lm)? '~' : ' ');
-
-		printf("%c", CC.LF);
+			Console.WriteChar((i == fm || i == lm)? '~' : ' ');
+		Console.NewLine();
 	} catch (String.RuntimeException) {
-		printf("[Error] Target Not Found.\n");
+		Console.WriteErrorLine(String.New("[Error] Target Not Found."));
 	} end
 } NeoC$
