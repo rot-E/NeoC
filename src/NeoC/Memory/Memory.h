@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 
+#include "Annotation.h"
+
 typedef struct {
-	void (* _HANDLER)();
-	void *(* Allocate)(const size_t size);
-	void *(* CountedAllocate)(const size_t num, const size_t size);
-	void *(* SharedAllocate)(const size_t size);
+	protected void (* _HANDLER)();
+	public void *(* Allocate)(const size_t size);
+	public void *(* CountedAllocate)(const size_t num, const size_t size);
+	public void *(* SharedAllocate)(const size_t size);
 } _Memory;
 
 extern _Memory Memory;

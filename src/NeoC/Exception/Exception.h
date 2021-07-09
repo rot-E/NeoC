@@ -31,41 +31,41 @@
 #include <setjmp.h>
 #include <stdlib.h>
 
+#include "Annotation.h"
 #include "Setup.h"
-
 #include "Memory.h"
 
 typedef struct {
-	jmp_buf _Context;
-	int32_t _Signal;
+	private jmp_buf _Context;
+	private int32_t _Signal;
 	/* データ持たせたい場合ここに追記;
-	// void *_Data;
+	// private void *_Data;
 	 *
 	 * アクセッサへのポインタ変数を_Context型に定義 */
 } Context_t;
 
 typedef struct {
-	Context_t *(* New)();
-	void (* Delete)(Context_t *);
+	public Context_t *(* New)();
+	public void (* Delete)(Context_t *);
 } _Context;
 
 extern _Context Context;
 
 
 typedef struct {
-	void (* _Setup)();
+	private void (* _Setup)();
 
-	int32_t _SIGNAL_MAX;
-	int32_t (* GenerateSignal)();
+	private int32_t _SIGNAL_MAX;
+	public int32_t (* GenerateSignal)();
 
-	int32_t _Nest;
-	int32_t _NEST_MAX;
-	void (* _HANDLER)();
-	Context_t *_Context;
+	private int32_t _Nest;
+	private int32_t _NEST_MAX;
+	protected void (* _HANDLER)();
+	private Context_t *_Context;
 
-	void (* Try)(const void (* Try)(), const void (* Catch)(), const void (* Finally)());
-	void (* Throw)(const int32_t);
-	int32_t (* ElicitSignal)();
+	public void (* Try)(const void (* Try)(), const void (* Catch)(), const void (* Finally)());
+	public void (* Throw)(const int32_t);
+	public int32_t (* ElicitSignal)();
 } _E;
 
 extern _E E;

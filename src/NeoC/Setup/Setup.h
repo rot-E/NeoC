@@ -7,13 +7,14 @@
 #define NeoC$ }
 /* ------------------------------------------------------ */
 
+#include "Annotation.h"
 #include "Exception.h"
 #include "CSI.h"
 #include "SGR.h"
 #include "String.h"
 
 typedef struct {
-	void (* _Setup)();
+	private void (* _Setup)();
 } __S;
 
 extern __S _S;
