@@ -97,10 +97,10 @@ void main() $NeoC {
 
 		throw (String.RuntimeException);
 	} catch (String.Exception) {
-		Console.WriteLine(String.New("String.Exception"));
+		Console.WriteErrorLine(String.New("String.Exception"));
 	} catchN (String.RuntimeException) {
-		Console.WriteLine(String.New("String.RuntimeException"));
+		Console.WriteErrorLine(String.New("String.RuntimeException"));
 	} finally {
-		Console.WriteLine(String.New("finally"));
+		Console.WriteErrorLine(String.New("finally"));
 	} endX
 } NeoC$

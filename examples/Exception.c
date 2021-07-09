@@ -21,16 +21,16 @@ void main() $NeoC {
 		Console.WriteLine(String.New("処理2"));
 		result = 2;
 	} catch (FooException) {
-		Console.WriteLine(String.New("Catch FooException"));
+		Console.WriteErrorLine(String.New("Catch FooException"));
 	} catchN (BarException) {
-		Console.WriteLine(String.New("Catch BarException"));
+		Console.WriteErrorLine(String.New("Catch BarException"));
 	} catchN (BazException) {
-		Console.WriteLine(String.New("Catch BazException"));
+		Console.WriteErrorLine(String.New("Catch BazException"));
 	} catchAll {
-		Console.WriteLine(String.New("Catch Other Exception"));
+		Console.WriteErrorLine(String.New("Catch Other Exception"));
 	} finally {
 		result = -1;
 	} endX
 
-	Console.WriteLine(String.NewFormat("%d\n", result));
+	Console.WriteLine(String.NewFormat("%d", result));
 } NeoC$

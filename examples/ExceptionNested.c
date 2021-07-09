@@ -12,29 +12,29 @@ void main() $NeoC {
 		try {
 			throw (FugaException);
 		} catch (FugaException) {
-			Console.WriteLine(String.New("Inner: Catch FugaException"));
+			Console.WriteErrorLine(String.New("Inner: Catch FugaException"));
 		} end
 
 		try {
 			throw (HogeException);
 		} catch (FugaException) {
-			Console.WriteLine(String.New("Inner: Catch FugaException"));
+			Console.WriteErrorLine(String.New("Inner: Catch FugaException"));
 		} finally {
-			Console.WriteLine(String.New("Caught HogeException? (Ans:No) ;-)"));
+			Console.WriteErrorLine(String.New("Caught HogeException? (Ans:No) ;-)"));
 		} endX
 
 		throw (PiyoException);
 	} catch (HogeException) {
-		Console.WriteLine(String.New("Outer: Catch HogeException"));
+		Console.WriteErrorLine(String.New("Outer: Catch HogeException"));
 	} catchN (FugaException) {
-		Console.WriteLine(String.New("Outer: Catch FugaException"));
+		Console.WriteErrorLine(String.New("Outer: Catch FugaException"));
 	} catchN (PiyoException) {
-		Console.WriteLine(String.New("Outer: Catch PiyoException"));
+		Console.WriteErrorLine(String.New("Outer: Catch PiyoException"));
 	} catchAll {
-		Console.WriteLine(String.New("Outer: Catch Other Exception"));
+		Console.WriteErrorLine(String.New("Outer: Catch Other Exception"));
 	} finally {
 		result = -1;
 	} endX
 
-	Console.WriteLine(String.NewFormat("%d\n", result));
+	Console.WriteLine(String.NewFormat("%d", result));
 } NeoC$
