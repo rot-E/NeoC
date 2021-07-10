@@ -47,4 +47,4 @@ $ ./XXX
 <br>
 
 ## License
-&emsp;[AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html)
+&emsp;[`AGPLv3`](https://www.gnu.org/licenses/agpl-3.0.html)
