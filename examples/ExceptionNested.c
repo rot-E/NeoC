@@ -3,9 +3,9 @@
 #include "NeoC/Console.h"
 
 void main() $_ {
-	int32_t HogeException signal;
-	int32_t FugaException signal;
-	int32_t PiyoException signal;
+	Signal_t HogeException signal;
+	Signal_t FugaException signal;
+	Signal_t PiyoException signal;
 
 	int32_t result;
 

@@ -36,9 +36,12 @@
 #include "Setup.h"
 #include "Memory.h"
 
+typedef uint32_t Signal_t;
+
 typedef struct {
 	private jmp_buf _Context;
-	private int32_t _Signal;
+	private Signal_t _Signal;
+
 	/* データ持たせたい場合ここに追記;
 	// private void *_Data;
 	 *
@@ -56,17 +59,17 @@ extern _Context Context;
 typedef struct {
 	private void (* _Setup)();
 
-	private int32_t _SIGNAL_MAX;
-	public int32_t (* GenerateSignal)();
+	private uint32_t _SIGNAL_MAX;
+	public Signal_t (* GenerateSignal)();
 
+	private Context_t *_Context;
 	private int32_t _Nest;
 	private int32_t _NEST_MAX;
 	protected void (* _HANDLER)();
-	private Context_t *_Context;
 
 	public void (* Try)(const void (* Try)(), const void (* Catch)(), const void (* Finally)());
-	public void (* Throw)(const int32_t);
-	public int32_t (* ElicitSignal)();
+	public void (* Throw)(const Signal_t);
+	public Signal_t (* ElicitSignal)();
 } _E;
 
 extern _E E;

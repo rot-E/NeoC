@@ -9,7 +9,7 @@ void main() $_ {
 	sign (BazException);
 	sign (QuxException);
 
-	int32_t QuuxException signal; // 方法2
+	Signal_t QuuxException signal; // 方法2
 
 
 	int32_t result = 0;

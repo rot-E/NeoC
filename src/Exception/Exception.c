@@ -29,7 +29,7 @@ static void _DEFAULT_HNDLER() {
 	exit(EXIT_FAILURE);
 }
 
-static int32_t GenerateSignal() {
+static Signal_t GenerateSignal() {
 	return E._SIGNAL_MAX++;
 }
 
@@ -44,14 +44,14 @@ static void Try(const void (* Try)(), const void (* Catch)(), const void (* Fina
 	Finally();
 }
 
-static void Throw(const int32_t sig) {
+static void Throw(const Signal_t sig) {
 	if (E._Nest < 0) E._HANDLER();
 
 	E._Context[--E._Nest]._Signal = sig;
 	longjmp(E._Context[E._Nest]._Context, 1);
 }
 
-static int32_t ElicitSignal() {
+static Signal_t ElicitSignal() {
 	return E._Context[E._Nest]._Signal;
 }
 
@@ -62,7 +62,7 @@ _E E = {
 	.GenerateSignal			= GenerateSignal,
 
 	._Nest					= 0,
-	._NEST_MAX				= 100,
+	._NEST_MAX				= 1000,
 	._HANDLER				= _DEFAULT_HNDLER,
 
 	.Try					= Try,
