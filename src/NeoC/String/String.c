@@ -1,8 +1,8 @@
 #include "String.h"
 
 static void _Setup() {
-	String.Exception			= E.GenerateSignal();
-	String.RuntimeException		= E.GenerateSignal();
+	String.Exception signal;
+	String.RuntimeException signal;
 }
 
 static String_t *New(const uint8_t *string) {

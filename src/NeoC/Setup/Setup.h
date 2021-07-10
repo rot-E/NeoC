@@ -1,9 +1,10 @@
 #pragma once
 
 /* ------------------------------------------------------ */
-/* 環境下宣言 */
+/* NeoC環境開始宣言 */
 #define $NeoC { _S._Setup();
 
+/* NeoC環境終了宣言 */
 #define NeoC$ }
 /* ------------------------------------------------------ */
 
@@ -12,6 +13,7 @@
 #include "CSI.h"
 #include "SGR.h"
 #include "String.h"
+#include "System.h"
 
 typedef struct {
 	private void (* _Setup)();

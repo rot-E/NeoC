@@ -15,4 +15,6 @@ gcc SampleCode.c NeoC.a -o SampleCode -g
 
 gcc Console.c NeoC.a -o Console -g
 
+gcc System.c NeoC.a -o System -g
+
 cd ../
