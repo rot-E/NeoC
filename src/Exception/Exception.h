@@ -11,7 +11,7 @@
 
 #define throw(EX) E.Throw(EX)
 
-#define catch(EX) }; Try; }), ({ void Catch() { const int32_t sig = E.ElicitSignal(); if (sig == EX) {
+#define catch(EX) }; Try; }), ({ void Catch() { const uint32_t sig = E.ElicitSignal(); if (sig == EX) {
 
 #define catchN(EX) } else if (sig == EX) {
 
@@ -34,13 +34,13 @@
 
 #include "Annotation.h"
 #include "Setup.h"
-#include "Memory.h"
+#include "__Memory.h"
 
 typedef uint32_t Signal_t;
 
 typedef struct {
 	private jmp_buf _Context;
-	private Signal_t _Signal;
+	private int32_t _Signal;
 
 	/* データ持たせたい場合ここに追記;
 	// private void *_Data;
@@ -60,7 +60,7 @@ typedef struct {
 	private void (* _Setup)();
 
 	private uint32_t _SIGNAL_MAX;
-	public Signal_t (* GenerateSignal)();
+	public uint32_t (* GenerateSignal)();
 
 	private Context_t *_Context;
 	private int32_t _Nest;

@@ -22,8 +22,8 @@ typedef struct {
 typedef struct {
 	private void (* _Setup)();
 
-	public final int32_t Exception;
-	public final int32_t Failure;
+	public final uint32_t Exception;
+	public final uint32_t Failure;
 
 	private int32_t _NEW_FORMAT_MAX_ALLOCATION_SIZE;
 
