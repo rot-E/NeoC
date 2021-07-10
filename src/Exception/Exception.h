@@ -60,7 +60,7 @@ typedef struct {
 	private void (* _Setup)();
 
 	private uint32_t _SIGNAL_MAX;
-	public uint32_t (* GenerateSignal)();
+	public Signal_t (* GenerateSignal)();
 
 	private Context_t *_Context;
 	private int32_t _Nest;
