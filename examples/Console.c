@@ -1,7 +1,8 @@
+#include "NeoC/Environment.h"
 #include "NeoC/Console.h"
 #include "NeoC/String.h"
 
-void main() $NeoC {
+void main() $_ {
 	Console.WriteLine(String.New("test"));
 	Console.SetColour(SGR.TEXT.BLUE);
 	Console.WriteLine(String.New("test"));
@@ -19,4 +20,4 @@ void main() $NeoC {
 	Console.WriteLine(String.New("test3"));
 
 	Console.WriteTopLine(String.New("> "));
-} NeoC$
+} _$

@@ -1,7 +1,8 @@
+#include "NeoC/Environment.h"
 #include "NeoC/Exception.h"
 #include "NeoC/Console.h"
 
-void main() $NeoC {
+void main() $_ {
 	/* signalの宣言 */
 	sign (FooException); // 方法1
 	sign (BarException);
@@ -33,4 +34,4 @@ void main() $NeoC {
 	} endX
 
 	Console.WriteLine(String.NewFormat("%d", result));
-} NeoC$
+} _$

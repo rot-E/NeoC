@@ -1,3 +1,4 @@
+#include "NeoC/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/SPEC/CC.h"
 #include "NeoC/SPEC/CSI.h"
@@ -6,7 +7,7 @@
 #include "NeoC/Exception.h"
 #include "NeoC/System.h"
 
-void main() $NeoC {
+void main() $_ {
 	String_t *neoC = String.New("NeoC");
 	String_t *isA = String.New(" is a ");
 	String_t *neo = String.New("Neo ");
@@ -44,4 +45,4 @@ void main() $NeoC {
 			System.USleep(30 * 1000);
 		}
 	}
-} NeoC$
+} _$

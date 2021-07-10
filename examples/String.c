@@ -1,8 +1,9 @@
+#include "NeoC/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 #include "NeoC/Exception.h"
 
-void main() $NeoC {
+void main() $_ {
 	try {
 		String_t *s = String.New("test string");
 
@@ -95,12 +96,10 @@ void main() $NeoC {
 
 		Console.WriteLine(String.NewFormat("%s", String.Unpack(String.NewChar('t'))));
 
-		throw (String.RuntimeException);
-	} catch (String.Exception) {
+		throw (String.Failure);
+	} catch (String.Failure) {
+		Console.WriteErrorLine(String.New("String.Failure"));
+	} catchN (String.Exception) {
 		Console.WriteErrorLine(String.New("String.Exception"));
-	} catchN (String.RuntimeException) {
-		Console.WriteErrorLine(String.New("String.RuntimeException"));
-	} finally {
-		Console.WriteErrorLine(String.New("finally"));
-	} endX
-} NeoC$
+	} end
+} _$

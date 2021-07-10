@@ -22,7 +22,7 @@ typedef struct {
 	private void (* _Setup)();
 
 	public final int32_t Exception;
-	public final int32_t RuntimeException;
+	public final int32_t Failure;
 
 	private int32_t _NEW_FORMAT_MAX_ALLOCATION_SIZE;
 
@@ -41,8 +41,8 @@ typedef struct {
 	public uint8_t (* GetHeadChar)(String_t *) throws (String.Exception);
 	public uint8_t (* GetLastChar)(String_t *) throws (String.Exception);
 
-	public int32_t (* FirstIndexOf)(String_t *, const uint8_t ch) throws (String.Exception, String.RuntimeException);
-	public int32_t (* LastIndexOf)(String_t *, const uint8_t ch) throws (String.Exception, String.RuntimeException);
+	public int32_t (* FirstIndexOf)(String_t *, const uint8_t ch) throws (String.Exception, String.Failure);
+	public int32_t (* LastIndexOf)(String_t *, const uint8_t ch) throws (String.Exception, String.Failure);
 
 	/* 加工系 */
 	public String_t *(* Substring)(String_t *, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception);

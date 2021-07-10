@@ -2,7 +2,7 @@
 
 static void _Setup() {
 	String.Exception signal;
-	String.RuntimeException signal;
+	String.Failure signal;
 }
 
 static String_t *New(const uint8_t *string) {
@@ -93,18 +93,18 @@ static uint8_t GetLastChar(String_t *str) throws (String.Exception) {
 	return String.GetCharAt(str, String.GetLength(str) - 1);
 }
 
-static int32_t FirstIndexOf(String_t *str, const uint8_t ch) throws (String.Exception, String.RuntimeException) {
+static int32_t FirstIndexOf(String_t *str, const uint8_t ch) throws (String.Exception, String.Failure) {
 	for (int32_t i = 0; i < String.GetLength(str); i++)
 		if (String.GetCharAt(str, i) == ch) return i;
 
-	throw (String.RuntimeException);
+	throw (String.Failure);
 }
 
-static int32_t LastIndexOf(String_t *str, const uint8_t ch) throws (String.Exception, String.RuntimeException) {
+static int32_t LastIndexOf(String_t *str, const uint8_t ch) throws (String.Exception, String.Failure) {
 	for (int32_t i = String.GetLength(str); 0 <= i; i--)
 		if (String.GetCharAt(str, i) == ch) return i;
 
-	throw (String.RuntimeException);
+	throw (String.Failure);
 }
 
 static String_t *Substring(String_t *str, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception) {
@@ -206,7 +206,7 @@ static bool EndsWithChar(String_t *str, const uint8_t ch) throws (String.Excepti
 _String String = {
 	._Setup								= _Setup,
 
-	._NEW_FORMAT_MAX_ALLOCATION_SIZE		= 100000,
+	._NEW_FORMAT_MAX_ALLOCATION_SIZE	= 100000,
 
 	.New								= New,
 	.NewN								= NewN,

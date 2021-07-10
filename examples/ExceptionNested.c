@@ -1,7 +1,8 @@
+#include "NeoC/Environment.h"
 #include "NeoC/Exception.h"
 #include "NeoC/Console.h"
 
-void main() $NeoC {
+void main() $_ {
 	int32_t HogeException signal;
 	int32_t FugaException signal;
 	int32_t PiyoException signal;
@@ -37,4 +38,4 @@ void main() $NeoC {
 	} endX
 
 	Console.WriteLine(String.NewFormat("%d", result));
-} NeoC$
+} _$

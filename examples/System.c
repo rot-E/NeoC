@@ -1,9 +1,10 @@
+#include "NeoC/Environment.h"
 #include "NeoC/Exception.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 #include "NeoC/System.h"
 
-void main() $NeoC {
+void main() $_ {
 	try {
 		Console.WriteLine(String.New("call sleep"));
 		System.Sleep(3);
@@ -15,4 +16,4 @@ void main() $NeoC {
 	} catch (System.Exception) {
 		Console.WriteErrorLine(String.New("sleep failed."));
 	} end
-} NeoC$
+} _$

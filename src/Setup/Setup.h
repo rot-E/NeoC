@@ -1,13 +1,5 @@
 #pragma once
 
-/* ------------------------------------------------------ */
-/* NeoC環境開始宣言 */
-#define $NeoC { _S._Setup(); E.Try(({ void Try() {
-
-/* NeoC環境終了宣言 */
-#define NeoC$ }; Try; }), ({ void Catch() { _S._HANDLER(); }; Catch; }), ({ void Finally() {}; Finally; })); }
-/* ------------------------------------------------------ */
-
 #include <stdio.h>
 #include <stdlib.h>
 
