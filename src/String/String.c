@@ -7,6 +7,7 @@ static void _Setup() {
 
 static String_t *New(const uint8_t *string) {
 	String_t *str = (String_t *)(Memory.Allocate(sizeof(String_t)));
+
 	str->_Size		= (string != NULL)? strlen(string) + 1 : 1;
 	str->_String	= (uint8_t *)(Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
 	if (string != NULL) strncpy(str->_String, string, strlen(string));
@@ -28,32 +29,29 @@ static String_t *NewN(const size_t size) {
 static String_t *NewFormat(const uint8_t *format, ...) {
 	String_t *str = NewN(String._NEW_FORMAT_MAX_ALLOCATION_SIZE); // 要実装
 
-	va_list ap;
+	use (format) {
+		vsprintf(str->_String, format, ap);
+	} release
 
-	va_start(ap, format);
-	vsprintf(str->_String, format, ap);
-	va_end(ap);
-
-	str->_String[str->_Size - 1] = CC.NUL; //
 	String.Reduce(str);
-
 	return str;
 }
 
 static String_t *NewChar(const uint8_t ch) {
+	// strndup(&ch, 2);
 	uint8_t tmp[] = { ch };
 	return String.New(tmp);
 }
 
-static void Reduce(String_t *str) {
-	uint8_t *tmp = (uint8_t *)(Memory.CountedAllocate(String.GetLength(str) + 1, sizeof(uint8_t)));
-	strncpy(tmp, String.Unpack(str), String.GetLength(str) + 1);
+static void Reduce(String_t *str) throws (String.Exception) {
+	uint8_t *tmp = strdup(str->_String);
+	if (tmp == NULL) throw (String.Exception);
 
 	str->_Size = String.GetLength(str) + 1;
+
 	String.Release(str);
-	str->_String = (uint8_t *)(Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
-	strncpy(str->_String, tmp, str->_Size);
-	str->_String[str->_Size - 1] = CC.NUL;
+	str->_String = strdup(tmp);
+	if (str->_String == NULL) throw (String.Exception);
 
 	free(tmp);
 }

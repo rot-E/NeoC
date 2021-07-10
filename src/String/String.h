@@ -8,6 +8,7 @@
 #include <stdarg.h>
 
 #include "Annotation.h"
+#include "Environment.h"
 #include "Setup.h"
 #include "Memory.h"
 #include "Exception.h"
@@ -30,7 +31,7 @@ typedef struct {
 	public String_t *(* NewN)(const size_t size);
 	public String_t *(* NewFormat)(const uint8_t *format, ...);
 	public String_t *(* NewChar)(const uint8_t ch);
-	public void (* Reduce)(String_t *);
+	public void (* Reduce)(String_t *) throws (String.Exception);
 	private void (* Release)(String_t *);
 	public void (* Delete)(String_t *);
 
