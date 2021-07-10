@@ -1,6 +1,13 @@
 #include "Memory.h"
 
 static void _DEFAULT_HANDLER() {
+	fprintf(stderr, "%s%s%s%s%s\n",
+		"\e[31m",
+		"[Error] ",
+		"\e[36m",
+		"Memory System",
+		"\e[39m"
+	);
 	exit(EXIT_FAILURE);
 }
 

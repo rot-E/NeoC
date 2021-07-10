@@ -5,7 +5,7 @@
 #define $NeoC { _S._Setup(); E.Try(({ void Try() {
 
 /* NeoC環境終了宣言 */
-#define NeoC$ }; Try; }), ({ void Catch() { Console.NewLine(); Console.WriteColourErrorLine(SGR.TEXT.RED, String.New("[Exception]")); }; Catch; }), ({ void Finally() {}; Finally; })); }
+#define NeoC$ }; Try; }), ({ void Catch() { _S._HANDLER(); }; Catch; }), ({ void Finally() {}; Finally; })); }
 /* ------------------------------------------------------ */
 
 #include "Annotation.h"
@@ -17,6 +17,8 @@
 
 typedef struct {
 	private void (* _Setup)();
+
+	private void (* _HANDLER)();
 } __S;
 
 extern __S _S;

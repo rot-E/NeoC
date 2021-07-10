@@ -19,6 +19,13 @@ static void _Setup() {
 }
 
 static void _DEFAULT_HNDLER() {
+	fprintf(stderr, "%s%s%s%s%s\n",
+		"\e[31m",
+		"[Error] ",
+		"\e[93m",
+		"Exception System",
+		"\e[39m"
+	);
 	exit(EXIT_FAILURE);
 }
 
