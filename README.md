@@ -42,7 +42,7 @@ $ sh build.sh
 ```fish
 $ sh build.sh clean
 ```
-<br><br>
+<br>
 
 ## License
 &emsp;[`AGPLv3`](https://www.gnu.org/licenses/agpl-3.0.html)
