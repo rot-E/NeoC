@@ -35,16 +35,14 @@ void main() $NeoC {
 ```fish
 $ sh build.sh
 ```
-`NeoC/*.h` `NeoC.a`
+`NeoC/*.h` `NeoC.a` `examples/*`
 <br><br>
 
-### Build `examples/*`
+## Clean
 ```fish
-$ sh all.sh
-$ cd examples
-$ ./XXX
+$ sh build.sh clean
 ```
-<br>
+<br><br>
 
 ## License
 &emsp;[`AGPLv3`](https://www.gnu.org/licenses/agpl-3.0.html)

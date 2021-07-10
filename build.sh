@@ -113,5 +113,5 @@ if [ $# == 0 ]; then
 	sh examples/build.sh
 else
 	clean
-	sh examples/clean.sh
+	sh examples/build.sh clean
 fi

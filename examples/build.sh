@@ -1,18 +1,54 @@
 set -eu
 
-sh examples/clean.sh
+function clean() { # examples-dir
+	if [ -e NeoC ]; then
+		rm -r NeoC
+	fi
 
-cp -pr NeoC* examples/
+	local t
 
-cd examples
-	gcc Exception.c NeoC.a -o Exception -g
-	gcc ExceptionNested.c NeoC.a -o ExceptionNested -g
+	if [ -n "$(ls)" ]; then
+		for t in $(ls); do
+			if [ -f $t ]; then
+				if [ "$(echo $t | /usr/bin/sed 's/^.*\.\([^\.]*\)$/\1/')" != "sh" ]; then
+					if [ "$(echo $t | /usr/bin/sed 's/^.*\.\([^\.]*\)$/\1/')" != "c" ]; then
+						rm $t
+					fi
+				fi
+			fi
+		done
+	fi
+}
 
-	gcc String.c NeoC.a -o String -g
-	gcc Theme.c NeoC.a -o Theme -g
-	gcc SampleCode.c NeoC.a -o SampleCode -g
+function copy() { # root-dir
+	cp -pr NeoC* examples/
+}
 
-	gcc Console.c NeoC.a -o Console -g
+function compile() { # examples-dir
+	local t
 
-	gcc System.c NeoC.a -o System -g
-cd ../
+	if [ -n "$(ls)" ]; then
+		for t in $(ls); do
+			if [ -f $t ]; then
+				if [ "$(echo $t | /usr/bin/sed 's/^.*\.\([^\.]*\)$/\1/')" = "c" ]; then
+					gcc $t NeoC.a -o "$(basename $t .c)" -g
+				fi
+			fi
+		done
+	fi
+}
+
+if [ $# == 0 ]; then
+	cd examples
+		clean
+	cd ../
+
+	copy
+	cd examples
+		compile
+	cd ../
+else
+	cd examples
+		clean
+	cd ../
+fi
