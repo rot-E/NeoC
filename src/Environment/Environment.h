@@ -5,7 +5,7 @@
 #define $_ { _S._Setup(); E.Try(({ void Try() {
 
 /* 環境終了宣言 */
-#define _$ }; Try; }), ({ void Catch() { _S._HANDLER(); }; Catch; }), ({ void Finally() {}; Finally; })); }
+#define _$ }; Try; }), ({ void Catch() { _S._MAIN_EXCEPTION_HANDLER(); }; Catch; }), ({ void Finally() {}; Finally; })); }
 
 
 /* 可変長引数使用開始宣言 */

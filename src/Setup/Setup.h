@@ -13,7 +13,7 @@
 typedef struct {
 	private void (* _Setup)();
 
-	private void (* _HANDLER)();
+	private void (* _MAIN_EXCEPTION_HANDLER)();
 } __S;
 
 extern __S _S;

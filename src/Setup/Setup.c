@@ -10,7 +10,7 @@ static void _Setup() {
 	System._Setup();
 }
 
-static void _DEFAULT_HANDLER() {
+static void _DEFAULT_MAIN_EXCEPTION_HANDLER() {
 	fprintf(stderr, "%s%s%s%s%s\n",
 		"\e[91m",
 		"[Exception] ",
@@ -22,7 +22,7 @@ static void _DEFAULT_HANDLER() {
 }
 
 __S _S = {
-	._Setup		= _Setup,
+	._Setup						= _Setup,
 
-	._HANDLER	= _DEFAULT_HANDLER,
+	._MAIN_EXCEPTION_HANDLER	= _DEFAULT_MAIN_EXCEPTION_HANDLER,
 };

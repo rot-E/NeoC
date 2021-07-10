@@ -1,23 +1,30 @@
 #include "Memory.h"
 
-static void _Setup() {
-	Memory.Exception signal;
+static void _DEFAULT_HANDLER() {
+	fprintf(stderr, "%s%s%s%s%s\n",
+		"\e[31m",
+		"[Error] ",
+		"\e[36m",
+		"Memory System",
+		"\e[39m"
+	);
+	exit(EXIT_FAILURE);
 }
 
-static void *_Inspect(void *ptr) throws (Memory.Exception) {
-	if (ptr == NULL) throw (Memory.Exception);
+static void *_Inspect(void *ptr) {
+	if (ptr == NULL) Memory._HANDLER();
 	return ptr;
 }
 
-static void *Allocate(const size_t size) throws (Memory.Exception) {
+static void *Allocate(const size_t size) {
 	return _Inspect(malloc(size));;
 }
 
-static void *CountedAllocate(const size_t n, const size_t size) throws (Memory.Exception) {
+static void *CountedAllocate(const size_t n, const size_t size) {
 	return _Inspect(calloc(n, size));
 }
 
-static void *SharedAllocate(const size_t size) throws (Memory.Exception) {
+static void *SharedAllocate(const size_t size) {
 	return _Inspect(
 		mmap(
 			NULL,
@@ -29,11 +36,11 @@ static void *SharedAllocate(const size_t size) throws (Memory.Exception) {
 	);
 }
 
-static void *ReAllocate(void *ptr, const size_t size) throws (Memory.Exception) {
+static void *ReAllocate(void *ptr, const size_t size) {
 	return _Inspect(realloc(ptr, size));
 }
 
-static void *ReCountedAllocate(void *ptr, const size_t n, const size_t size) throws (Memory.Exception) {
+static void *ReCountedAllocate(void *ptr, const size_t n, const size_t size) {
 	return _Inspect(realloc(ptr, n * size));
 }
 
@@ -42,7 +49,7 @@ static void Free(void *ptr) {
 }
 
 _Memory Memory = {
-	._Setup						= _Setup,
+	._HANDLER					= _DEFAULT_HANDLER,
 
 	.Allocate					= Allocate,
 	.CountedAllocate			= CountedAllocate,
