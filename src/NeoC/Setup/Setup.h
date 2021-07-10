@@ -8,6 +8,9 @@
 #define NeoC$ }; Try; }), ({ void Catch() { _S._HANDLER(); }; Catch; }), ({ void Finally() {}; Finally; })); }
 /* ------------------------------------------------------ */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "Annotation.h"
 #include "Exception.h"
 #include "CSI.h"

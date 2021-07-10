@@ -37,9 +37,9 @@ void main() $NeoC {
 			System.USleep(30 * 1000);
 		}
 
-		for (int32_t i = String.GetLength(text); i > 0; i--) {
+		for (int32_t i = String.GetLength(text) - 1; i >= 0; i--) {
 			Console.WriteChar(CC.BS);
-			Console.WriteChar((String.GetCharAt(text, i + 1) != 'm')? '^' : '.');
+			Console.WriteChar((String.GetCharAt(text, i) != 'm')? '^' : '.');
 			Console.WriteChar(CC.BS);
 			System.USleep(30 * 1000);
 		}
