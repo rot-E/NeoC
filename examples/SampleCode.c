@@ -1,6 +1,7 @@
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 #include "NeoC/Exception.h"
+#include "NeoC/System.h"
 
 void main() $NeoC {
    String_t *text = String.New("NeoC is a Neo C Programming Environment Library !");
@@ -12,6 +13,7 @@ void main() $NeoC {
 
       for (int32_t i = 0; i < String.GetLength(text); i++) {
          Console.WriteChar((i == fi || i == li)? '^' : ' ');
+		 System.USleep(50 * 1000);
       }
       Console.NewLine();
 

@@ -20,6 +20,7 @@ typedef struct {
 	public void (* WriteColourLine)(uint8_t *colour, String_t *str);
 
 	public void (* WriteErrorLine)(String_t *str);
+	public void (* WriteColourErrorLine)(uint8_t *colour, String_t *str);
 
 	public void (* Erase)();
 	public void (* ErasePrevLine)();

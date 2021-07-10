@@ -41,6 +41,12 @@ static void WriteErrorLine(String_t *str) {
 	fflush(stderr);
 }
 
+static void WriteColourErrorLine(uint8_t *colour, String_t *str) {
+	Console.SetColour(colour);
+	Console.WriteErrorLine(str);
+	Console.SetDefaultColour();
+}
+
 static void Erase() {
 	Console.SetState(CSI.EL(2));
 }
@@ -72,6 +78,7 @@ _Console Console = {
 	.WriteColourLine		= WriteColourLine,
 
 	.WriteErrorLine			= WriteErrorLine,
+	.WriteColourErrorLine	= WriteColourErrorLine,
 
 	.Erase					= Erase,
 	.ErasePrevLine			= ErasePrevLine,

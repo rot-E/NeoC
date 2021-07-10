@@ -1,8 +1,10 @@
 #include "NeoC/String.h"
 #include "NeoC/CC.h"
+#include "NeoC/CSI.h"
 #include "NeoC/SGR.h"
 #include "NeoC/Console.h"
 #include "NeoC/Exception.h"
+#include "NeoC/System.h"
 
 void main() $NeoC {
 	String_t *neoC = String.New("NeoC");
@@ -23,27 +25,23 @@ void main() $NeoC {
 		SGR.TEXT.DEFAULT
 	));
 
-	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
-
 	String_t *text = String.NewFormat(
 		"%s%s%s%s%s", String.Unpack(neoC), String.Unpack(isA),
 		String.Unpack(neo), String.Unpack(CPEL), String.Unpack(exc)
 	);
 
-	for (int32_t i = 0; i < String.GetLength(text); i++)
-		Console.WriteChar((String.GetCharAt(text, i) == 'm')? '^' : '.');
-	Console.NewLine();
-
 	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
+	for (;;) {
+		for (int32_t i = 0; i < String.GetLength(text); i++) {
+			Console.WriteChar((String.GetCharAt(text, i) == 'm')? '^' : '.');
+			System.USleep(30 * 1000);
+		}
 
-	try {
-		int32_t fm = String.FirstIndexOf(text, 'i');
-		int32_t lm = String.LastIndexOf(text, 'i');
-
-		for (int32_t i = 0; i < String.GetLength(text); i++)
-			Console.WriteChar((i == fm || i == lm)? '~' : ' ');
-		Console.NewLine();
-	} catch (String.RuntimeException) {
-		Console.WriteErrorLine(String.New("[Error] Target Not Found."));
-	} end
+		for (int32_t i = String.GetLength(text); i > 0; i--) {
+			Console.WriteChar(CC.BS);
+			Console.WriteChar((String.GetCharAt(text, i + 1) != 'm')? '^' : '.');
+			Console.WriteChar(CC.BS);
+			System.USleep(30 * 1000);
+		}
+	}
 } NeoC$

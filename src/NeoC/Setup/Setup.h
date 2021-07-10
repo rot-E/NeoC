@@ -2,10 +2,10 @@
 
 /* ------------------------------------------------------ */
 /* NeoC環境開始宣言 */
-#define $NeoC { _S._Setup();
+#define $NeoC { _S._Setup(); E.Try(({ void Try() {
 
 /* NeoC環境終了宣言 */
-#define NeoC$ }
+#define NeoC$ }; Try; }), ({ void Catch() { Console.NewLine(); Console.WriteColourErrorLine(SGR.TEXT.RED, String.New("[Exception]")); }; Catch; }), ({ void Finally() {}; Finally; })); }
 /* ------------------------------------------------------ */
 
 #include "Annotation.h"
