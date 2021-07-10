@@ -13,8 +13,8 @@
 
 #include "Annotation.h"
 #include "Exception.h"
-#include "CSI.h"
-#include "SGR.h"
+#include "SPEC/CSI.h"
+#include "SPEC/SGR.h"
 #include "String.h"
 #include "System.h"
 

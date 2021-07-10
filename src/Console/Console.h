@@ -3,9 +3,9 @@
 #include <stdio.h>
 
 #include "Annotation.h"
-#include "CC.h"
-#include "CSI.h"
-#include "SGR.h"
+#include "SPEC/CC.h"
+#include "SPEC/CSI.h"
+#include "SPEC/SGR.h"
 #include "String.h"
 
 typedef struct {

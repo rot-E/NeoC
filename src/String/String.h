@@ -11,7 +11,7 @@
 #include "Setup.h"
 #include "Memory.h"
 #include "Exception.h"
-#include "CC.h"
+#include "SPEC/CC.h"
 
 typedef struct {
 	private int32_t _Size;
@@ -31,7 +31,7 @@ typedef struct {
 	public String_t *(* NewFormat)(const uint8_t *format, ...);
 	public String_t *(* NewChar)(const uint8_t ch);
 	public void (* Reduce)(String_t *);
-	public void (* Release)(String_t *);
+	private void (* Release)(String_t *);
 	public void (* Delete)(String_t *);
 
 	/* 取得系 */

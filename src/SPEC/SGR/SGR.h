@@ -2,10 +2,10 @@
 
 #include <stdint.h>
 
-#include "Annotation.h"
-#include "Setup.h"
-#include "Memory.h"
-#include "Exception.h"
+#include "../Annotation.h"
+#include "../Setup.h"
+#include "../Memory.h"
+#include "../Exception.h"
 
 #include "CSI.h"
 

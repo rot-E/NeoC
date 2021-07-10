@@ -1,7 +1,7 @@
 #include "NeoC/String.h"
-#include "NeoC/CC.h"
-#include "NeoC/CSI.h"
-#include "NeoC/SGR.h"
+#include "NeoC/SPEC/CC.h"
+#include "NeoC/SPEC/CSI.h"
+#include "NeoC/SPEC/SGR.h"
 #include "NeoC/Console.h"
 #include "NeoC/Exception.h"
 #include "NeoC/System.h"
@@ -39,7 +39,7 @@ void main() $NeoC {
 
 		for (int32_t i = String.GetLength(text) - 1; i >= 0; i--) {
 			Console.WriteChar(CC.BS);
-			Console.WriteChar((String.GetCharAt(text, i) != 'm')? '^' : '.');
+			Console.WriteChar((String.GetCharAt(text, i) != 'm')? '_' : '~');
 			Console.WriteChar(CC.BS);
 			System.USleep(30 * 1000);
 		}
