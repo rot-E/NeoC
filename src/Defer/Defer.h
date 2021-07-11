@@ -1,15 +1,20 @@
 #pragma once
 
-
+/* ------------------------------------------------------ */
+/* 事後処理登録 */
 #define defer _Defer.Set(({ void Task()
 
 #define set Task; }));
 
+/* 実処理登録 */
+// 戻り値無し
 #define execute _Defer.Execute(({ void *Procedure()
 
+// 戻り値在り: 内部でポインタをreturnすること
 #define retrieve return _Defer.Execute(({ void *Procedure()
 
 #define ret Procedure; }));
+/* ------------------------------------------------------ */
 
 #include <stdint.h>
 
