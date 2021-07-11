@@ -5,7 +5,7 @@
 
 void main() $_ {
 	try {
-		String_t *s = String.New("test string");
+		String_t *s = String.New(u8"test string");
 
 		Console.WriteLine(String.NewFormat("s=\"%s\"   |s|=%d   s(0)='%c'   s(|s|-1)='%c'",
 			String.Unpack(s),
@@ -77,7 +77,7 @@ void main() $_ {
 		s = String.New("aiueotttttX");
 		Console.WriteLine(String.NewFormat("Original: %s", String.Unpack(s)));
 		Console.WriteLine(String.NewFormat("DropLastChar: %s", String.Unpack(String.DropLastChar(s)) ));
-		Console.WriteLine(String.NewFormat("Substring['0-2'3]: %s", String.Unpack(String.Substring(s, 0, 3)) )); // マルチバイト/ワイド文字は使用不能
+		Console.WriteLine(String.NewFormat("Substring['0-2'3]: %s", String.Unpack(String.Substring(s, 0, 3)) ));
 		Console.WriteLine(String.NewFormat("Substring[2'3-4'5]: %s", String.Unpack(String.Substring(s, 3, 5)) ));
 		Console.WriteLine(String.NewFormat("t -> X: %s", String.Unpack(String.ReplaceWithChar(s, 't', 'X')) ));
 		Console.WriteLine(String.NewFormat("s#s: %s", String.Unpack(String.Concat(s, s)) ));
