@@ -3,23 +3,21 @@
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
-#include <stdlib.h>
-
-int fn(int a, int b) {
-	int *i = (int *)(malloc(sizeof(int)));
+String_t *fn() {
+		// 組立に使った領域は事後解放
+	String_t *str = String.New("outer");
 	defer {
-		free(i);
+		Console.WriteLine(String.New("deleting str"));
+		String.Delete(str);
+		Console.WriteLine(String.New("deleted str"));
 	} set
 
-	return execute {
-		*i = 3;
-		*i = a + b * *i;
-
-		Console.WriteLine(String.NewFormat("ret: %d\n", *i));
-		return *i;
+	retrieve {
+			// 組立られた領域は解放されずアドレスを返却
+		return String.Concat(str, String.New(" innner"));
 	} ret
 }
 
 void main() $_ {
-	Console.WriteLine(String.NewFormat("catch: %d", fn(12, 31)));
+	Console.WriteLine(fn());
 } _$

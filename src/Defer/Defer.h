@@ -7,6 +7,8 @@
 
 #define execute _Defer.Execute(({ void *Procedure()
 
+#define retrieve return _Defer.Execute(({ void *Procedure()
+
 #define ret Procedure; }));
 
 #include <stdint.h>
