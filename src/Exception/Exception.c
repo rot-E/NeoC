@@ -1,7 +1,7 @@
 #include "Exception.h"
 
 static Context_t *New() {
-	return (Context_t *)(Memory.Allocate(sizeof(Context_t)));
+	return (Context_t *)(_Memory.Allocate(sizeof(Context_t)));
 }
 
 static void Delete(Context_t *cxt) {
@@ -15,28 +15,17 @@ _Context Context = {
 
 
 static void _Setup() {
-	E._Context = (Context_t *)(Memory.CountedAllocate(E._NEST_MAX, sizeof(Context_t)));
-}
-
-static void _DEFAULT_HNDLER() {
-	fprintf(stderr, "%s%s%s%s%s\n",
-		"\e[31m",
-		"[Error] ",
-		"\e[93m",
-		"Exception System",
-		"\e[39m"
-	);
-	exit(EXIT_FAILURE);
+	_Exception._Context = (Context_t *)(_Memory.CountedAllocate(_Exception._NEST_MAX, sizeof(Context_t)));
 }
 
 static Signal_t GenerateSignal() {
-	return E._SIGNAL_MAX++;
+	return _Exception._SIGNAL_MAX++;
 }
 
 static void Try(const void (* Try)(), const void (* Catch)(), const void (* Finally)()) {
-	if (E._Nest >= E._NEST_MAX - 1) E._HANDLER();
+	if (_Exception._Nest >= _Exception._NEST_MAX - 1) _Error.Panic("\e[93m", "Exception System");
 
-	if (setjmp(E._Context[E._Nest++]._Context) == 0) {
+	if (setjmp(_Exception._Context[_Exception._Nest++]._Context) == 0) {
 		Try();
 	} else {
 		Catch();
@@ -45,17 +34,17 @@ static void Try(const void (* Try)(), const void (* Catch)(), const void (* Fina
 }
 
 static void Throw(const Signal_t sig) {
-	if (E._Nest < 0) E._HANDLER();
+	if (_Exception._Nest < 0) _Error.Panic("\e[93m", "Exception System");
 
-	E._Context[--E._Nest]._Signal = sig;
-	longjmp(E._Context[E._Nest]._Context, 1);
+	_Exception._Context[--_Exception._Nest]._Signal = sig;
+	longjmp(_Exception._Context[_Exception._Nest]._Context, 1);
 }
 
 static Signal_t ElicitSignal() {
-	return E._Context[E._Nest]._Signal;
+	return _Exception._Context[_Exception._Nest]._Signal;
 }
 
-_E E = {
+__Exception _Exception = {
 	._Setup					= _Setup,
 
 	._SIGNAL_MAX			= 0,
@@ -63,7 +52,6 @@ _E E = {
 
 	._Nest					= 0,
 	._NEST_MAX				= 1000,
-	._HANDLER				= _DEFAULT_HNDLER,
 
 	.Try					= Try,
 	.Throw					= Throw,

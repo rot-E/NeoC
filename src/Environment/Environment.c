@@ -1,7 +1,8 @@
 #include "Environment.h"
 
 static void _Setup() {
-	E._Setup();
+	_Exception._Setup();
+	_Defer._Setup();
 
 	CSI._Setup();
 	SGR._Setup();
@@ -22,7 +23,7 @@ static void _DEFAULT_MAIN_EXCEPTION_HANDLER() {
 	exit(EXIT_FAILURE);
 }
 
-__S _S = {
+__Environment _Environment = {
 	._Setup						= _Setup,
 
 	._MAIN_EXCEPTION_HANDLER	= _DEFAULT_MAIN_EXCEPTION_HANDLER,

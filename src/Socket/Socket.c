@@ -8,7 +8,7 @@ static void _Setup() {
 }
 
 static Socket_t *New(const int32_t socket) {
-	Socket_t *sock = (Socket_t *)(Memory.Allocate(sizeof(Socket_t)));
+	Socket_t *sock = (Socket_t *)(_Memory.Allocate(sizeof(Socket_t)));
 
 	sock->_Socket				= (socket >= 3)? socket : 0;
 	sock->_Addr					= NULL;
@@ -35,7 +35,7 @@ static Socket_t *NewTCPClient(String_t *serverHost, const in_port_t serverPort) 
 	if (hent == NULL) throw (Socket.Exception);
 
 	// 接続情報構成
-	sock->_Addr = (struct sockaddr_in *)(Memory.Allocate(sizeof(struct sockaddr_in)));
+	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
 	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
 
 	sock->_Addr->sin_family		= AF_INET;
@@ -61,7 +61,7 @@ static Socket_t *NewTCPServer(const in_port_t listenPort) throws (Socket.Excepti
 	if (sock->_Socket == -1) throw (Socket.Exception);
 
 	// 接続情報構成
-	sock->_Addr = (struct sockaddr_in *)(Memory.Allocate(sizeof(struct sockaddr_in)));
+	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
 	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
 
 	sock->_Addr->sin_family = AF_INET;
@@ -101,7 +101,7 @@ static Socket_t *NewUDPServer(const in_port_t listenPort) throws (Socket.Excepti
 	if (sock->_Socket == -1) throw (Socket.Exception);
 
 	// 接続情報構成
-	sock->_Addr = (struct sockaddr_in *)(Memory.Allocate(sizeof(struct sockaddr_in)));
+	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
 	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
 
 	sock->_Addr->sin_family			= AF_INET;
@@ -177,7 +177,7 @@ static void Configure(Socket_t *self, String_t *host, const in_port_t port) thro
 
 	// 接続情報構成
 	self->_Addr = (struct sockaddr_in *)(
-		Memory.Allocate(sizeof(struct sockaddr_in))
+		_Memory.Allocate(sizeof(struct sockaddr_in))
 	);
 	memset(self->_Addr, 0, sizeof(*self->_Addr));
 
@@ -189,7 +189,7 @@ static void Configure(Socket_t *self, String_t *host, const in_port_t port) thro
 static void ConfigureBroadcast(Socket_t *self, const in_port_t port) throws (Socket.Exception) {
 	// 接続情報構成
 	self->_Addr = (struct sockaddr_in *)(
-		Memory.Allocate(sizeof(struct sockaddr_in))
+		_Memory.Allocate(sizeof(struct sockaddr_in))
 	);
 	memset(self->_Addr, 0, sizeof(*self->_Addr));
 
@@ -226,7 +226,7 @@ static String_t *Collect(Socket_t *self) throws (Socket.Exception) {
 	int32_t result = recvfrom(self->_Socket, String.Unpack(str), String.GetLength(str) - 1, 0, (struct sockaddr *)(self->_Addr), ({
 		socklen_t tmp = sizeof(*self->_Addr);
 		&tmp;
-	}));
+	})); // 危うい？
 	if (result == -1) throw (Socket.Exception);
 
 	return String.ConcatChar(str, CC.NUL);

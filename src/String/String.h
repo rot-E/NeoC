@@ -11,7 +11,7 @@
 #include "Memory.h"
 #include "Exception.h"
 #include "SPEC/CC.h"
-#include "VariableLengthArray.h"
+#include "Abbreviation.h"
 
 typedef struct {
 	private int32_t _Size;

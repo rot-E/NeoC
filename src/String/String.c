@@ -6,10 +6,10 @@ static void _Setup() {
 }
 
 static String_t *New(const uint8_t *string) {
-	String_t *str = (String_t *)(Memory.Allocate(sizeof(String_t)));
+	String_t *str = (String_t *)(_Memory.Allocate(sizeof(String_t)));
 
 	str->_Size		= (string != NULL)? strlen(string) + 1 : 1;
-	str->_String	= (uint8_t *)(Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
+	str->_String	= (uint8_t *)(_Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
 	if (string != NULL) strncpy(str->_String, string, strlen(string));
 	str->_String[(string != NULL)? str->_Size - 1 : 0] = CC.NUL;
 
@@ -21,7 +21,7 @@ static String_t *NewN(const size_t size) {
 	String.Release(str);
 
 	str->_Size = size;
-	str->_String = (uint8_t *)(Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
+	str->_String = (uint8_t *)(_Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
 
 	return str;
 }
@@ -113,7 +113,7 @@ static String_t *Substring(String_t *str, const int32_t beginIndex, const int32_
 		|| beginIndex > lastIndex ) throw (String.Exception);
 
 	uint8_t *s = (uint8_t *)(
-		Memory.CountedAllocate(1 + lastIndex - beginIndex, sizeof(uint8_t))
+		_Memory.CountedAllocate(1 + lastIndex - beginIndex, sizeof(uint8_t))
 	);
 	strncpy(s, str->_String + beginIndex, lastIndex - beginIndex);
 	s[lastIndex - beginIndex - 1] = CC.NUL;
@@ -127,7 +127,7 @@ static String_t *DropLastChar(String_t *str) throws (String.Exception) {
 
 static String_t *ReplaceWithChar(String_t *str, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception) {
 	uint8_t *s = (uint8_t *)(
-		Memory.CountedAllocate(String.GetLength(str) + 1, sizeof(uint8_t))
+		_Memory.CountedAllocate(String.GetLength(str) + 1, sizeof(uint8_t))
 	);
 
 	for (int32_t i = 0; i < String.GetLength(str); i++)
@@ -138,7 +138,7 @@ static String_t *ReplaceWithChar(String_t *str, const uint8_t oldChar, const uin
 
 static String_t *Concat(String_t *str, String_t *str2) {
 	uint8_t *s = (uint8_t *)(
-		Memory.CountedAllocate(String.GetLength(str) + String.GetLength(str2) + 1, sizeof(uint8_t))
+		_Memory.CountedAllocate(String.GetLength(str) + String.GetLength(str2) + 1, sizeof(uint8_t))
 	);
 
 	strncpy(s, String.Unpack(str), String.GetLength(str));
@@ -149,7 +149,7 @@ static String_t *Concat(String_t *str, String_t *str2) {
 
 static String_t *ConcatChar(String_t *str, const uint8_t ch) {
 	uint8_t *s = (uint8_t *)(
-		Memory.CountedAllocate(1 + String.GetLength(str) + 1, sizeof(uint8_t))
+		_Memory.CountedAllocate(1 + String.GetLength(str) + 1, sizeof(uint8_t))
 	);
 
 	char sArr[] = { ch };

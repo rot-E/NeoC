@@ -1,18 +1,7 @@
 #include "Memory.h"
 
-static void _DEFAULT_HANDLER() {
-	fprintf(stderr, "%s%s%s%s%s\n",
-		"\e[31m",
-		"[Error] ",
-		"\e[36m",
-		"Memory System",
-		"\e[39m"
-	);
-	exit(EXIT_FAILURE);
-}
-
 static void *_Inspect(void *ptr) {
-	if (ptr == NULL) Memory._HANDLER();
+	if (ptr == NULL) _Error.Panic("\e[36m", "Memory System");
 	return ptr;
 }
 
@@ -48,9 +37,7 @@ static void Free(void *ptr) {
 	free(ptr);
 }
 
-_Memory Memory = {
-	._HANDLER					= _DEFAULT_HANDLER,
-
+__Memory _Memory = {
 	.Allocate					= Allocate,
 	.CountedAllocate			= CountedAllocate,
 	.SharedAllocate				= SharedAllocate,

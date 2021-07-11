@@ -39,6 +39,7 @@ function retrieve() { # copied-src-dir
 
 function compile() { # copied-src-dir
 	# 環境 (Environment非依存)
+	gcc -c Error.c -o Error.o -g
 	gcc -c Memory.c -o Memory.o -g
 
 	# ライブラリ用初期化環境
@@ -46,6 +47,7 @@ function compile() { # copied-src-dir
 
 	# 環境 (Environment依存)
 	gcc -c Exception.c -o Exception.o -g
+	gcc -c Defer.c -o Defer.o -g
 
 	# 定義値
 	cd SPEC

@@ -3,12 +3,17 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 
+#include "../Annotation.h"
 #include "../String.h"
 
 typedef struct {
-	bool (* Exists)(String_t *path);
-	bool (* Create)(String_t *path);
-	bool (* Delete)(String_t *path);
+	private void (* _Setup)() throws (Directory.Exception);
+
+	public final Exception;
+
+	public bool (* Exists)(String_t *path);
+	public bool (* Create)(String_t *path);
+	public bool (* Delete)(String_t *path);
 } _Directory;
 
 extern _Directory Directory;

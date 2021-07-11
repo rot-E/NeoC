@@ -2,26 +2,27 @@
 
 /* ------------------------------------------------------ */
 /* signal定義 */
-#define signal = E.GenerateSignal()
+#define signal = _Exception.GenerateSignal()
 
-#define sign(EX) int32_t EX = E.GenerateSignal()
+#define sign(EX) int32_t EX = _Exception.GenerateSignal()
 
 /* 例外処理 */
-#define try E.Try(({ void Try() {
+// 危うい？
+#define try _Exception.Try(({ void Try()
 
-#define throw(EX) E.Throw(EX)
+#define throw(EX) _Exception.Throw(EX)
 
-#define catch(EX) }; Try; }), ({ void Catch() { const uint32_t sig = E.ElicitSignal(); if (sig == EX) {
+#define catch(EX) ; Try; }), ({ void Catch() { const uint32_t sig = _Exception.ElicitSignal(); if (sig == EX)
 
-#define catchN(EX) } else if (sig == EX) {
+#define catchN(EX) else if (sig == EX)
 
-#define catchAll } else {
+#define catchAll else
 
-#define fin }}; Catch; }), ({ void Finally() {}; Finally; }));
+#define fin }; Catch; }), ({ void Finally() {}; Finally; }));
 
-#define finally }}; Catch; }), ({ void Finally() {
+#define finally }; Catch; }), ({ void Finally()
 
-#define end }; Finally; }));
+#define end ; Finally; }));
 
 /* 函数宣言定義時補足宣言 */
 #define throws(...)
@@ -33,13 +34,14 @@
 #include <stdlib.h>
 
 #include "Annotation.h"
+#include "Error.h"
 #include "Memory.h"
 
 typedef uint32_t Signal_t;
 
 typedef struct {
 	private jmp_buf _Context;
-	private int32_t _Signal;
+	private Signal_t _Signal;
 
 	/* データ持たせたい場合ここに追記;
 	// private void *_Data;
@@ -64,11 +66,10 @@ typedef struct {
 	private Context_t *_Context;
 	private int32_t _Nest;
 	private int32_t _NEST_MAX;
-	protected void (* _HANDLER)();
 
 	public void (* Try)(const void (* Try)(), const void (* Catch)(), const void (* Finally)());
 	public void (* Throw)(const Signal_t);
 	public Signal_t (* ElicitSignal)();
-} _E;
+} __Exception;
 
-extern _E E;
+extern __Exception _Exception;

@@ -2,13 +2,11 @@
 
 #include <stdlib.h>
 #include <sys/mman.h>
-#include <stdio.h>
 
 #include "Annotation.h"
+#include "Error.h"
 
 typedef struct {
-	protected void (* _HANDLER)();
-
 	/* 確保系 */
 	public void *(* Allocate)(const size_t size);
 	public void *(* CountedAllocate)(const size_t n, const size_t size);
@@ -20,6 +18,6 @@ typedef struct {
 
 	/* 解放系 */
 	public void (* Free)(void *ptr);
-} _Memory;
+} __Memory;
 
-extern _Memory Memory;
+extern __Memory _Memory;
