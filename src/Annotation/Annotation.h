@@ -6,6 +6,7 @@
 #define protected		// 公開・変更非推奨
 #define public			// 公開
 #define undefined		// 未定義
+#define library			// ライブラリ専用
 
 /* 値 */
 #define final			// 変更不能

@@ -141,22 +141,25 @@ static void Send(Socket_t *self, String_t *message) throws (Socket.Exception) {
 
 static String_t *Receive(Socket_t *self) throws (Socket.Exception, Socket.DisconnectionException) {
 	String_t *data = String.NewN(Socket.DATA_MAX_SIZE);
+	defer {
+		String.Delete(data);
+	} set
 
-	int32_t result = recv(self->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
-	if (result == 0) throw (Socket.DisconnectionException);
-	if (result == -1) throw (Socket.Exception);
+	retrieve {
+		int32_t result = recv(self->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
+		if (result == 0) throw (Socket.DisconnectionException);
+		if (result == -1) throw (Socket.Exception);
 
-	String.Reduce(data);
+		String.Reduce(data);
 
-//	defer (String.Delete(str));
-
-	if (String.EndsWith(data, Socket.CRLF)) {
-		/* 区切りがCRLFの場合 */
-		return String.Substring(data, 0, String.GetLength(data) + 1 - String.GetLength(Socket.CRLF));
-	} else if (String.EndsWithChar(data, CC.LF)) {
-		/* 区切りがLFの場合 */
-		return String.DropLastChar(data);
-	}
+		if (String.EndsWith(data, Socket.CRLF)) {
+			/* 区切りがCRLFの場合 */
+			return String.Substring(data, 0, String.GetLength(data) + 1 - String.GetLength(Socket.CRLF));
+		} else if (String.EndsWithChar(data, CC.LF)) {
+			/* 区切りがLFの場合 */
+			return String.DropLastChar(data);
+		}
+	} ret
 }
 
 static void Disconnect(Socket_t *self) {

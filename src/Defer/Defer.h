@@ -24,6 +24,7 @@ typedef struct {
 	private void (** _Task)();
 
 	public void (* Set)(void (* Task)());
+	library public void (* Rewind)();
 	public void *(* Execute)(void *(* Procedure)());
 } __Defer;
 

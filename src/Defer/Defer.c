@@ -12,11 +12,13 @@ static void Set(void (* Task)()) {
 	_Defer._Task[_Defer._Index++] = Task;
 }
 
+static void Rewind() {
+	while (_Defer._Index > 0) _Defer._Task[--_Defer._Index]();
+}
+
 static void *Execute(void *(* Procedure)()) {
 	void *r = Procedure();
-
-	while (_Defer._Index > 0) _Defer._Task[--_Defer._Index]();
-
+	_Defer.Rewind();
 	return r;
 }
 
@@ -27,5 +29,6 @@ __Defer _Defer = {
 	._TASK_MAX		= 10000,
 
 	.Set			= Set,
+	.Rewind			= Rewind,
 	.Execute		= Execute,
 };

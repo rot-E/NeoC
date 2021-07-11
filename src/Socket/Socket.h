@@ -8,6 +8,7 @@
 
 #include "Memory.h"
 #include "Exception.h"
+#include "Defer.h"
 #include "String.h"
 
 typedef struct {

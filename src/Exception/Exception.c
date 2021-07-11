@@ -36,6 +36,8 @@ static void Try(const void (* Try)(), const void (* Catch)(), const void (* Fina
 static void Throw(const Signal_t sig) {
 	if (_Exception._Nest < 0) _Error.Panic("\e[93m", "Exception System");
 
+	_Defer.Rewind();
+
 	_Exception._Context[--_Exception._Nest]._Signal = sig;
 	longjmp(_Exception._Context[_Exception._Nest]._Context, 1);
 }

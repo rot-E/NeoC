@@ -36,6 +36,7 @@
 #include "Annotation.h"
 #include "Error.h"
 #include "Memory.h"
+#include "Defer.h"
 
 typedef uint32_t Signal_t;
 
