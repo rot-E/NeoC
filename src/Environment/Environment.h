@@ -6,11 +6,23 @@
 
 /* 環境終了宣言 */
 #define _$ }; Try; }), ({ void Catch() { _S._MAIN_EXCEPTION_HANDLER(); }; Catch; }), ({ void Finally() {}; Finally; })); }
-
-
-/* 可変長引数使用開始宣言 */
-#define use(FMT_STR) va_list ap; va_start(ap, FMT_STR);
-
-/* 可変長引数使用終了宣言 */
-#define release va_end(ap);
 /* ------------------------------------------------------ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Annotation.h"
+#include "Exception.h"
+#include "SPEC/CSI.h"
+#include "SPEC/SGR.h"
+#include "String.h"
+#include "System.h"
+#include "Socket.h"
+
+typedef struct {
+	private void (* _Setup)();
+
+	private void (* _MAIN_EXCEPTION_HANDLER)();
+} __S;
+
+extern __S _S;

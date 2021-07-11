@@ -17,11 +17,11 @@
 
 #define catchAll } else {
 
-#define end }}; Catch; }), ({ void Finally() {}; Finally; }));
+#define fin }}; Catch; }), ({ void Finally() {}; Finally; }));
 
 #define finally }}; Catch; }), ({ void Finally() {
 
-#define endX }; Finally; }));
+#define end }; Finally; }));
 
 /* 函数宣言定義時補足宣言 */
 #define throws(...)
@@ -33,7 +33,6 @@
 #include <stdlib.h>
 
 #include "Annotation.h"
-#include "Setup.h"
 #include "Memory.h"
 
 typedef uint32_t Signal_t;

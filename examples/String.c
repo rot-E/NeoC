@@ -1,7 +1,7 @@
 #include "NeoC/Environment.h"
+#include "NeoC/Exception.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
-#include "NeoC/Exception.h"
 
 void main() $_ {
 	try {
@@ -101,5 +101,5 @@ void main() $_ {
 		Console.WriteErrorLine(String.New("String.Failure"));
 	} catchN (String.Exception) {
 		Console.WriteErrorLine(String.New("String.Exception"));
-	} end
+	} fin
 } _$

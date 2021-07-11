@@ -21,6 +21,6 @@ void main() $_ {
 
    } catch (String.Failure) {
       Console.WriteErrorLine(String.NewFormat("Target character '%c' not found.", target));
-   } end
+   } fin
 
 } _$

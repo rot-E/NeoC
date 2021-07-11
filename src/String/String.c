@@ -61,6 +61,8 @@ static void Release(String_t *str) {
 }
 
 static void Delete(String_t *str) {
+	if (str == NULL) return;
+
 	String.Release(str);
 	free(str);
 }

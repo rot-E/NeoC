@@ -38,13 +38,13 @@ function retrieve() { # copied-src-dir
 }
 
 function compile() { # copied-src-dir
-	# 環境 (Setup非依存)
+	# 環境 (Environment非依存)
 	gcc -c Memory.c -o Memory.o -g
 
 	# ライブラリ用初期化環境
-	gcc -c Setup.c -o Setup.o -g
+	gcc -c Environment.c -o Environment.o -g
 
-	# 環境 (Setup依存)
+	# 環境 (Environment依存)
 	gcc -c Exception.c -o Exception.o -g
 
 	# 定義値
@@ -58,6 +58,7 @@ function compile() { # copied-src-dir
 	gcc -c String.c -o String.o -g
 	gcc -c Console.c -o Console.o -g
 	gcc -c System.c -o System.o -g
+	gcc -c Socket.c -o Socket.o -g
 }
 
 function archive() { # copied-src-dir

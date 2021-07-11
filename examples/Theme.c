@@ -1,10 +1,8 @@
 #include "NeoC/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/SPEC/CC.h"
-#include "NeoC/SPEC/CSI.h"
 #include "NeoC/SPEC/SGR.h"
 #include "NeoC/Console.h"
-#include "NeoC/Exception.h"
 #include "NeoC/System.h"
 
 void main() $_ {

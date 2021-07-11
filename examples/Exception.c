@@ -1,5 +1,6 @@
 #include "NeoC/Environment.h"
 #include "NeoC/Exception.h"
+#include "NeoC/String.h"
 #include "NeoC/Console.h"
 
 void main() $_ {
@@ -31,7 +32,7 @@ void main() $_ {
 		Console.WriteErrorLine(String.New("Catch Other Exception"));
 	} finally {
 		result = -1;
-	} endX
+	} end
 
 	Console.WriteLine(String.NewFormat("%d", result));
 } _$

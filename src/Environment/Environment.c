@@ -1,4 +1,4 @@
-#include "Setup.h"
+#include "Environment.h"
 
 static void _Setup() {
 	E._Setup();
@@ -8,6 +8,7 @@ static void _Setup() {
 
 	String._Setup();
 	System._Setup();
+	Socket._Setup();
 }
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER() {

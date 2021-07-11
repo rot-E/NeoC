@@ -15,5 +15,5 @@ void main() $_ {
 		Console.WriteLine(String.New("called usleep"));
 	} catch (System.Exception) {
 		Console.WriteErrorLine(String.New("sleep failed."));
-	} end
+	} fin
 } _$

@@ -2,6 +2,8 @@
 
 void _Setup() {
 	SGR = (_SGR){
+		._Setup					= _Setup, // ?
+
 		.SET = {
 			.BOLD				= CSI.GenerateSGR(1),
 			.DIM				= CSI.GenerateSGR(2),

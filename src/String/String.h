@@ -8,11 +8,10 @@
 #include <stdarg.h>
 
 #include "Annotation.h"
-#include "Environment.h"
-#include "Setup.h"
 #include "Memory.h"
 #include "Exception.h"
 #include "SPEC/CC.h"
+#include "VariableLengthArray.h"
 
 typedef struct {
 	private int32_t _Size;
