@@ -3,7 +3,7 @@
 #include "NeoC/SPEC/CC.h"
 #include "NeoC/SPEC/SGR.h"
 #include "NeoC/Console.h"
-#include "NeoC/Exception.h"
+#include "NeoC/System.h"
 
 void main() $_ {
 	String_t *neoC = String.New("NeoC");
@@ -24,28 +24,23 @@ void main() $_ {
 		SGR.TEXT.DEFAULT
 	));
 
-	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
-
 	String_t *text = String.NewFormat(
 		"%s%s%s%s%s", String.Unpack(neoC), String.Unpack(isA),
 		String.Unpack(neo), String.Unpack(CPEL), String.Unpack(exc)
 	);
 
-	for (int32_t i = 0; i < String.GetLength(text); i++)
-		Console.WriteChar((String.GetCharAt(text, i) == 'm')? '^' : '.');
-	Console.NewLine();
-
 	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
+	for (;;) {
+		for (int32_t i = 0; i < String.GetLength(text); i++) {
+			Console.WriteChar((String.GetCharAt(text, i) == 'm')? '^' : '.');
+			System.USleep(30 * 1000);
+		}
 
-	uint8_t target = 'i';
-	try {
-		int32_t fi = String.FirstIndexOf(text, target);
-		int32_t li = String.LastIndexOf(text, target);
-
-		for (int32_t i = 0; i < String.GetLength(text); i++)
-			Console.WriteChar((i == fi || i == li)? '~' : ' ');
-		Console.NewLine();
-	} catch (String.Failure) {
-		Console.WriteErrorLine(String.NewFormat("Target character '%c' not found.", target));
-	} fin
+		for (int32_t i = String.GetLength(text) - 1; i >= 0; i--) {
+			Console.WriteChar(CC.BS);
+			Console.WriteChar((String.GetCharAt(text, i) != 'm')? '_' : '~');
+			Console.WriteChar(CC.BS);
+			System.USleep(30 * 1000);
+		}
+	}
 } _$
