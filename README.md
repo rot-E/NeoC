@@ -10,6 +10,7 @@ Neo C Programming Environment Library
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 #include "NeoC/Exception.h"
+#include "NeoC/Defer.h"
 #include "NeoC/System.h"
 
 void main() $_ {
@@ -18,15 +19,20 @@ void main() $_ {
 
    uint8_t target = 'i';
    try {
-      int32_t fi = String.FirstIndexOf(text, target);
-      int32_t li = String.LastIndexOf(text, target);
+      defer {
+         Console.WriteLine(text);
+      } set
 
-      for (int32_t i = 0; i < String.GetLength(text); i++) {
-         Console.WriteChar((i == fi || i == li)? '^' : ' ');
-		 System.USleep(50 * 1000);
-      }
-      Console.NewLine();
+      execute {
+         int32_t fi = String.FirstIndexOf(text, target);
+         int32_t li = String.LastIndexOf(text, target);
 
+         for (int32_t i = 0; i < String.GetLength(text); i++) {
+            Console.WriteChar((i == fi || i == li)? '^' : ' ');
+         System.USleep(50 * 1000);
+         }
+         Console.NewLine();
+      } ret
    } catch (String.Failure) {
       Console.WriteErrorLine(String.NewFormat("Target character '%c' not found.", target));
    } fin
