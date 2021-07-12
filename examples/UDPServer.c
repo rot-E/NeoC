@@ -16,7 +16,7 @@ void main() $_ {
 				String_t *msg = Socket.Collect(svr);
 				Console.WriteLine(
 					String.NewFormat(
-						"[%s, %d]> %s",
+						u8"[%s, %d]> %s",
 						({
 							String_t *ip = Socket.GetDestIPAddr(svr);
 							String.Unpack(ip);
@@ -25,11 +25,11 @@ void main() $_ {
 						String.Unpack(msg)
 					)
 				);
-				Socket.Cast(svr, String.New("Received."));
+				Socket.Cast(svr, String.New(u8"Received."));
 			}
 		}
 	} catch (Socket.Exception) {
-		Console.WriteErrorLine(String.New("[Socket.Exception] 通信エラー"));
+		Console.WriteErrorLine(String.New(u8"[Socket.Exception] 通信エラー"));
 	} fin
 
 	Socket.Delete(svr);

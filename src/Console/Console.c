@@ -37,7 +37,7 @@ static void WriteColourLine(uint8_t *colour, String_t *str) {
 }
 
 static void WriteErrorLine(String_t *str) {
-	fprintf(stderr, "%s%c", String.Unpack(str), CC.LF);
+	fprintf(stderr, u8"%s%c", String.Unpack(str), CC.LF);
 	fflush(stderr);
 }
 

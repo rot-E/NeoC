@@ -11,18 +11,18 @@ void main() $_ {
 	Socket_t *cli = NULL;
 
 	try {
-		cli = Socket.NewTCPClient(String.New("localhost"), 10001);
+		cli = Socket.NewTCPClient(String.New(u8"localhost"), 10001);
 
 		for (int32_t i = 0;; i++) {
-			String_t *str = String.NewFormat("Hello %d.", i);
+			String_t *str = String.NewFormat(u8"Hello %d.", i);
 			Socket.Send(cli, str);
-			Console.WriteLine(String.NewFormat("[Client]> %s", String.Unpack(str)));
+			Console.WriteLine(String.NewFormat(u8"[Client]> %s", String.Unpack(str)));
 
 			System.USleep(100 * 1000);
 
 			if (Socket.UpdateExists(cli)) {
 				String_t *msg = Socket.Receive(cli);
-				Console.WriteLine(String.NewFormat("[Server]> %s", String.Unpack(msg)));
+				Console.WriteLine(String.NewFormat(u8"[Server]> %s", String.Unpack(msg)));
 			}
 
 			if (i == 10) {
@@ -31,9 +31,9 @@ void main() $_ {
 			}
 		}
 	} catch (Socket.Exception) {
-		Console.WriteErrorLine(String.New("[Socket.Exception] 通信エラー"));
+		Console.WriteErrorLine(String.New(u8"[Socket.Exception] 通信エラー"));
 	} catchN (Socket.DisconnectionException) {
-		Console.WriteErrorLine(String.New("[Socket.DisconnectionException] 切断されました"));
+		Console.WriteErrorLine(String.New(u8"[Socket.DisconnectionException] 切断されました"));
 	} finally {
 		Socket.Delete(cli);
 	} end

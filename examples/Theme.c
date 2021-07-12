@@ -6,14 +6,14 @@
 #include "NeoC/Exception.h"
 
 void main() $_ {
-	String_t *neoC = String.New("NeoC");
-	String_t *isA = String.New(" is a ");
-	String_t *neo = String.New("Neo ");
-	String_t *CPEL = String.New("C Programming Environment Library");
-	String_t *exc = String.New(" !");
+	String_t *neoC = String.New(u8"NeoC");
+	String_t *isA = String.New(u8" is a ");
+	String_t *neo = String.New(u8"Neo ");
+	String_t *CPEL = String.New(u8"C Programming Environment Library");
+	String_t *exc = String.New(u8" !");
 
 	Console.WriteLine(String.NewFormat(
-		"%c%c%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+		u8"%c%c%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 		CC.HT, CC.HT, SGR.SET.BOLD, SGR.TEXT.LIGHT_YELLOW,
 		String.Unpack(neoC), SGR.RESET.BOLD, SGR.TEXT.YELLOW,
 		String.Unpack(isA), SGR.SET.BOLD, SGR.SET.BLINK,
@@ -27,7 +27,7 @@ void main() $_ {
 	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
 
 	String_t *text = String.NewFormat(
-		"%s%s%s%s%s", String.Unpack(neoC), String.Unpack(isA),
+		u8"%s%s%s%s%s", String.Unpack(neoC), String.Unpack(isA),
 		String.Unpack(neo), String.Unpack(CPEL), String.Unpack(exc)
 	);
 
@@ -46,6 +46,6 @@ void main() $_ {
 			Console.WriteChar((i == fi || i == li)? '~' : ' ');
 		Console.NewLine();
 	} catch (String.Failure) {
-		Console.WriteErrorLine(String.NewFormat("Target character '%c' not found.", target));
+		Console.WriteErrorLine(String.NewFormat(u8"Target character '%c' not found.", target));
 	} fin
 } _$

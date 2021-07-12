@@ -6,14 +6,14 @@
 
 void main() $_ {
 	try {
-		Console.WriteLine(String.New("call sleep"));
+		Console.WriteLine(String.New(u8"call sleep"));
 		System.Sleep(3);
-		Console.WriteLine(String.New("called sleep"));
+		Console.WriteLine(String.New(u8"called sleep"));
 
-		Console.WriteLine(String.New("call usleep"));
+		Console.WriteLine(String.New(u8"call usleep"));
 		System.USleep(1000 * 1000);
-		Console.WriteLine(String.New("called usleep"));
+		Console.WriteLine(String.New(u8"called usleep"));
 	} catch (System.Exception) {
-		Console.WriteErrorLine(String.New("sleep failed."));
+		Console.WriteErrorLine(String.New(u8"sleep failed."));
 	} fin
 } _$

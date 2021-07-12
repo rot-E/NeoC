@@ -1,12 +1,12 @@
 #include "Error.h"
 
 static void Panic(uint8_t *colour, uint8_t *message) {
-	fprintf(stderr, "%s%s%s%s%s\n",
-		"\e[31m",
-		"[Error] ",
+	fprintf(stderr, u8"%s%s%s%s%s\n",
+		u8"\e[31m",
+		u8"[Error] ",
 		colour,
 		message,
-		"\e[39m"
+		u8"\e[39m"
 	);
 	exit(EXIT_FAILURE);
 }

@@ -34,7 +34,7 @@ static void Try(const void (* Try)(), const void (* Catch)(), const void (* Fina
 }
 
 static void Throw(const Signal_t sig) {
-	if (_Exception._Nest < 0) _Error.Panic("\e[93m", "Exception System");
+	if (_Exception._Nest < 0) _Error.Panic(u8"\e[93m", u8"Exception System");
 
 	_Defer.Rewind();
 

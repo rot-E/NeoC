@@ -14,29 +14,29 @@ void main() $_ {
 		try {
 			throw (FugaException);
 		} catch (FugaException) {
-			Console.WriteErrorLine(String.New("Inner: Catch FugaException"));
+			Console.WriteErrorLine(String.New(u8"Inner: Catch FugaException"));
 		} fin
 
 		try {
 			throw (HogeException);
 		} catch (FugaException) {
-			Console.WriteErrorLine(String.New("Inner: Catch FugaException"));
+			Console.WriteErrorLine(String.New(u8"Inner: Catch FugaException"));
 		} finally {
-			Console.WriteErrorLine(String.New("Caught HogeException? (Ans:No) ;-)"));
+			Console.WriteErrorLine(String.New(u8"Caught HogeException? (Ans:No) ;-)"));
 		} end
 
 		throw (PiyoException);
 	} catch (HogeException) {
-		Console.WriteErrorLine(String.New("Outer: Catch HogeException"));
+		Console.WriteErrorLine(String.New(u8"Outer: Catch HogeException"));
 	} catchN (FugaException) {
-		Console.WriteErrorLine(String.New("Outer: Catch FugaException"));
+		Console.WriteErrorLine(String.New(u8"Outer: Catch FugaException"));
 	} catchN (PiyoException) {
-		Console.WriteErrorLine(String.New("Outer: Catch PiyoException"));
+		Console.WriteErrorLine(String.New(u8"Outer: Catch PiyoException"));
 	} catchAll {
-		Console.WriteErrorLine(String.New("Outer: Catch Other Exception"));
+		Console.WriteErrorLine(String.New(u8"Outer: Catch Other Exception"));
 	} finally {
 		result = -1;
 	} end
 
-	Console.WriteLine(String.NewFormat("%d", result));
+	Console.WriteLine(String.NewFormat(u8"%d", result));
 } _$

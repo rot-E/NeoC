@@ -16,23 +16,23 @@ void main() $_ {
 	int32_t result = 0;
 
 	try {
-		Console.WriteLine(String.New("処理1"));
+		Console.WriteLine(String.New(u8"処理1"));
 		result = 1;
 		throw (QuxException);
 
-		Console.WriteLine(String.New("処理2"));
+		Console.WriteLine(String.New(u8"処理2"));
 		result = 2;
 	} catch (FooException) {
-		Console.WriteErrorLine(String.New("Catch FooException"));
+		Console.WriteErrorLine(String.New(u8"Catch FooException"));
 	} catchN (BarException) {
-		Console.WriteErrorLine(String.New("Catch BarException"));
+		Console.WriteErrorLine(String.New(u8"Catch BarException"));
 	} catchN (BazException) {
-		Console.WriteErrorLine(String.New("Catch BazException"));
+		Console.WriteErrorLine(String.New(u8"Catch BazException"));
 	} catchAll {
-		Console.WriteErrorLine(String.New("Catch Other Exception"));
+		Console.WriteErrorLine(String.New(u8"Catch Other Exception"));
 	} finally {
 		result = -1;
 	} end
 
-	Console.WriteLine(String.NewFormat("%d", result));
+	Console.WriteLine(String.NewFormat(u8"%d", result));
 } _$

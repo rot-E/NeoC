@@ -7,7 +7,7 @@ static void _Setup() {
 }
 
 static void Set(void (* Task)()) {
-	if (_Defer._Index >= _Defer._TASK_MAX) _Error.Panic("\e[92m", "Defer System");
+	if (_Defer._Index >= _Defer._TASK_MAX) _Error.Panic(u8"\e[92m", u8"Defer System");
 
 	_Defer._Task[_Defer._Index++] = Task;
 }

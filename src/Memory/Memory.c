@@ -1,7 +1,7 @@
 #include "Memory.h"
 
 static void *_Inspect(void *ptr) {
-	if (ptr == NULL) _Error.Panic("\e[36m", "Memory System");
+	if (ptr == NULL) _Error.Panic(u8"\e[36m", u8"Memory System");
 	return ptr;
 }
 

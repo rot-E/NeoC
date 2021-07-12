@@ -11,18 +11,18 @@ void main() $_ {
 
 	try {
 		cli = Socket.NewUDPClient();
-		Socket.Configure(cli, String.New("localhost"), 10001);
+		Socket.Configure(cli, String.New(u8"localhost"), 10001);
 
 		for (int i = 0;; i++) {
-			String_t *str = String.NewFormat("Hello %d.", i);
+			String_t *str = String.NewFormat(u8"Hello %d.", i);
 			Socket.Cast(cli, str);
-			Console.WriteLine(String.NewFormat("Casted: %s", String.Unpack(str)));
+			Console.WriteLine(String.NewFormat(u8"Casted: %s", String.Unpack(str)));
 			System.USleep(100 * 1000);
 
 			if (Socket.UpdateExists(cli)) {
 				String_t *msg = Socket.Collect(cli);
 				String_t *ip = Socket.GetDestIPAddr(cli);
-				Console.WriteLine(String.NewFormat("[%s, %d]> %s", String.Unpack(ip), Socket.GetDestPort(cli), String.Unpack(msg)));
+				Console.WriteLine(String.NewFormat(u8"[%s, %d]> %s", String.Unpack(ip), Socket.GetDestPort(cli), String.Unpack(msg)));
 			}
 
 			if (i == 10) {
@@ -34,11 +34,11 @@ void main() $_ {
 		/* Broadcast */
 		cli2 = Socket.NewUDPClient();
 		Socket.ConfigureBroadcast(cli2, 10001);
-		Socket.Broadcast(cli2, String.New("HELO"));
-		Console.WriteLine(String.New("Broadcasted."));
+		Socket.Broadcast(cli2, String.New(u8"HELO"));
+		Console.WriteLine(String.New(u8"Broadcasted."));
 
 	} catch (Socket.Exception) {
-		Console.WriteErrorLine(String.New("[Socket.Exception] 通信エラー"));
+		Console.WriteErrorLine(String.New(u8"[Socket.Exception] 通信エラー"));
 	} fin
 
 	Socket.Delete(cli);

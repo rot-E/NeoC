@@ -13,12 +13,12 @@ static void _Setup() {
 }
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER() {
-	fprintf(stderr, "%s%s%s%s%s\n",
-		"\e[91m",
-		"[Exception] ",
-		"\e[36m",
-		"main function",
-		"\e[39m"
+	fprintf(stderr, u8"%s%s%s%s%s\n",
+		u8"\e[91m",
+		u8"[Exception] ",
+		u8"\e[36m",
+		u8"main function",
+		u8"\e[39m"
 	);
 	exit(EXIT_FAILURE);
 }

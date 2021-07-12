@@ -6,7 +6,7 @@
 #include "NeoC/System.h"
 
 void main() $_ {
-   String_t *text = String.New("NeoC is a Neo C Programming Environment Library !");
+   String_t *text = String.New(u8"NeoC is a Neo C Programming Environment Library !");
    Console.WriteLine(text);
 
    uint8_t target = 'i';
@@ -26,6 +26,6 @@ void main() $_ {
          Console.NewLine();
       } ret
    } catch (String.Failure) {
-      Console.WriteErrorLine(String.NewFormat("Target character '%c' not found.", target));
+      Console.WriteErrorLine(String.NewFormat(u8"Target character '%c' not found.", target));
    } fin
 } _$

@@ -4,7 +4,7 @@ static void _Setup() {
 	Socket.Exception signal;
 	Socket.DisconnectionException signal;
 
-	Socket.CRLF = String.NewFormat("%c%c", CC.CR, CC.LF);
+	Socket.CRLF = String.NewFormat(u8"%c%c", CC.CR, CC.LF);
 }
 
 static Socket_t *New(const int32_t socket) {

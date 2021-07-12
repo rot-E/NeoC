@@ -3,21 +3,21 @@
 #include "NeoC/Console.h"
 
 void main() $_ {
-	Console.WriteLine(String.New("test"));
+	Console.WriteLine(String.New(u8"test"));
 	Console.SetColour(SGR.TEXT.BLUE);
-	Console.WriteLine(String.New("test"));
+	Console.WriteLine(String.New(u8"test"));
 	Console.SetDefaultColour();
-	Console.WriteLine(String.New("test"));
+	Console.WriteLine(String.New(u8"test"));
 
 	Console.SetState(SGR.SET.BLINK);
-	Console.Write(String.New("blink"));
+	Console.Write(String.New(u8"blink"));
 	Console.SetState(SGR.RESET.BLINK);
-	Console.WriteLine(String.New(""));
+	Console.WriteLine(String.New(u8""));
 
-	Console.WriteLine(String.New("test1"));
-	Console.WriteLine(String.New("test2"));
+	Console.WriteLine(String.New(u8"test1"));
+	Console.WriteLine(String.New(u8"test2"));
 	Console.ErasePrevLine();
-	Console.WriteLine(String.New("test3"));
+	Console.WriteLine(String.New(u8"test3"));
 
-	Console.WriteTopLine(String.New("> "));
+	Console.WriteTopLine(String.New(u8"> "));
 } _$
