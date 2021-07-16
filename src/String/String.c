@@ -45,13 +45,13 @@ static String_t *NewChar(const uint8_t ch) {
 
 static void Reduce(String_t *str) throws (String.Exception) {
 	uint8_t *tmp = strdup(str->_String);
-	if (tmp == NULL) throw (String.Exception);
+	if (tmp == NULL) throw (Signal.New(String.Exception));
 
 	str->_Size = String.GetLength(str) + 1;
 
 	String.Release(str);
 	str->_String = strdup(tmp);
-	if (str->_String == NULL) throw (String.Exception);
+	if (str->_String == NULL) throw (Signal.New(String.Exception));
 
 	free(tmp);
 }
@@ -76,19 +76,19 @@ static int32_t GetLength(String_t *str) {
 }
 
 static uint8_t GetCharAt(String_t *str, const int32_t index) throws (String.Exception) {
-	if (String.GetLength(str) < index) throw (String.Exception);
+	if (String.GetLength(str) < index) throw (Signal.New(String.Exception));
 
 	return String.Unpack(str)[index];
 }
 
 static uint8_t GetHeadChar(String_t *str) throws (String.Exception) {
-	if (String.GetLength(str) < 1) throw (String.Exception);
+	if (String.GetLength(str) < 1) throw (Signal.New(String.Exception));
 
 	return String.GetCharAt(str, 0);
 }
 
 static uint8_t GetLastChar(String_t *str) throws (String.Exception) {
-	if (String.GetLength(str) < 1) throw (String.Exception);
+	if (String.GetLength(str) < 1) throw (Signal.New(String.Exception));
 
 	return String.GetCharAt(str, String.GetLength(str) - 1);
 }
@@ -97,20 +97,20 @@ static int32_t FirstIndexOf(String_t *str, const uint8_t ch) throws (String.Exce
 	for (int32_t i = 0; i < String.GetLength(str); i++)
 		if (String.GetCharAt(str, i) == ch) return i;
 
-	throw (String.Failure);
+	throw (Signal.New(String.Failure));
 }
 
 static int32_t LastIndexOf(String_t *str, const uint8_t ch) throws (String.Exception, String.Failure) {
 	for (int32_t i = String.GetLength(str); 0 <= i; i--)
 		if (String.GetCharAt(str, i) == ch) return i;
 
-	throw (String.Failure);
+	throw (Signal.New(String.Failure));
 }
 
 static String_t *Substring(String_t *str, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception) {
 	if (   String.GetLength(str) + 1 < beginIndex
 		|| String.GetLength(str) + 1 < lastIndex
-		|| beginIndex > lastIndex ) throw (String.Exception);
+		|| beginIndex > lastIndex ) throw (Signal.New(String.Exception));
 
 	uint8_t *s = (uint8_t *)(
 		_Memory.CountedAllocate(1 + lastIndex - beginIndex, sizeof(uint8_t))
@@ -175,7 +175,7 @@ static bool Equals(String_t *str, String_t *anString) {
 
 static bool StartsWith(String_t *str, String_t *prefix) throws (String.Exception) {
 	if (String.GetLength(str) < String.GetLength(prefix))
-		throw (String.Exception);
+		throw (Signal.New(String.Exception));
 
 	for (uint32_t i = 0; i < String.GetLength(prefix); i++)
 		if (String.GetCharAt(str, i) != String.GetCharAt(prefix, i))
@@ -190,7 +190,7 @@ static bool StartsWithChar(String_t *str, const uint8_t ch) throws (String.Excep
 
 static bool EndsWith(String_t *str, String_t *suffix) throws (String.Exception) {
 	if (String.GetLength(str) < String.GetLength(suffix))
-		throw (String.Exception);
+		throw (Signal.New(String.Exception));
 
 	return !strncmp(
 		str->_String + String.GetLength(str) - String.GetLength(suffix),

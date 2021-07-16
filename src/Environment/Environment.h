@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 #include "Annotation.h"
-#include "Exception.h"
+#include "Exception/Exception.h"
 #include "Defer.h"
 #include "SPEC/CSI.h"
 #include "SPEC/SGR.h"

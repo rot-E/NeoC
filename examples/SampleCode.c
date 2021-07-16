@@ -1,7 +1,7 @@
 #include "NeoC/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
-#include "NeoC/Exception.h"
+#include "NeoC/Exception/Exception.h"
 #include "NeoC/Defer.h"
 #include "NeoC/System.h"
 

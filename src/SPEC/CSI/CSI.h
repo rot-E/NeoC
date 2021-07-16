@@ -4,7 +4,8 @@
 
 #include "../Annotation.h"
 #include "../Memory.h"
-#include "../Exception.h"
+#include "../Exception/Signal.h"
+#include "../Exception/Exception.h"
 
 #include "CC.h"
 
@@ -19,7 +20,7 @@
 typedef struct {
 	private void (* _Setup)();
 
-	public final int32_t RuntimeException;
+	public final SignalCode_t Exception;
 
 	private int32_t _ESCAPE_SEQUENCE_LEMGTH_MAX;
 
@@ -35,8 +36,8 @@ typedef struct {
 	public uint8_t *(* CHT)(const int32_t n); // nタブ右
 	public uint8_t *(* CBT)(const int32_t n); // nタブ左
 
-	public uint8_t *(* ED)(const int32_t n);
-	public uint8_t *(* EL)(const int32_t n);
+	public uint8_t *(* ED)(const int32_t n) throws (CSI.Exception);
+	public uint8_t *(* EL)(const int32_t n) throws (CSI.Exception);
 	public uint8_t *(* ECH)(const int32_t n);
 	public uint8_t *(* DCH)(const int32_t n);
 	public uint8_t *(* IL)(const int32_t n);

@@ -9,7 +9,8 @@
 
 #include "Annotation.h"
 #include "Memory.h"
-#include "Exception.h"
+#include "Exception/Signal.h"
+#include "Exception/Exception.h"
 #include "SPEC/CC.h"
 #include "Abbreviation.h"
 
@@ -21,8 +22,8 @@ typedef struct {
 typedef struct {
 	private void (* _Setup)();
 
-	public final uint32_t Exception;
-	public final uint32_t Failure;
+	public final SignalCode_t Exception;
+	public final SignalCode_t Failure;
 
 	private int32_t _NEW_FORMAT_MAX_ALLOCATION_SIZE;
 

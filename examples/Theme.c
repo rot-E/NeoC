@@ -3,7 +3,7 @@
 #include "NeoC/SPEC/CC.h"
 #include "NeoC/SPEC/SGR.h"
 #include "NeoC/Console.h"
-#include "NeoC/Exception.h"
+#include "NeoC/Exception/Exception.h"
 
 void main() $_ {
 	String_t *neoC = String.New(u8"NeoC");

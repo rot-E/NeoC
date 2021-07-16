@@ -1,5 +1,6 @@
 #include "NeoC/Environment.h"
-#include "NeoC/Exception.h"
+#include "NeoC/Exception/Signal.h"
+#include "NeoC/Exception/Exception.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
@@ -96,7 +97,7 @@ void main() $_ {
 
 		Console.WriteLine(String.NewFormat(u8"%s", String.Unpack(String.NewChar('t'))));
 
-		throw (String.Failure);
+		throw (Signal.New(String.Failure));
 	} catch (String.Failure) {
 		Console.WriteErrorLine(String.New(u8"String.Failure"));
 	} catchN (String.Exception) {

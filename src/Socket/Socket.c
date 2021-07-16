@@ -28,11 +28,11 @@ static Socket_t *NewTCPClient(String_t *serverHost, const in_port_t serverPort) 
 
 	// ソケット作成
 	sock->_Socket = socket(PF_INET, SOCK_STREAM, 0);
-	if (sock->_Socket == -1) throw (Socket.Exception);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
 
 	// 名前解決
 	struct hostent *hent = gethostbyname(String.Unpack(serverHost));
-	if (hent == NULL) throw (Socket.Exception);
+	if (hent == NULL) throw (Signal.New(Socket.Exception));
 
 	// 接続情報構成
 	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
@@ -44,7 +44,7 @@ static Socket_t *NewTCPClient(String_t *serverHost, const in_port_t serverPort) 
 
 	// 接続
 	int32_t result = connect(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 
 	// ソケット監視設定
 	FD_ZERO(&sock->_FDState);
@@ -58,7 +58,7 @@ static Socket_t *NewTCPServer(const in_port_t listenPort) throws (Socket.Excepti
 
 	// 待受用ソケット作成
 	sock->_Socket = socket(PF_INET, SOCK_STREAM, 0);
-	if (sock->_Socket == -1) throw (Socket.Exception);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
 
 	// 接続情報構成
 	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
@@ -70,11 +70,11 @@ static Socket_t *NewTCPServer(const in_port_t listenPort) throws (Socket.Excepti
 
 	// 名前を付与
 	int32_t result = bind(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 
 	// 待受開始
 	result = listen(sock->_Socket, 5);
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 
 	return sock;
 }
@@ -84,7 +84,7 @@ static Socket_t *NewUDPClient() throws (Socket.Exception) {
 
 	// ソケット作成
 	sock->_Socket = socket(PF_INET, SOCK_DGRAM, 0);
-	if (sock->_Socket == -1) throw (Socket.Exception);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
 
 	// ソケット監視設定
 	FD_ZERO(&sock->_FDState);
@@ -98,7 +98,7 @@ static Socket_t *NewUDPServer(const in_port_t listenPort) throws (Socket.Excepti
 
 	// ソケット作成
 	sock->_Socket = socket(PF_INET, SOCK_DGRAM, 0);
-	if (sock->_Socket == -1) throw (Socket.Exception);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
 
 	// 接続情報構成
 	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
@@ -110,7 +110,7 @@ static Socket_t *NewUDPServer(const in_port_t listenPort) throws (Socket.Excepti
 
 	// 名前を付与
 	int32_t result = bind(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 
 	// ソケット監視設定
 	FD_ZERO(&sock->_FDState);
@@ -134,7 +134,7 @@ static void Send(Socket_t *self, String_t *message) throws (Socket.Exception) {
 	String_t *data = String.Concat(message, Socket.CRLF);
 
 	int32_t result = send(self->_Socket, String.Unpack(data), String.GetLength(data), 0);
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 
 	String.Delete(data);
 }
@@ -147,8 +147,8 @@ static String_t *Receive(Socket_t *self) throws (Socket.Exception, Socket.Discon
 
 	retrieve {
 		int32_t result = recv(self->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
-		if (result == 0) throw (Socket.DisconnectionException);
-		if (result == -1) throw (Socket.Exception);
+		if (result == 0) throw (Signal.New(Socket.DisconnectionException));
+		if (result == -1) throw (Signal.New(Socket.Exception));
 
 		String.Reduce(data);
 
@@ -176,7 +176,7 @@ static bool UpdateExists(Socket_t *self) {
 static void Configure(Socket_t *self, String_t *host, const in_port_t port) throws (Socket.Exception) {
 	// 名前解決
 	struct hostent *hent = gethostbyname(String.Unpack(host));
-	if (hent == NULL) throw (Socket.Exception);
+	if (hent == NULL) throw (Signal.New(Socket.Exception));
 
 	// 接続情報構成
 	self->_Addr = (struct sockaddr_in *)(
@@ -204,7 +204,7 @@ static void ConfigureBroadcast(Socket_t *self, const in_port_t port) throws (Soc
 	self->_BroadcastSwitch = 1;
 
 	int32_t result = setsockopt(self->_Socket, SOL_SOCKET, SO_BROADCAST, (void *)(&self->_BroadcastSwitch), sizeof(self->_BroadcastSwitch));
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 }
 
 static String_t *GetDestIPAddr(Socket_t *self) {
@@ -217,7 +217,7 @@ static in_port_t GetDestPort(Socket_t *self) {
 
 static void Cast(Socket_t *self, String_t *message) throws (Socket.Exception) {
 	int32_t result = sendto(self->_Socket, String.Unpack(message), String.GetLength(message), 0, (struct sockaddr *)(self->_Addr), sizeof(*self->_Addr));
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 }
 
 static void Broadcast(Socket_t *self, String_t *message) throws (Socket.Exception) {
@@ -230,7 +230,7 @@ static String_t *Collect(Socket_t *self) throws (Socket.Exception) {
 		socklen_t tmp = sizeof(*self->_Addr);
 		&tmp;
 	})); // 危うい？
-	if (result == -1) throw (Socket.Exception);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 
 	return String.ConcatChar(str, CC.NUL);
 }

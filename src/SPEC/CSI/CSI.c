@@ -1,7 +1,7 @@
 #include "CSI.h"
 
 static void _Setup() {
-	CSI.RuntimeException signal;
+	CSI.Exception signal;
 }
 
 static uint8_t *CUU(const int32_t n) {
@@ -64,16 +64,16 @@ static uint8_t *CBT(const int32_t n) {
 	return seq;
 }
 
-static uint8_t *ED(const int32_t n) {
-	if (n < 0 || 3 < n) throw (CSI.RuntimeException);
+static uint8_t *ED(const int32_t n) throws (CSI.Exception) {
+	if (n < 0 || 3 < n) throw (Signal.New(CSI.Exception));
 
 	uint8_t *seq = (uint8_t *)(_Memory.CountedAllocate(CSI._ESCAPE_SEQUENCE_LEMGTH_MAX, sizeof(uint8_t)));
 	sprintf(seq, u8"%c[%dJ", CC.ESC, n);
 	return seq;
 }
 
-static uint8_t *EL(const int32_t n) {
-	if (n < 0 || 2 < n) throw (CSI.RuntimeException);
+static uint8_t *EL(const int32_t n) throws (CSI.Exception) {
+	if (n < 0 || 2 < n) throw (Signal.New(CSI.Exception));
 
 	uint8_t *seq = (uint8_t *)(_Memory.CountedAllocate(CSI._ESCAPE_SEQUENCE_LEMGTH_MAX, sizeof(uint8_t)));
 	sprintf(seq, u8"%c[%dK", CC.ESC, n);

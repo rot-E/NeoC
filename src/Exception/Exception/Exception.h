@@ -2,9 +2,9 @@
 
 /* ------------------------------------------------------ */
 /* signal定義 */
-#define signal = _Exception.GenerateSignal()
+#define signal = _Exception.AssignSignalCode()
 
-#define sign(EX) int32_t EX = _Exception.GenerateSignal()
+#define sign(EX) SignalCode_t EX = _Exception.AssignSignalCode()
 
 /* 例外処理 */
 // 危うい？
@@ -12,9 +12,11 @@
 
 #define throw(EX) _Exception.Throw(EX)
 
-#define catch(EX) ; Try; }), ({ void Catch() { const uint32_t sig = _Exception.ElicitSignal(); if (sig == EX)
+#define catch(EX) ; Try; }), ({ void Catch(Signal_t *sig) { if (Signal.GetSignalCode(sig) == EX)
 
-#define catchN(EX) else if (sig == EX)
+#define elicit() sig
+
+#define catchN(EX) else if (Signal.GetSignalCode(sig) == EX)
 
 #define catchAll else
 
@@ -33,21 +35,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Annotation.h"
-#include "Error.h"
-#include "Memory.h"
-#include "Defer.h"
+#include "../Annotation.h"
+#include "../Error.h"
+#include "../Memory.h"
+#include "../Defer.h"
 
-typedef uint32_t Signal_t;
+#include "Signal.h"
 
 typedef struct {
 	private jmp_buf _Context;
-	private Signal_t _Signal;
-
-	/* データ持たせたい場合ここに追記;
-	// private void *_Data;
-	 *
-	 * アクセッサへのポインタ変数を_Context型に定義 */
+	private Signal_t *_Signal;
 } Context_t;
 
 typedef struct {
@@ -61,16 +58,15 @@ extern _Context Context;
 typedef struct {
 	private void (* _Setup)();
 
-	private uint32_t _SIGNAL_MAX;
-	public Signal_t (* GenerateSignal)();
+	private uint32_t _SIGNAL_CODE_MAX;
+	public SignalCode_t (* AssignSignalCode)();
 
 	private Context_t *_Context;
 	private int32_t _Nest;
 	private int32_t _NEST_MAX;
 
-	public void (* Try)(const void (* Try)(), const void (* Catch)(), const void (* Finally)());
-	public void (* Throw)(const Signal_t);
-	public Signal_t (* ElicitSignal)();
+	public void (* Try)(const void (* Try)(), const void (* Catch)(Signal_t *), const void (* Finally)());
+	public void (* Throw)(Signal_t *);
 } __Exception;
 
 extern __Exception _Exception;

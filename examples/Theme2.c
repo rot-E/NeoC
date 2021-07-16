@@ -29,7 +29,7 @@ void main() $_ {
 		String.Unpack(neo), String.Unpack(CPEL), String.Unpack(exc)
 	);
 
-	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT);
+	Console.WriteChar(CC.HT); Console.WriteChar(CC.HT); Console.SetState(CSI.DECTCEM('l'));
 	for (;;) {
 		for (int32_t i = 0; i < String.GetLength(text); i++) {
 			Console.WriteChar((String.GetCharAt(text, i) == 'm')? '^' : '.');

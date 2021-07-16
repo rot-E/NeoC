@@ -1,5 +1,6 @@
 #include "NeoC/Environment.h"
-#include "NeoC/Exception.h"
+#include "NeoC/Exception/Signal.h"
+#include "NeoC/Exception/Exception.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
@@ -10,7 +11,7 @@ void main() $_ {
 	sign (BazException);
 	sign (QuxException);
 
-	Signal_t QuuxException signal; // 方法2
+	SignalCode_t QuuxException signal; // 方法2
 
 
 	int32_t result = 0;
@@ -18,7 +19,7 @@ void main() $_ {
 	try {
 		Console.WriteLine(String.New(u8"処理1"));
 		result = 1;
-		throw (QuxException);
+		throw (Signal.New(QuxException));
 
 		Console.WriteLine(String.New(u8"処理2"));
 		result = 2;

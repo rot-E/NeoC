@@ -7,7 +7,8 @@
 #include <sys/select.h>
 
 #include "Memory.h"
-#include "Exception.h"
+#include "Exception/Signal.h"
+#include "Exception/Exception.h"
 #include "Defer.h"
 #include "String.h"
 
@@ -21,8 +22,8 @@ typedef struct {
 typedef struct {
 	private void (* _Setup)();
 
-	public final int32_t Exception;
-	public final int32_t DisconnectionException;
+	public final SignalCode_t Exception;
+	public final SignalCode_t DisconnectionException;
 
 	public final String_t *CRLF;
 	protected final int32_t DATA_MAX_SIZE;
