@@ -63,4 +63,6 @@ void main() $_ {
 	} end
 
 	Console.WriteLine(String.NewFormat(u8"%d", result));
+
+	throw (Signal.Build(HogeException, "Message"));
 } _$
