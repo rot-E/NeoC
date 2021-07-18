@@ -13,11 +13,14 @@ static Socket_t *Accept(Socket_t *self) {
 
 static void Send(Socket_t *self, String_t *message) throws (Socket.Exception) {
 	String_t *data = String.Concat(message, Socket.CRLF);
+	defer {
+		String.Delete(data);
+	} set
 
-	int32_t result = send(self->_Socket, String.Unpack(data), String.GetLength(data), 0);
-	if (result == -1) throw (Signal.New(Socket.Exception));
-
-	String.Delete(data);
+	execute {
+		int32_t result = send(self->_Socket, String.Unpack(data), String.GetLength(data), 0);
+		if (result == -1) throw (Signal.New(Socket.Exception));
+	} ret
 }
 
 static String_t *Receive(Socket_t *self) throws (Socket.Exception, Socket.DisconnectionException) {
@@ -30,8 +33,6 @@ static String_t *Receive(Socket_t *self) throws (Socket.Exception, Socket.Discon
 		int32_t result = recv(self->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
 		if (result == 0) throw (Signal.New(Socket.DisconnectionException));
 		if (result == -1) throw (Signal.New(Socket.Exception));
-
-		String.Reduce(data);
 
 		if (String.EndsWith(data, Socket.CRLF)) {
 			/* 区切りがCRLFの場合 */
