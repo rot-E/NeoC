@@ -18,6 +18,4 @@ void main() $_ {
 	Console.WriteLine(String.New(u8"test2"));
 	Console.ErasePrevLine();
 	Console.WriteLine(String.New(u8"test3"));
-
-	Console.WriteTopLine(String.New(u8"> "));
 } _$
