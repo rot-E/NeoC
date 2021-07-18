@@ -16,4 +16,9 @@ void main() $_ {
 	} catch (System.Exception) {
 		Console.WriteErrorLine(String.New(u8"sleep failed."));
 	} fin
+
+	Console.WriteLine(String.New("終了するには何か入力してください..."));
+	while (!System.Keystroked());
+	Console.WriteLine(String.New("入力されました"));
+	scanf("%s", NULL);
 } _$
