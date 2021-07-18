@@ -25,12 +25,16 @@ static SignalCode_t AssignSignalCode() {
 static void Try(const void (* Try)(), const void (* Catch)(Signal_t *), const void (* Finally)()) {
 	if (_Exception._Nest >= _Exception._NEST_MAX - 1) _Error.Panic("\e[93m", "Exception System");
 
+	bool threw = false;
 	if (setjmp(_Exception._Context[_Exception._Nest++]._Context) == 0) {
 		Try();
 	} else {
+		threw = true;
 		Catch(_Exception._Context[_Exception._Nest]._Signal);
 	}
 	Finally();
+
+	if (!threw) _Exception._Nest--;
 }
 
 static void Throw(Signal_t *sig) {

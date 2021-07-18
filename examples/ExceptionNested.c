@@ -4,6 +4,10 @@
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
+void f(SignalCode_t c) {
+	throw (Signal.Build(c, "f"));
+}
+
 void main() $_ {
 	SignalCode_t HogeException signal;
 	SignalCode_t FugaException signal;
@@ -65,4 +69,6 @@ void main() $_ {
 	Console.WriteLine(String.NewFormat(u8"%d", result));
 
 	throw (Signal.Build(HogeException, "Message"));
+
+	f(HogeException);
 } _$
