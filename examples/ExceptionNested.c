@@ -4,7 +4,7 @@
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
-void f(SignalCode_t c) {
+void f(SignalCode_t c) throws (c) {
 	throw (Signal.Build(c, "f"));
 }
 
