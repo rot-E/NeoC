@@ -15,6 +15,13 @@ void main() $_ {
 			String.GetLastChar(s)
 		));
 
+		Console.WriteLine(String.NewFormat(u8"s=\"%s\"   |s|=%d   s(0)='%c'   s(|s|-1)='%c'",
+			s->Unpack(s),
+			s->GetLength(s),
+			s->GetCharAt(s, 0),
+			s->GetLastChar(s)
+		));
+
 		Console.WriteLine(String.NewFormat(u8"first index of 's': %d",
 			String.FirstIndexOf(s, 's')
 		));

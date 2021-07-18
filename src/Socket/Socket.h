@@ -12,11 +12,33 @@
 #include "Defer.h"
 #include "String.h"
 
-typedef struct {
+typedef struct Socket_t {
 	private int32_t _Socket;
 	private fd_set _FDState;
 	private struct sockaddr_in *_Addr;
 	private int32_t _BroadcastSwitch;
+
+	/* TCP */
+	public struct Socket_t *(* Accept)(struct Socket_t *);
+
+	public void (* Send)(struct Socket_t *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Receive)(struct Socket_t *) throws (Socket.Exception, Socket.DisconnectionException);
+
+	public void (* Disconnect)(struct Socket_t *);
+
+	/* 共通 */
+	public bool (* UpdateExists)(struct Socket_t *);
+
+	/* UDP */
+	public void (* Configure)(struct Socket_t *, String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
+	public void (* ConfigureBroadcast)(struct Socket_t *, const in_port_t serverPort) throws (Socket.Exception);
+
+	public String_t *(* GetDestIPAddr)(struct Socket_t *);
+	public in_port_t (* GetDestPort)(struct Socket_t *);
+
+	public void (* Cast)(struct Socket_t *, String_t *message) throws (Socket.Exception);
+	public void (* Broadcast)(struct Socket_t *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Collect)(struct Socket_t *) throws (Socket.Exception);
 } Socket_t;
 
 typedef struct {

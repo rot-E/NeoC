@@ -14,9 +14,34 @@
 #include "SPEC/CC.h"
 #include "Abbreviation.h"
 
-typedef struct {
+typedef struct String_t {
 	private int32_t _Size;
 	private uint8_t *_String;
+
+	/* 取得系 */
+	public uint8_t *(* Unpack)(struct String_t *);
+	public int32_t (* GetLength)(struct String_t *);
+	public uint8_t (* GetCharAt)(struct String_t *, const int32_t index) throws (String.Exception);
+	public uint8_t (* GetHeadChar)(struct String_t *) throws (String.Exception);
+	public uint8_t (* GetLastChar)(struct String_t *) throws (String.Exception);
+
+	public int32_t (* FirstIndexOf)(struct String_t *, const uint8_t ch) throws (String.Exception, String.Failure);
+	public int32_t (* LastIndexOf)(struct String_t *, const uint8_t ch) throws (String.Exception, String.Failure);
+
+	/* 加工系 */
+	public struct String_t *(* Substring)(struct String_t *, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception);
+	public struct String_t *(* DropLastChar)(struct String_t *) throws (String.Exception);
+	public struct String_t *(* ReplaceWithChar)(struct String_t *, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception);
+	public struct String_t *(* Concat)(struct String_t *, struct String_t *str);
+	public struct String_t *(* ConcatChar)(struct String_t *, const uint8_t ch);
+
+	/* 検査系 */
+	public bool (* IsEmpty)(struct String_t *);
+	public bool (* Equals)(struct String_t *, struct String_t *anString);
+	public bool (* StartsWith)(struct String_t *, struct String_t *prefix) throws (String.Exception);
+	public bool (* StartsWithChar)(struct String_t *, const uint8_t ch) throws (String.Exception);
+	public bool (* EndsWith)(struct String_t *, struct String_t *suffix) throws (String.Exception);
+	public bool (* EndsWithChar)(struct String_t *, const uint8_t ch) throws (String.Exception);
 } String_t;
 
 typedef struct {

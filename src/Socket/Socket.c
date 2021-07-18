@@ -7,125 +7,6 @@ static void _Setup() {
 	Socket.CRLF = String.NewFormat(u8"%c%c", CC.CR, CC.LF);
 }
 
-static Socket_t *New(const int32_t socket) {
-	Socket_t *sock = (Socket_t *)(_Memory.Allocate(sizeof(Socket_t)));
-
-	sock->_Socket				= (socket >= 3)? socket : 0;
-	sock->_Addr					= NULL;
-	sock->_BroadcastSwitch		= 0;
-
-	// ソケット監視設定
-	if (socket >= 3) {
-		FD_ZERO(&sock->_FDState);
-		FD_SET(sock->_Socket, &sock->_FDState);
-	}
-
-	return sock;
-}
-
-static Socket_t *NewTCPClient(String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception) {
-	Socket_t *sock = Socket.New(-1);
-
-	// ソケット作成
-	sock->_Socket = socket(PF_INET, SOCK_STREAM, 0);
-	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
-
-	// 名前解決
-	struct hostent *hent = gethostbyname(String.Unpack(serverHost));
-	if (hent == NULL) throw (Signal.New(Socket.Exception));
-
-	// 接続情報構成
-	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
-	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
-
-	sock->_Addr->sin_family		= AF_INET;
-	sock->_Addr->sin_port		= htons(serverPort);
-	memcpy(&sock->_Addr->sin_addr, hent->h_addr_list[0], hent->h_length);
-
-	// 接続
-	int32_t result = connect(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
-	if (result == -1) throw (Signal.New(Socket.Exception));
-
-	// ソケット監視設定
-	FD_ZERO(&sock->_FDState);
-	FD_SET(sock->_Socket, &sock->_FDState);
-
-	return sock;
-}
-
-static Socket_t *NewTCPServer(const in_port_t listenPort) throws (Socket.Exception) {
-	Socket_t *sock = Socket.New(-1);
-
-	// 待受用ソケット作成
-	sock->_Socket = socket(PF_INET, SOCK_STREAM, 0);
-	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
-
-	// 接続情報構成
-	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
-	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
-
-	sock->_Addr->sin_family = AF_INET;
-	sock->_Addr->sin_port = htons(listenPort);
-	sock->_Addr->sin_addr.s_addr = htonl(INADDR_ANY);
-
-	// 名前を付与
-	int32_t result = bind(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
-	if (result == -1) throw (Signal.New(Socket.Exception));
-
-	// 待受開始
-	result = listen(sock->_Socket, 5);
-	if (result == -1) throw (Signal.New(Socket.Exception));
-
-	return sock;
-}
-
-static Socket_t *NewUDPClient() throws (Socket.Exception) {
-	Socket_t *sock = Socket.New(-1);
-
-	// ソケット作成
-	sock->_Socket = socket(PF_INET, SOCK_DGRAM, 0);
-	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
-
-	// ソケット監視設定
-	FD_ZERO(&sock->_FDState);
-	FD_SET(sock->_Socket, &sock->_FDState);
-
-	return sock;
-}
-
-static Socket_t *NewUDPServer(const in_port_t listenPort) throws (Socket.Exception) {
-	Socket_t *sock = Socket.New(-1);
-
-	// ソケット作成
-	sock->_Socket = socket(PF_INET, SOCK_DGRAM, 0);
-	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
-
-	// 接続情報構成
-	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
-	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
-
-	sock->_Addr->sin_family			= AF_INET;
-	sock->_Addr->sin_port			= htons(listenPort);
-	sock->_Addr->sin_addr.s_addr	= htonl(INADDR_ANY);
-
-	// 名前を付与
-	int32_t result = bind(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
-	if (result == -1) throw (Signal.New(Socket.Exception));
-
-	// ソケット監視設定
-	FD_ZERO(&sock->_FDState);
-	FD_SET(sock->_Socket, &sock->_FDState);
-
-	return sock;
-}
-
-static void Delete(Socket_t *sock) {
-	if (sock == NULL) return;
-
-	free(sock->_Addr);
-	free(sock);
-}
-
 static Socket_t *Accept(Socket_t *self) {
 	return Socket.New(accept(self->_Socket, NULL, NULL));
 }
@@ -233,6 +114,138 @@ static String_t *Collect(Socket_t *self) throws (Socket.Exception) {
 	if (result == -1) throw (Signal.New(Socket.Exception));
 
 	return String.ConcatChar(str, CC.NUL);
+}
+
+static Socket_t *New(const int32_t socket) {
+	Socket_t *sock = (Socket_t *)(_Memory.Allocate(sizeof(Socket_t)));
+
+	sock->_Socket					= (socket >= 3)? socket : 0;
+	sock->_Addr						= NULL;
+	sock->_BroadcastSwitch			= 0;
+
+	// ソケット監視設定
+	if (socket >= 3) {
+		FD_ZERO(&sock->_FDState);
+		FD_SET(sock->_Socket, &sock->_FDState);
+	}
+
+	sock->Accept					= Accept;
+	sock->Send						= Send;
+	sock->Receive					= Receive;
+	sock->Disconnect				= Disconnect;
+	sock->UpdateExists				= UpdateExists;
+	sock->Configure					= Configure;
+	sock->ConfigureBroadcast		= ConfigureBroadcast;
+	sock->GetDestIPAddr				= GetDestIPAddr;
+	sock->GetDestPort				= GetDestPort;
+	sock->Cast						= Cast;
+	sock->Broadcast					= Broadcast;
+	sock->Collect					= Collect;
+
+	return sock;
+}
+
+static Socket_t *NewTCPClient(String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception) {
+	Socket_t *sock = Socket.New(-1);
+
+	// ソケット作成
+	sock->_Socket = socket(PF_INET, SOCK_STREAM, 0);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
+
+	// 名前解決
+	struct hostent *hent = gethostbyname(String.Unpack(serverHost));
+	if (hent == NULL) throw (Signal.New(Socket.Exception));
+
+	// 接続情報構成
+	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
+	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
+
+	sock->_Addr->sin_family		= AF_INET;
+	sock->_Addr->sin_port		= htons(serverPort);
+	memcpy(&sock->_Addr->sin_addr, hent->h_addr_list[0], hent->h_length);
+
+	// 接続
+	int32_t result = connect(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
+	if (result == -1) throw (Signal.New(Socket.Exception));
+
+	// ソケット監視設定
+	FD_ZERO(&sock->_FDState);
+	FD_SET(sock->_Socket, &sock->_FDState);
+
+	return sock;
+}
+
+static Socket_t *NewTCPServer(const in_port_t listenPort) throws (Socket.Exception) {
+	Socket_t *sock = Socket.New(-1);
+
+	// 待受用ソケット作成
+	sock->_Socket = socket(PF_INET, SOCK_STREAM, 0);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
+
+	// 接続情報構成
+	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
+	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
+
+	sock->_Addr->sin_family = AF_INET;
+	sock->_Addr->sin_port = htons(listenPort);
+	sock->_Addr->sin_addr.s_addr = htonl(INADDR_ANY);
+
+	// 名前を付与
+	int32_t result = bind(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
+	if (result == -1) throw (Signal.New(Socket.Exception));
+
+	// 待受開始
+	result = listen(sock->_Socket, 5);
+	if (result == -1) throw (Signal.New(Socket.Exception));
+
+	return sock;
+}
+
+static Socket_t *NewUDPClient() throws (Socket.Exception) {
+	Socket_t *sock = Socket.New(-1);
+
+	// ソケット作成
+	sock->_Socket = socket(PF_INET, SOCK_DGRAM, 0);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
+
+	// ソケット監視設定
+	FD_ZERO(&sock->_FDState);
+	FD_SET(sock->_Socket, &sock->_FDState);
+
+	return sock;
+}
+
+static Socket_t *NewUDPServer(const in_port_t listenPort) throws (Socket.Exception) {
+	Socket_t *sock = Socket.New(-1);
+
+	// ソケット作成
+	sock->_Socket = socket(PF_INET, SOCK_DGRAM, 0);
+	if (sock->_Socket == -1) throw (Signal.New(Socket.Exception));
+
+	// 接続情報構成
+	sock->_Addr = (struct sockaddr_in *)(_Memory.Allocate(sizeof(struct sockaddr_in)));
+	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
+
+	sock->_Addr->sin_family			= AF_INET;
+	sock->_Addr->sin_port			= htons(listenPort);
+	sock->_Addr->sin_addr.s_addr	= htonl(INADDR_ANY);
+
+	// 名前を付与
+	int32_t result = bind(sock->_Socket, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
+	if (result == -1) throw (Signal.New(Socket.Exception));
+
+	// ソケット監視設定
+	FD_ZERO(&sock->_FDState);
+	FD_SET(sock->_Socket, &sock->_FDState);
+
+	return sock;
+}
+
+static void Delete(Socket_t *sock) {
+	if (sock == NULL) return;
+
+	free(sock->_Addr);
+	free(sock);
 }
 
 _Socket Socket = {
