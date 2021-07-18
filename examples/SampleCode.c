@@ -17,7 +17,9 @@ void main() $_ {
 
       execute {
          int32_t fi = String.FirstIndexOf(text, target);
-         int32_t li = String.LastIndexOf(text, target);
+                   // text->FirstIndexOf(text, target);
+         int32_t li = text->LastIndexOf(text, target);
+                   // String.LastIndexOf(text, target);
 
          for (int32_t i = 0; i < String.GetLength(text); i++) {
             Console.WriteChar((i == fi || i == li)? '^' : ' ');
