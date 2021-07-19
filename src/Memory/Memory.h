@@ -14,7 +14,6 @@ typedef struct {
 
 	/* 再確保系 */
 	public void *(* ReAllocate)(void *ptr, const size_t size);
-	public void *(* ReCountedAllocate)(void *ptr, const size_t n, const size_t size);
 
 	/* 解放系 */
 	public void (* Free)(void *ptr);

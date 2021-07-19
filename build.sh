@@ -62,6 +62,10 @@ function compile() { # copied-src-dir
 	gcc -c Console.c -o Console.o -g
 	gcc -c System.c -o System.o -g
 	gcc -c Socket.c -o Socket.o -g
+
+	cd Data
+		gcc -c Map.c -o Map.o -g
+	cd ../
 }
 
 function archive() { # copied-src-dir

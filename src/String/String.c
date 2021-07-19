@@ -208,18 +208,18 @@ static void Reduce(String_t *str) throws (String.Exception) {
 	str->_String = strdup(tmp);
 	if (str->_String == NULL) throw (Signal.New(String.Exception));
 
-	free(tmp);
+	_Memory.Free(tmp);
 }
 
 static void Release(String_t *str) {
-	free(str->_String);
+	_Memory.Free(str->_String);
 }
 
 static void Delete(String_t *str) {
 	if (str == NULL) return;
 
 	String.Release(str);
-	free(str);
+	_Memory.Free(str);
 }
 
 _String String = {

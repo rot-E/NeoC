@@ -29,10 +29,6 @@ static void *ReAllocate(void *ptr, const size_t size) {
 	return _Inspect(realloc(ptr, size));
 }
 
-static void *ReCountedAllocate(void *ptr, const size_t n, const size_t size) {
-	return _Inspect(realloc(ptr, n * size));
-}
-
 static void Free(void *ptr) {
 	free(ptr);
 }
@@ -42,6 +38,5 @@ __Memory _Memory = {
 	.CountedAllocate			= CountedAllocate,
 	.SharedAllocate				= SharedAllocate,
 	.ReAllocate					= ReAllocate,
-	.ReCountedAllocate			= ReCountedAllocate,
 	.Free						= Free,
 };

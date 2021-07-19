@@ -17,8 +17,8 @@ static Signal_t *Build(SignalCode_t code, uint8_t *message) {
 }
 
 static void Delete(Signal_t *sig) {
-	free(sig->_Message);
-	free(sig);
+	_Memory.Free(sig->_Message);
+	_Memory.Free(sig);
 }
 
 static SignalCode_t GetSignalCode(Signal_t *sig) {

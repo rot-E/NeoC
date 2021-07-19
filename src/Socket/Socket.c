@@ -245,8 +245,8 @@ static Socket_t *NewUDPServer(const in_port_t listenPort) throws (Socket.Excepti
 static void Delete(Socket_t *sock) {
 	if (sock == NULL) return;
 
-	free(sock->_Addr);
-	free(sock);
+	_Memory.Free(sock->_Addr);
+	_Memory.Free(sock);
 }
 
 _Socket Socket = {

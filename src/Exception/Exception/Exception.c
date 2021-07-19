@@ -5,7 +5,7 @@ static Context_t *New() {
 }
 
 static void Delete(Context_t *cxt) {
-	free(cxt);
+	_Memory.Free(cxt);
 }
 
 _Context Context = {
