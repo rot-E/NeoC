@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
+#include <threads.h>
 
 #include "../Annotation.h"
 #include "../Exception/Signal.h"
@@ -34,6 +35,8 @@ typedef struct Map_t {
 	private int32_t _ValueSize;
 	private bool (* _KeyComparer)(void *mapKey, void *key);
 	private bool (* _ValueComparer)(void *mapValue, void *value);
+
+	mtx_t _Mtx;
 
 	/* 操作系 */
 	public void (* Put)(struct Map_t *, void *key, void *value);

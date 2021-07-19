@@ -4,14 +4,6 @@ static void _Setup() {
 	Map.Exception signal;
 }
 
-static void SetKeyComparer(Map_t *map, bool (* kcmpr)(void *mapKey, void *key)) {
-	map->_KeyComparer = kcmpr;
-}
-
-static void SetValueComparer(Map_t *map, bool (* vcmpr)(void *mapValue, void *value)) {
-	map->_ValueComparer = vcmpr;
-}
-
 static bool IsEmpty(Map_t *map) {
 	return map->_Size == 0;
 }
@@ -31,13 +23,19 @@ static bool ContainsValue(Map_t *map, void *value) {
 }
 
 static void Put(Map_t *map, void *key, void *value) {
+	mtx_lock(&map->_Mtx);
+
 	map->_Set[map->_Size++] = (Set_t){
 		.Key	= key,
 		.Value	= value,
 	};
+
+	mtx_unlock(&map->_Mtx);
 }
 
 static void Remove(Map_t *map, void *key) {
+	mtx_lock(&map->_Mtx);
+
 	int32_t i;
 	for (i = 0; i < Map.GetSize(map); i++)
 		if (map->_KeyComparer(Map.GetSet(map, i).Key, key)) break;
@@ -46,6 +44,8 @@ static void Remove(Map_t *map, void *key) {
 		map->_Set[j - 1] = map->_Set[j];
 
 	map->_Size--;
+
+	mtx_unlock(&map->_Mtx);
 }
 
 static int32_t GetSize(Map_t *map) {
@@ -67,6 +67,7 @@ static Map_t *New(const size_t keySize, const size_t valueSize, bool (* keyCompa
 	map->_ValueSize			= valueSize;
 	map->_KeyComparer		= keyComparer;
 	map->_ValueComparer		= valueComparer;
+	mtx_init(&map->_Mtx, mtx_plain);
 
 	map->Put				= Put;
 	map->Remove				= Remove;
@@ -80,6 +81,8 @@ static Map_t *New(const size_t keySize, const size_t valueSize, bool (* keyCompa
 }
 
 static void Delete(Map_t *map) {
+	mtx_destroy(&map->_Mtx);
+
 	_Memory.Free(map->_Set);
 	_Memory.Free(map);
 }

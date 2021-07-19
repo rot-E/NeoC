@@ -31,7 +31,7 @@ function compile() { # examples-dir
 		for t in $(ls); do
 			if [ -f $t ]; then
 				if [ "$(echo $t | /usr/bin/sed 's/^.*\.\([^\.]*\)$/\1/')" = "c" ]; then
-					gcc $t NeoC.a -o "$(basename $t .c)" -g
+					gcc $t NeoC.a -lpthread -o "$(basename $t .c)" -g
 				fi
 			fi
 		done
