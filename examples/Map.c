@@ -19,13 +19,13 @@ void main() $_ {
 			vcmpr;
 		})
 	);
-	Console.WriteLine(String.NewFormat("Empty? %d", map->IsEmpty(map)));
+	Console.WriteLine(String.NewFormat(u8"Empty? %d", map->IsEmpty(map)));
 	Console.NewLine();
 
 	/* 領域確保/値配置 */
-	String_t *s1 = String.New("test string");
-	String_t *s2 = String.New("test string 2");
-	String_t *s3 = String.New("test string 3");
+	String_t *s1 = String.New(u8"test string");
+	String_t *s2 = String.New(u8"test string 2");
+	String_t *s3 = String.New(u8"test string 3");
 
 	int32_t *i1 = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
 	*i1 = 42;
@@ -46,15 +46,15 @@ void main() $_ {
 			*(int32_t *)( map->GetSet(map, i).Value )
 		));
 	}
-	Console.WriteLine(String.NewFormat("Empty? %d", map->IsEmpty(map)));
+	Console.WriteLine(String.NewFormat(u8"Empty? %d", map->IsEmpty(map)));
 	int32_t *tmpi = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
 	*tmpi = 100;
 
-	String_t *tmp = String.New("test");
-	Console.WriteLine(String.NewFormat("Contains key \"%s\"? %d", s3->Unpack(s3), map->ContainsKey(map, s3)));
-	Console.WriteLine(String.NewFormat("Contains key \"%s\"? %d", tmp->Unpack(tmp), map->ContainsKey(map, tmp)));
-	Console.WriteLine(String.NewFormat("Contains value \"%d\"? %d", *i1, map->ContainsValue(map, i1)));
-	Console.WriteLine(String.NewFormat("Contains value \"%d\"? %d", *tmpi, map->ContainsValue(map, tmpi)));
+	String_t *tmp = String.New(u8"test");
+	Console.WriteLine(String.NewFormat(u8"Contains key \"%s\"? %d", s3->Unpack(s3), map->ContainsKey(map, s3)));
+	Console.WriteLine(String.NewFormat(u8"Contains key \"%s\"? %d", tmp->Unpack(tmp), map->ContainsKey(map, tmp)));
+	Console.WriteLine(String.NewFormat(u8"Contains value \"%d\"? %d", *i1, map->ContainsValue(map, i1)));
+	Console.WriteLine(String.NewFormat(u8"Contains value \"%d\"? %d", *tmpi, map->ContainsValue(map, tmpi)));
 	Console.NewLine();
 
 	/* アドレス削除 */
