@@ -13,19 +13,7 @@ void main() $_ {
    uint8_t target = 'i';
    try {
       defer {
-         Map_t *map = Map.New(
-            T(String_t *, int32_t *), ({
-               bool kcmpr(void *mapK, void *k) {
-                  return String.Equals((String_t *)(mapK), (String_t *)(k));
-               };
-               kcmpr;
-            }), ({
-               bool vcmpr(void *mapV, void *v) {
-                  return *(int32_t *)(mapV) == *(int32_t *)(v);
-               };
-               vcmpr;
-            })
-         );
+         Map_t *map = Map.New(T(String_t *, int32_t *));
 
          String_t *s1 = String.New(u8"NeoC!    ");
          String_t *s2 = String.New(u8"NeoC!!!  ");

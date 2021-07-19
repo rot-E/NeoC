@@ -38,6 +38,11 @@ typedef struct Map_t {
 
 	mtx_t _Mtx;
 
+	public void (* SetComparer)(struct Map_t *,
+		bool (* keyComparer)(void *mapKey, void *key),
+		bool (* valueComparer)(void *mapValue, void *value)
+	);
+
 	/* 操作系 */
 	public void (* Put)(struct Map_t *, void *key, void *value);
 	public void (* Remove)(struct Map_t *, void *key);
@@ -57,13 +62,13 @@ typedef struct {
 	public final SignalCode_t Exception;
 	private final int32_t _SIZE_MAX;
 
-	public Map_t *(* New)(
-		const size_t keySize,
-		const size_t valueSize,
+	public Map_t *(* New)(const size_t keySize, const size_t valueSize);
+	public void (* Delete)(Map_t *);
+
+	public void (* SetComparer)(Map_t *,
 		bool (* keyComparer)(void *mapKey, void *key),
 		bool (* valueComparer)(void *mapValue, void *value)
 	);
-	public void (* Delete)(Map_t *);
 
 	/* 操作系 */
 	public void (* Put)(struct Map_t *, void *key, void *value);
