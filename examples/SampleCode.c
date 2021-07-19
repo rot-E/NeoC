@@ -13,10 +13,6 @@ void main() $_ {
    uint8_t target = 'i';
    try {
       defer {
-         Console.WriteLine(text);
-      } set
-
-      defer {
          Map_t *map = Map.New(
             T(String_t *, int32_t *), ({
                bool kcmpr(void *mapK, void *k) {
@@ -53,6 +49,10 @@ void main() $_ {
                *(int32_t *)( map->GetSet(map, i).Value )
             ));
          }
+      } set
+
+      defer {
+         Console.WriteLine(text);
          Console.NewLine();
       } set
 
