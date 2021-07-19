@@ -4,6 +4,6 @@
 #define p Console.WriteColourLine(SGR.TEXT.LIGHT_RED, String.NewChar('*'));
 /* ------------------------------------------------------ */
 
-#include "SPEC/SGR.h"
-#include "String.h"
-#include "Console.h"
+#include "NeoC/SPEC/SGR.h"
+#include "NeoC/String.h"
+#include "NeoC/Console.h"

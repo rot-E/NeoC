@@ -7,12 +7,12 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "Annotation.h"
-#include "Memory.h"
-#include "Exception/Signal.h"
-#include "Exception/Exception.h"
-#include "SPEC/CC.h"
-#include "Abbreviation.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Memory.h"
+#include "NeoC/Exception/Signal.h"
+#include "NeoC/Exception/Exception.h"
+#include "NeoC/SPEC/CC.h"
+#include "NeoC/Abbreviation.h"
 
 typedef struct String_t {
 	private int32_t _Size;

@@ -1,4 +1,4 @@
-#include "Signal.h"
+#include "NeoC/Exception/Signal.h"
 
 static Signal_t *New(SignalCode_t code) {
 	Signal_t *sig = (Signal_t *)(_Memory.Allocate(sizeof(Signal_t)));

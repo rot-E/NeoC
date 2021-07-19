@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 
-#include "../Annotation.h"
-#include "../String.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/String.h"
 
 typedef struct {
 	private void (* _Setup)() throws (Directory.Exception);

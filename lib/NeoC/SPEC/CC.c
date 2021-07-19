@@ -1,4 +1,4 @@
-#include "CC.h"
+#include "NeoC/SPEC/CC.h"
 
 _CC CC = {
 	.NUL	= '\0',

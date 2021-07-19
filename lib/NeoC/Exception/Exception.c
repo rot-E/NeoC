@@ -1,4 +1,4 @@
-#include "Exception.h"
+#include "NeoC/Exception/Exception.h"
 
 static Context_t *New() {
 	return (Context_t *)(_Memory.Allocate(sizeof(Context_t)));

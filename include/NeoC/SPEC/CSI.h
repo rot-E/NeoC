@@ -2,12 +2,12 @@
 
 #include <stdint.h>
 
-#include "../Annotation.h"
-#include "../Memory.h"
-#include "../Exception/Signal.h"
-#include "../Exception/Exception.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Memory.h"
+#include "NeoC/Exception/Signal.h"
+#include "NeoC/Exception/Exception.h"
 
-#include "CC.h"
+#include "NeoC/SPEC/CC.h"
 
 /** ANSI Escape Sequence / Control Sequence Introducer
  *

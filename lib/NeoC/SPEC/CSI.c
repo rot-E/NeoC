@@ -1,4 +1,4 @@
-#include "CSI.h"
+#include "NeoC/SPEC/CSI.h"
 
 static void _Setup() {
 	CSI.Exception signal;

@@ -2,9 +2,9 @@
 
 #include <stdint.h>
 
-#include "../Annotation.h"
+#include "NeoC/Annotation.h"
 
-#include "CSI.h"
+#include "NeoC/SPEC/CSI.h"
 
 /** ANSI Escape Sequence / Select Graphic Rendition
  *

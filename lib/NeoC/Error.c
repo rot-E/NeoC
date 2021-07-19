@@ -1,4 +1,4 @@
-#include "Error.h"
+#include "NeoC/Error.h"
 
 static void Panic(uint8_t *colour, uint8_t *message) {
 	fprintf(stderr, u8"%s%s%s%s%s\n",

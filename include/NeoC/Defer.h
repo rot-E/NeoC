@@ -18,8 +18,8 @@
 
 #include <stdint.h>
 
-#include "Annotation.h"
-#include "Memory.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Memory.h"
 
 typedef struct {
 	private void (* _Setup)();

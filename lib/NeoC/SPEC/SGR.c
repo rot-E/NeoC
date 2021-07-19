@@ -1,4 +1,4 @@
-#include "SGR.h"
+#include "NeoC/SPEC/SGR.h"
 
 void _Setup() {
 	SGR = (_SGR){

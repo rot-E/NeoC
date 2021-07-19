@@ -35,12 +35,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../Annotation.h"
-#include "../Error.h"
-#include "../Memory.h"
-#include "../Defer.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Error.h"
+#include "NeoC/Memory.h"
+#include "NeoC/Defer.h"
 
-#include "Signal.h"
+#include "NeoC/Exception/Signal.h"
 
 typedef struct {
 	private jmp_buf _Context;

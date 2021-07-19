@@ -11,15 +11,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Annotation.h"
-#include "Exception/Exception.h"
-#include "Defer.h"
-#include "SPEC/CSI.h"
-#include "SPEC/SGR.h"
-#include "String.h"
-#include "System.h"
-#include "Socket.h"
-#include "Exception/Signal.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Exception/Exception.h"
+#include "NeoC/Defer.h"
+#include "NeoC/SPEC/CSI.h"
+#include "NeoC/SPEC/SGR.h"
+#include "NeoC/String.h"
+#include "NeoC/System.h"
+#include "NeoC/Socket.h"
+#include "NeoC/Exception/Signal.h"
 
 typedef struct {
 	private void (* _Setup)();

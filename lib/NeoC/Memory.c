@@ -1,4 +1,4 @@
-#include "Memory.h"
+#include "NeoC/Memory.h"
 
 static void *_Inspect(void *ptr) {
 	if (ptr == NULL) _Error.Panic(u8"\e[36m", u8"Memory System");

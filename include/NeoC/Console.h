@@ -2,11 +2,11 @@
 
 #include <stdio.h>
 
-#include "Annotation.h"
-#include "SPEC/CC.h"
-#include "SPEC/CSI.h"
-#include "SPEC/SGR.h"
-#include "String.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/SPEC/CC.h"
+#include "NeoC/SPEC/CSI.h"
+#include "NeoC/SPEC/SGR.h"
+#include "NeoC/String.h"
 
 typedef struct {
 	public void (* SetState)(uint8_t *escSeq);

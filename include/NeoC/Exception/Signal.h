@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "../Annotation.h"
-#include "../Memory.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Memory.h"
 
 typedef uint32_t SignalCode_t;
 

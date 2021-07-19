@@ -2,8 +2,8 @@
 
 #include <unistd.h>
 
-#include "Exception/Signal.h"
-#include "Exception/Exception.h"
+#include "NeoC/Exception/Signal.h"
+#include "NeoC/Exception/Exception.h"
 
 typedef struct {
 	private void (* _Setup)();

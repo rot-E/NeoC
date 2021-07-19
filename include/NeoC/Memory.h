@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 
-#include "Annotation.h"
-#include "Error.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Error.h"
 
 typedef struct {
 	/* 確保系 */
