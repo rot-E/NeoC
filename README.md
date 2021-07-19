@@ -72,15 +72,39 @@ void main() $_ {
 <br>
 
 ## Build
+buildフォルダを作成する。
 ```fish
-$ sh build.sh
+$ mkdir build
+$ cd build
 ```
-`NeoC/*.h` `NeoC.a` `examples/*`
+
+cmakeを使って、以下の中から目的のビルド環境を指定して作成する。
+
+```fish
+# コンパイルオプションなし
+$ cmake ..
+
+# デバッグするために、-gオプションをつける
+$ cmake .. -DCMAKE_BUILD_TYPE=Debug
+
+# 最適化をするために、-O3オプションをつける
+$ cmake .. -DCMAKE_BUILD_TYPE=Release
+```
+
+ビルドする。
+
+```fish
+$ make
+```
+
+`build/lib/libNeoC.a` `examples/*`が生成される。
 <br><br>
+
 
 ## Clean
 ```fish
-$ sh build.sh clean
+$ cd build
+$ make clean
 ```
 <br>
 
