@@ -12,4 +12,4 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 endif()
 
 add_subdirectory(lib/NeoC)
-add_subdirectory(examples)
+add_subdirectory(examples EXCLUDE_FROM_ALL)

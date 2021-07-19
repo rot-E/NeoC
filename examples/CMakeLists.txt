@@ -1,3 +1,23 @@
+add_custom_target(examples)
+add_dependencies(examples
+    Console
+    Defer
+    DeferInFunction
+    Exception
+    ExceptionNested
+    SampleCode
+    String
+    System
+    TCPClient
+    TCPEchoServer
+    TCPServer
+    Theme
+    Theme2
+    UDPClient
+    UDPEchoServer
+    UDPServer
+)
+
 add_executable(Console Console.c)
 target_link_libraries(Console NeoC)
 
