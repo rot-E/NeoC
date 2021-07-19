@@ -68,13 +68,13 @@ static Map_t *New(const size_t keySize, const size_t valueSize, bool (* keyCompa
 	map->_KeyComparer		= keyComparer;
 	map->_ValueComparer		= valueComparer;
 
-	map->IsEmpty			= IsEmpty;
-	map->ContainsKey		= ContainsKey;
-	map->ContainsValue		= ContainsValue;
 	map->Put				= Put;
 	map->Remove				= Remove;
 	map->GetSize			= GetSize;
 	map->GetSet				= GetSet;
+	map->IsEmpty			= IsEmpty;
+	map->ContainsKey		= ContainsKey;
+	map->ContainsValue		= ContainsValue;
 
 	return map;
 }
@@ -91,13 +91,13 @@ _Map Map = {
 	.New				= New,
 	.Delete				= Delete,
 
-	.IsEmpty			= IsEmpty,
-	.ContainsKey		= ContainsKey,
-	.ContainsValue		= ContainsValue,
-
 	.Put				= Put,
 	.Remove				= Remove,
 
 	.GetSize			= GetSize,
 	.GetSet				= GetSet,
+
+	.IsEmpty			= IsEmpty,
+	.ContainsKey		= ContainsKey,
+	.ContainsValue		= ContainsValue,
 };
