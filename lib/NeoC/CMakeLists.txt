@@ -32,3 +32,16 @@ target_include_directories(NeoC
     PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
+
+include(GNUInstallDirs)
+# install NeoC library
+install(TARGETS NeoC
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+# install headers
+# includeフォルダの中身を全てコピーする
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    FILES_MATCHING PATTERN "*.h"
+)
