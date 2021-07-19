@@ -1,6 +1,4 @@
-# cmakeドキュメントで推奨していないため、GOLBやAUX_SOURCE_DIRECTORYを利用しない方法で記述した
-# https://cmake.org/cmake/help/latest/command/file.html#filesystem
-
+# オプションを用いてライブラリを共有ライブラリとしても生成出来るように
 option(NEOC_BUILD_SHARED_LIBS "build NeoC as a shared library" OFF)
 
 if (MYLIB_BUILD_SHARED_LIBS)
@@ -9,6 +7,9 @@ else()
     add_library(NeoC STATIC)
 endif()
 
+# NeoCライブラリを生成するために必要なソースファイル
+# cmakeドキュメントで推奨していないため、GOLBやAUX_SOURCE_DIRECTORYを利用しない方法で記述した
+# https://cmake.org/cmake/help/latest/command/file.html#filesystem
 target_sources(NeoC
     PRIVATE
     Exception/Exception.c
@@ -28,6 +29,7 @@ target_sources(NeoC
     System.c
 )
 
+# NeoCライブラリを生成するために必要なヘッダファイルの場所
 target_include_directories(NeoC
     PUBLIC
     ${PROJECT_SOURCE_DIR}/include
