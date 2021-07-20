@@ -18,6 +18,8 @@ typedef struct Socket_t {
 	private struct sockaddr_in *_Addr;
 	private int32_t _BroadcastSwitch;
 
+	public int32_t (* GetFd)(struct Socket_t *);
+
 	/* TCP */
 	public struct Socket_t *(* Accept)(struct Socket_t *);
 
@@ -57,6 +59,8 @@ typedef struct {
 	public Socket_t *(* NewUDPClient)() throws (Socket.Exception);
 	public Socket_t *(* NewUDPServer)(const in_port_t listenPort) throws (Socket.Exception);
 	public void (* Delete)(Socket_t *);
+
+	public int32_t (* GetFd)(Socket_t *);
 
 	/* TCP */
 	public Socket_t *(* Accept)(Socket_t *);

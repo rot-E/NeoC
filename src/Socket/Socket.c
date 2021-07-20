@@ -7,6 +7,10 @@ static void _Setup() {
 	Socket.CRLF = String.NewFormat(u8"%c%c", CC.CR, CC.LF);
 }
 
+static int32_t GetFd(Socket_t *sock) {
+	return sock->_Socket;
+}
+
 static Socket_t *Accept(Socket_t *self) {
 	return Socket.New(accept(self->_Socket, NULL, NULL));
 }
@@ -130,6 +134,7 @@ static Socket_t *New(const int32_t socket) {
 		FD_SET(sock->_Socket, &sock->_FDState);
 	}
 
+	sock->GetFd						= GetFd;
 	sock->Accept					= Accept;
 	sock->Send						= Send;
 	sock->Receive					= Receive;
@@ -260,6 +265,8 @@ _Socket Socket = {
 	.NewUDPClient				= NewUDPClient,
 	.NewUDPServer				= NewUDPServer,
 	.Delete						= Delete,
+
+	.GetFd						= GetFd,
 
 	.Accept						= Accept,
 	.Send						= Send,
