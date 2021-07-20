@@ -9,7 +9,7 @@ void main() $_ {
 	Map_t *map = Map.New(T(String_t *, int32_t *));
 	map->SetComparer(map, ({
 		bool kcmpr(void *mapK, void *k) {
-			return String.Equals((String_t *)(mapK), (String_t *)(k));
+			return String.Equals(mapK, k);
 		};
 		kcmpr;
 	}), ({
