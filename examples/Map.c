@@ -7,17 +7,10 @@
 void main() $_ {
 	/* Map生成 */
 	Map_t *map = Map.New(T(String_t *, int32_t *));
-	map->SetComparer(map, ({
-		bool kcmpr(void *mapK, void *k) {
-			return String.Equals(mapK, k);
-		};
-		kcmpr;
-	}), ({
-		bool vcmpr(void *mapV, void *v) {
-			return *(int32_t *)(mapV) == *(int32_t *)(v);
-		};
-		vcmpr;
-	}));
+	map->SetComparer(map,
+		Comparer(mapK, k, String.Equals(mapK, k)),
+		Comparer(mapV, v, *(int32_t *)(mapV) == *(int32_t *)(v))
+	);
 
 	Console.WriteLine(String.NewFormat(u8"Empty? %d", map->IsEmpty(map)));
 	Console.NewLine();

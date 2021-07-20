@@ -3,6 +3,14 @@
 /* ------------------------------------------------------ */
 #define T(KT, VT) sizeof(KT), sizeof(VT)
 
+#define Comparer(X, Y, EqEvaFm)				\
+	({										\
+		bool cmpr(void *X, void *Y) {		\
+			return EqEvaFm;					\
+		};									\
+		cmpr;								\
+	})
+
 #define $put(T, VAL)		\
 	({						\
 		T _tmp = VAL;		\
