@@ -25,11 +25,11 @@
 #include <string.h>
 #include <threads.h>
 
-#include "../Annotation.h"
-#include "../Exception/Signal.h"
-#include "../Exception/Exception.h"
+#include "NeoC/Annotation.h"
+#include "NeoC/Exception/Signal.h"
+#include "NeoC/Exception/Exception.h"
 
-#include "../Debug.h"
+#include "NeoC/Debug.h"
 
 typedef struct {
 	public void *Key;
