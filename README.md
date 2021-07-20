@@ -87,7 +87,7 @@ GCC拡張機能を利用しているため、コンパイラには`gcc`を利用
 
 ```fish
 $ cmake .. 
-$ make
+$ make -j
 ```
 
 これによって、`build/lib/libNeoC.a`が生成される。
@@ -137,7 +137,7 @@ $ cmake .. -DNEOC_BUILD_SHARED_LIBS=ON
 ライブラリをビルドした時と同様にビルド環境を作成した後、`examples`ターゲットを指定してビルドする。
 
 ```fish
-$ make exmaples
+$ make exmaples -j
 ```
 
 `build/examples/*`が生成される。
@@ -162,7 +162,7 @@ $ make clean
 
 ```
 $ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/.local
-$ make install
+$ make install -j
 ```
 
 <br>
