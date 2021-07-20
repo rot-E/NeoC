@@ -40,10 +40,10 @@ void main() $_ {
 		));
 	}
 	Console.WriteLine(String.NewFormat(u8"Empty? %d", map->IsEmpty(map)));
-	int32_t *tmpi = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
-	*tmpi = 100;
 
 	String_t *tmp = String.New(u8"test");
+	int32_t *tmpi = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
+	*tmpi = 100;
 	Console.WriteLine(String.NewFormat(u8"Contains key \"%s\"? %d", s3->Unpack(s3), map->ContainsKey(map, s3)));
 	Console.WriteLine(String.NewFormat(u8"Contains key \"%s\"? %d", tmp->Unpack(tmp), map->ContainsKey(map, tmp)));
 	Console.WriteLine(String.NewFormat(u8"Contains value \"%d\"? %d", *i1, map->ContainsValue(map, i1)));
