@@ -137,7 +137,7 @@ $ cmake .. -DNEOC_BUILD_SHARED_LIBS=ON
 ライブラリをビルドした時と同様にビルド環境を作成した後、`examples`ターゲットを指定してビルドする。
 
 ```fish
-$ make exmaples -j
+$ make examples -j
 ```
 
 `build/examples/*`が生成される。
