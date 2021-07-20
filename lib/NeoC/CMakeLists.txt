@@ -1,7 +1,7 @@
 # オプションを用いてライブラリを共有ライブラリとしても生成出来るように
 option(NEOC_BUILD_SHARED_LIBS "build NeoC as a shared library" OFF)
 
-if (MYLIB_BUILD_SHARED_LIBS)
+if (NEOC_BUILD_SHARED_LIBS)
     add_library(NeoC SHARED)
 else()
     add_library(NeoC STATIC)
