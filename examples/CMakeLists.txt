@@ -1,3 +1,7 @@
+# pthreadを使う
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 add_custom_target(examples)
 add_dependencies(examples
     Console
@@ -5,6 +9,7 @@ add_dependencies(examples
     DeferInFunction
     Exception
     ExceptionNested
+    Map
     SampleCode
     String
     System
@@ -33,8 +38,17 @@ target_link_libraries(Exception NeoC)
 add_executable(ExceptionNested ExceptionNested.c)
 target_link_libraries(ExceptionNested NeoC)
 
+add_executable(Map Map.c)
+target_link_libraries(Map
+    NeoC
+    Threads::Threads
+)
+
 add_executable(SampleCode SampleCode.c)
-target_link_libraries(SampleCode NeoC)
+target_link_libraries(SampleCode
+    NeoC
+    Threads::Threads
+)
 
 add_executable(String String.c)
 target_link_libraries(String NeoC)

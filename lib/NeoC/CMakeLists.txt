@@ -12,6 +12,7 @@ endif()
 # https://cmake.org/cmake/help/latest/command/file.html#filesystem
 target_sources(NeoC
     PRIVATE
+    Data/Map.c
     Exception/Exception.c
     Exception/Signal.c
     #File/Directory.c
