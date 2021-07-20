@@ -3,12 +3,12 @@
 /* ------------------------------------------------------ */
 #define T(KT, VT) sizeof(KT), sizeof(VT)
 
-#define Comparer(X, Y, EqEvaFm)				\
+#define Comparator(X, Y, EqEvaFm)			\
 	({										\
-		bool cmpr(void *X, void *Y) {		\
+		bool cmptr(void *X, void *Y) {		\
 			return EqEvaFm;					\
 		};									\
-		cmpr;								\
+		cmptr;								\
 	})
 
 #define $put(T, VAL)		\
@@ -41,14 +41,14 @@ typedef struct Map_t {
 	private int32_t _Size;
 	private int32_t _KeySize;
 	private int32_t _ValueSize;
-	private bool (* _KeyComparer)(void *mapKey, void *key);
-	private bool (* _ValueComparer)(void *mapValue, void *value);
+	private bool (* _KeyComparator)(void *mapKey, void *key);
+	private bool (* _ValueComparator)(void *mapValue, void *value);
 
 	mtx_t _Mtx;
 
-	public void (* SetComparer)(struct Map_t *,
-		bool (* keyComparer)(void *mapKey, void *key),
-		bool (* valueComparer)(void *mapValue, void *value)
+	public void (* SetComparator)(struct Map_t *,
+		bool (* keyComparator)(void *mapKey, void *key),
+		bool (* valueComparator)(void *mapValue, void *value)
 	);
 
 	/* 操作系 */
@@ -73,9 +73,9 @@ typedef struct {
 	public Map_t *(* New)(const size_t keySize, const size_t valueSize);
 	public void (* Delete)(Map_t *);
 
-	public void (* SetComparer)(Map_t *,
-		bool (* keyComparer)(void *mapKey, void *key),
-		bool (* valueComparer)(void *mapValue, void *value)
+	public void (* SetComparator)(Map_t *,
+		bool (* keyComparator)(void *mapKey, void *key),
+		bool (* valueComparator)(void *mapValue, void *value)
 	);
 
 	/* 操作系 */
