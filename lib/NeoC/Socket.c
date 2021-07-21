@@ -131,7 +131,7 @@ static Socket_t *New(const int32_t socket) {
 	// ソケット監視設定
 	if (socket >= 3) {
 		FD_ZERO(&sock->_FDState);
-		FD_SET(sock->_Socket, &sock->_FDState);
+		FD_SET(Socket.GetFd(sock), &sock->_FDState);
 	}
 
 	sock->GetFd						= GetFd;
@@ -176,7 +176,7 @@ static Socket_t *NewTCPClient(String_t *serverHost, const in_port_t serverPort) 
 
 	// ソケット監視設定
 	FD_ZERO(&sock->_FDState);
-	FD_SET(sock->_Socket, &sock->_FDState);
+	FD_SET(Socket.GetFd(sock), &sock->_FDState);
 
 	return sock;
 }
@@ -216,7 +216,7 @@ static Socket_t *NewUDPClient() throws (Socket.Exception) {
 
 	// ソケット監視設定
 	FD_ZERO(&sock->_FDState);
-	FD_SET(sock->_Socket, &sock->_FDState);
+	FD_SET(Socket.GetFd(sock), &sock->_FDState);
 
 	return sock;
 }
@@ -242,7 +242,7 @@ static Socket_t *NewUDPServer(const in_port_t listenPort) throws (Socket.Excepti
 
 	// ソケット監視設定
 	FD_ZERO(&sock->_FDState);
-	FD_SET(sock->_Socket, &sock->_FDState);
+	FD_SET(Socket.GetFd(sock), &sock->_FDState);
 
 	return sock;
 }
