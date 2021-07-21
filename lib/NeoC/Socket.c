@@ -17,35 +17,31 @@ static Socket_t *Accept(Socket_t *self) {
 
 static void Send(Socket_t *self, String_t *message) throws (Socket.Exception) {
 	String_t *data = String.Concat(message, Socket.CRLF);
-	defer {
-		String.Delete(data);
-	} set
+	// defer String.Delete(data);
 
-	execute {
-		int32_t result = send(self->_Socket, String.Unpack(data), String.GetLength(data), 0);
-		if (result == -1) throw (Signal.New(Socket.Exception));
-	} ret
+	int32_t result = send(self->_Socket, String.Unpack(data), String.GetLength(data), 0);
+	String.Delete(data);
+	if (result == -1) throw (Signal.New(Socket.Exception));
 }
 
 static String_t *Receive(Socket_t *self) throws (Socket.Exception, Socket.DisconnectionException) {
 	String_t *data = String.NewN(Socket.DATA_MAX_SIZE);
-	defer {
-		String.Delete(data);
-	} set
+	// defer? String.Delete(data);
 
-	retrieve {
-		int32_t result = recv(self->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
-		if (result == 0) throw (Signal.New(Socket.DisconnectionException));
-		if (result == -1) throw (Signal.New(Socket.Exception));
+	int32_t result = recv(self->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
+	if (result == 0) throw (Signal.New(Socket.DisconnectionException));
+	if (result == -1) throw (Signal.New(Socket.Exception));
 
-		if (String.EndsWith(data, Socket.CRLF)) {
-			/* 区切りがCRLFの場合 */
-			return String.Substring(data, 0, String.GetLength(data) + 1 - String.GetLength(Socket.CRLF));
-		} else if (String.EndsWithChar(data, CC.LF)) {
-			/* 区切りがLFの場合 */
-			return String.DropLastChar(data);
-		}
-	} ret
+	if (String.EndsWith(data, Socket.CRLF)) {
+		/* 区切りがCRLFの場合 */
+		return String.Substring(data, 0, String.GetLength(data) + 1 - String.GetLength(Socket.CRLF));
+	} else if (String.EndsWithChar(data, CC.LF)) {
+		/* 区切りがLFの場合 */
+		return String.DropLastChar(data);
+	} else {
+		String.Reduce(data);
+		return data;
+	}
 }
 
 static void Disconnect(Socket_t *self) {
