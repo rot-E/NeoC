@@ -12,6 +12,8 @@ static void SetComparator(Map_t *map, bool (* keyComparator)(void *mapKey, void 
 static void Put(Map_t *map, void *key, void *value) {
 	mtx_lock(&map->_Mtx);
 
+	// map->_Size++次第で例外スロー
+
 	map->_Set[map->_Size++] = (Set_t){
 		.Key	= key,
 		.Value	= value,
@@ -20,15 +22,23 @@ static void Put(Map_t *map, void *key, void *value) {
 	mtx_unlock(&map->_Mtx);
 }
 
-static void Remove(Map_t *map, void *key) {
+static void Remove(Map_t *map, void *key) throws (Map.Exception) {
 	mtx_lock(&map->_Mtx);
 
 	int32_t i;
+	bool existence = false;
 	for (i = 0; i < Map.GetSize(map); i++)
-		if (map->_KeyComparator(Map.GetSet(map, i).Key, key)) break;
+		if (map->_KeyComparator(Map.GetSet(map, i).Key, key)) {
+			existence = true;
+			break;
+		}
+	if (!existence) {
+		mtx_unlock(&map->_Mtx);
+		throw (Signal.New(Map.Exception));
+	}
 
-	for (int32_t j = Map.GetSize(map) - 1; i < j; j--)
-		map->_Set[j - 1] = map->_Set[j];
+	for (int32_t j = i; j < Map.GetSize(map) - 1; j++)
+		map->_Set[j] = map->_Set[j + 1];
 
 	map->_Size--;
 

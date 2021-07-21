@@ -53,7 +53,7 @@ typedef struct Map_t {
 
 	/* 操作系 */
 	public void (* Put)(struct Map_t *, void *key, void *value);
-	public void (* Remove)(struct Map_t *, void *key);
+	public void (* Remove)(struct Map_t *, void *key) throws (Map.Exception);
 
 	/* 取得系 */
 	public int32_t (* GetSize)(struct Map_t *);
@@ -80,7 +80,7 @@ typedef struct {
 
 	/* 操作系 */
 	public void (* Put)(struct Map_t *, void *key, void *value);
-	public void (* Remove)(Map_t *, void *key);
+	public void (* Remove)(Map_t *, void *key) throws (Map.Exception);
 
 	/* 取得系 */
 	public int32_t (* GetSize)(Map_t *);
