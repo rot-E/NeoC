@@ -63,9 +63,21 @@ void main() $_ {
 	Console.NewLine();
 
 	/* 再格納 */
+	String_t *s4 = String.New(u8"あいうえお");
+	String_t *s5 = String.New(u8"かきくけこ");
+	String_t *s6 = String.New(u8"さしすせそ");
+
+	int32_t *i4 = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
+	*i4 = -1;
+	int32_t *i5 = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
+	*i5 = -2;
+	int32_t *i6 = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
+	*i6 = -3;
+
+	map->Put(map, s4, i4);
 	map->Put(map, s2, i2);
-	map->Put(map, s2, i2);
-	map->Put(map, s2, i2);
+	map->Put(map, s5, i5);
+	map->Put(map, s6, i6);
 
 	for (int32_t i = 0; i < map->GetSize(map); i++) {
 		Console.WriteLine(String.NewFormat(
