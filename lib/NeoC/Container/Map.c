@@ -1,4 +1,4 @@
-#include "NeoC/Data/Map.h"
+#include "NeoC/Container/Map.h"
 
 static void _Setup() {
 	Map.Exception signal;

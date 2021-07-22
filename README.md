@@ -11,7 +11,7 @@ Neo C Programming Environment Library
 #include "NeoC/Console.h"
 #include "NeoC/Exception/Exception.h"
 #include "NeoC/Defer.h"
-#include "NeoC/Data/Map.h"
+#include "NeoC/Container/Map.h"
 #include "NeoC/System.h"
 
 void main() $_ {
