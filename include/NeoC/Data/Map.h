@@ -10,14 +10,6 @@
 		};									\
 		cmptr;								\
 	})
-
-#define $put(T, VAL)		\
-	({						\
-		T _tmp = VAL;		\
-		(void *)(&_tmp);	\
-	})
-
-#define in(...)
 /* ------------------------------------------------------ */
 
 #include <stdint.h>
@@ -43,6 +35,7 @@ typedef struct Map_t {
 	private int32_t _ValueSize;
 	private bool (* _KeyComparator)(void *mapKey, void *key);
 	private bool (* _ValueComparator)(void *mapValue, void *value);
+	private int32_t _Length;
 
 	mtx_t _Mtx;
 
@@ -56,7 +49,7 @@ typedef struct Map_t {
 	public void (* Remove)(struct Map_t *, void *key) throws (Map.Exception);
 
 	/* 取得系 */
-	public int32_t (* GetSize)(struct Map_t *);
+	public int32_t (* GetLength)(struct Map_t *);
 	public Set_t (* GetSet)(struct Map_t *, int32_t);
 
 	/* 検査系 */
@@ -68,7 +61,7 @@ typedef struct Map_t {
 typedef struct {
 	private void (* _Setup)();
 	public final SignalCode_t Exception;
-	private final int32_t _SIZE_MAX;
+	private final int32_t _ALLOCATION_BLOCK_SIZE;
 
 	public Map_t *(* New)(const size_t keySize, const size_t valueSize);
 	public void (* Delete)(Map_t *);
@@ -83,7 +76,7 @@ typedef struct {
 	public void (* Remove)(Map_t *, void *key) throws (Map.Exception);
 
 	/* 取得系 */
-	public int32_t (* GetSize)(Map_t *);
+	public int32_t (* GetLength)(Map_t *);
 	public Set_t (* GetSet)(Map_t *, int32_t);
 
 	/* 検査系 */

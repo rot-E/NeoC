@@ -1,5 +1,14 @@
 #pragma once
 
+/* ------------------------------------------------------ */
+#define $(T, VAL)										\
+	({													\
+		T *_tmp = (T *)(_Memory.Allocate(sizeof(T)));	\
+		*_tmp = VAL;									\
+		_tmp;											\
+	})
+/* ------------------------------------------------------ */
+
 #include <stdlib.h>
 #include <sys/mman.h>
 

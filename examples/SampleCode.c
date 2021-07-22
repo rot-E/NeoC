@@ -30,7 +30,7 @@ void main() $_ {
          map->Put(map, s2, i2);
          map->Put(map, s3, i3);
 
-         for (int32_t i = 0; i < map->GetSize(map); i++) {
+         for (int32_t i = 0; i < map->GetLength(map); i++) {
             Console.WriteLine(String.NewFormat(
                "%s : %d",
                String.Unpack((String_t *)( map->GetSet(map, i).Key )),
