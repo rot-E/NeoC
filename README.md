@@ -37,7 +37,7 @@ void main() $_ {
 
          for (int32_t i = 0; i < map->GetLength(map); i++) {
             Console.WriteLine(String.NewFormat(
-               "%s : %d",
+               u8"%s : %d",
                String.Unpack((String_t *)( map->GetSet(map, i).Key )),
                *(int32_t *)( map->GetSet(map, i).Value )
             ));
