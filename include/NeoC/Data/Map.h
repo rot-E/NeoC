@@ -5,10 +5,10 @@
 
 #define Comparator(X, Y, EqEvaFm)			\
 	({										\
-		bool cmptr(void *X, void *Y) {		\
+		bool _cmptr(void *X, void *Y) {		\
 			return EqEvaFm;					\
 		};									\
-		cmptr;								\
+		_cmptr;								\
 	})
 /* ------------------------------------------------------ */
 
@@ -20,8 +20,6 @@
 #include "NeoC/Annotation.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
-
-#include "NeoC/Debug.h"
 
 typedef struct {
 	public void *Key;
