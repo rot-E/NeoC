@@ -50,8 +50,6 @@ typedef struct {
 	public final SignalCode_t Exception;
 	public final SignalCode_t Failure;
 
-	private int32_t _NEW_FORMAT_MAX_ALLOCATION_SIZE;
-
 	public String_t *(* New)(const uint8_t *str);
 	public String_t *(* NewN)(const size_t size);
 	public String_t *(* NewFormat)(const uint8_t *format, ...);

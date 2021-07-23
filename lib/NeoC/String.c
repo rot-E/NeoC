@@ -182,7 +182,7 @@ static String_t *NewN(const size_t size) {
 }
 
 static String_t *NewFormat(const uint8_t *format, ...) {
-	String_t *str = NewN(String._NEW_FORMAT_MAX_ALLOCATION_SIZE); // 要実装
+	String_t *str = NewN(INT32_MAX); // 要実装
 
 	use (format) {
 		vsprintf(str->_String, format, ap);
@@ -224,8 +224,6 @@ static void Delete(String_t *str) {
 
 _String String = {
 	._Setup								= _Setup,
-
-	._NEW_FORMAT_MAX_ALLOCATION_SIZE	= 100000,
 
 	.New								= New,
 	.NewN								= NewN,
