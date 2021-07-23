@@ -53,14 +53,10 @@ void main() $_ {
 	Console.NewLine();
 
 	/* 再格納 */
-	String_t *s4 = String.New(u8"あいうえお");
-	String_t *s5 = String.New(u8"かきくけこ");
-	String_t *s6 = String.New(u8"さしすせそ");
-
-	lis->Add(lis, s4);
+	lis->Add(lis, String.New(u8"あいうえお"));
 	lis->Add(lis, s2);
-	lis->Add(lis, s5);
-	lis->Add(lis, s6);
+	lis->Add(lis, String.New(u8"かきくけこ"));
+	lis->Add(lis, String.New(u8"さしすせそ"));
 
 	for (int32_t i = 0; i < lis->GetLength(lis); i++) {
 		Console.WriteLine(String.NewFormat(
@@ -78,10 +74,8 @@ void main() $_ {
 	lis = List.New() in (String_t *);
 
 	const int32_t SIZE = 5000;
-	String_t *strs[SIZE];
 	for (int32_t i = 0; i < SIZE; i++) {
-		strs[i] = String.NewFormat(u8"STR-%d", i);
-		lis->Add(lis, strs[i]);
+		lis->Add(lis, String.NewFormat(u8"STR-%d", i));
 
 		if (i % List._ALLOCATION_BLOCK_SIZE == 0)
 			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, lis->_Size));
@@ -102,15 +96,14 @@ void main() $_ {
 	for (int32_t i = SIZE - 1; 0 <= i; i--) {
 		if (i == 3535) continue;
 
-		lis->RemoveItem(lis, strs[i]);
+		lis->Remove(lis, i);
 
 		if ((i - 1) % List._ALLOCATION_BLOCK_SIZE == 0)
 			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, lis->_Size));
 	}
 
 	Console.WriteLine(String.NewFormat(
-		"%s",
-		String.Unpack( lis->Get(lis, 0) )
+		"%s", String.Unpack( lis->Get(lis, 0) )
 	));
 
 	/* List解放 */

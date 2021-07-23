@@ -13,6 +13,7 @@ add_dependencies(examples
     Map
     Queue
     SampleCode
+    Stack
     String
     System
     TCPClient
@@ -76,6 +77,12 @@ target_link_libraries(Queue
 
 add_executable(SampleCode SampleCode.c)
 target_link_libraries(SampleCode
+    NeoC
+    Threads::Threads
+)
+
+add_executable(Stack Stack.c)
+target_link_libraries(Stack
     NeoC
     Threads::Threads
 )

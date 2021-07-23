@@ -9,15 +9,10 @@ void main() $_ {
 	/* 4-tuple生成 */
 	Tuple_t *tp = Tuple.New(4) in (String_t *, int32_t *, double *);
 
-	/* 領域確保/値配置 */
-	String_t *s = String.New(u8"test string");
-	int32_t *i = $(int32_t, 42);
-	double *d = $(double, 3.14);
-
 	/* アドレス格納 */
-	tp->Set(tp, 0, s);
-	tp->Set(tp, 1, i);
-	tp->Set(tp, 2, d);
+	tp->Set(tp, 0, String.New(u8"test string"));
+	tp->Set(tp, 1, $(int32_t, 42));
+	tp->Set(tp, 2, $(double, 3.14));
 
 	for (int32_t i = 0; i < tp->GetSize(tp); i++) {
 		if (i == 0)

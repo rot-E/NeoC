@@ -36,6 +36,12 @@ static void Remove(List_t *lis, const int32_t idx) throws (List.Exception) {
 
 	lis->_Length--;
 
+	// 領域過多→解放
+	if (lis->_Length < lis->_Size - List._ALLOCATION_BLOCK_SIZE) {
+		lis->_Size -= List._ALLOCATION_BLOCK_SIZE;
+		lis->_Item = _Memory.ReAllocate(lis->_Item, lis->_Size * sizeof(void *));
+	}
+
 	mtx_unlock(&lis->_Mtx);
 }
 

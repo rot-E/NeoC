@@ -52,11 +52,35 @@ static void Exchange(Stack_t *st) throws (Stack.Exception) {
 }
 
 static void LeftRotate(Stack_t *st, const int32_t n) throws (Stack.Exception) {
+	Stack_t *btm = Stack.New();
+	for (int32_t i = 0; i < n; i++)
+		Stack.Push(btm, Stack.Pop(st));
 
+	Stack_t *top = Stack.New();
+	for (int32_t i = Stack.GetLength(st); 0 < i; i--)
+		Stack.Push(top, Stack.Pop(st));
+
+	for (int32_t i = Stack.GetLength(btm); 0 < i; i--)
+		Stack.Push(st, Stack.Pop(btm));
+
+	for (int32_t i = Stack.GetLength(top); 0 < i; i--)
+		Stack.Push(st, Stack.Pop(top));
 }
 
 static void RightRotate(Stack_t *st, const int32_t n) throws (Stack.Exception) {
+	Stack_t *btm = Stack.New();
+	for (int32_t i = Stack.GetLength(st) - n; 0 < i; i--)
+		Stack.Push(btm, Stack.Pop(st));
 
+	Stack_t *top = Stack.New();
+	for (int32_t i = 0; i < n; i++)
+		Stack.Push(top, Stack.Pop(st));
+
+	for (int32_t i = Stack.GetLength(btm); 0 < i; i--)
+		Stack.Push(st, Stack.Pop(btm));
+
+	for (int32_t i = Stack.GetLength(top); 0 < i; i--)
+		Stack.Push(st, Stack.Pop(top));
 }
 
 static void *Peek(Stack_t *st) throws (Stack.Exception) {
