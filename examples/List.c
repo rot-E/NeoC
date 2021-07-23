@@ -92,6 +92,13 @@ void main() $_ {
 		String.Unpack( lis->Get(lis, 3000) )
 	));
 
+	String_t *s = String.New("STR-1234");
+	Console.WriteLine(String.NewFormat(
+		"Index of \"%s\": %d",
+		String.Unpack(s),
+		lis->IndexOf(lis, s)
+	));
+
 	for (int32_t i = SIZE - 1; 0 <= i; i--) {
 		if (i == 3535) continue;
 
