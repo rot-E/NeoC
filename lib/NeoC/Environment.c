@@ -10,6 +10,12 @@ static void _Setup() {
 	String._Setup();
 	System._Setup();
 	Socket._Setup();
+
+	Tuple._Setup();
+	Map._Setup();
+	//List._Setup();
+	//Stack._Setup();
+	//Queue._Setup();
 }
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER(Signal_t *sig) {
