@@ -15,6 +15,8 @@ target_sources(NeoC
     Collection/List.c
     Collection/Map.c
     Collection/Queue.c
+    Collection/Set.c
+    Collection/Stack.c
     Collection/Tuple.c
     Exception/Exception.c
     Exception/Signal.c

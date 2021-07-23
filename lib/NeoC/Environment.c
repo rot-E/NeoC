@@ -14,9 +14,9 @@ static void _Setup() {
 	Tuple._Setup();
 	Map._Setup();
 	List._Setup();
-	//Set._Setup();
-	//Stack._Setup();
-	//Queue._Setup();
+	Set._Setup();
+	Stack._Setup();
+	Queue._Setup();
 }
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER(Signal_t *sig) {
