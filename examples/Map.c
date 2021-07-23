@@ -34,8 +34,8 @@ void main() $_ {
 	for (int32_t i = 0; i < map->GetLength(map); i++) {
 		Console.WriteLine(String.NewFormat(
 			"%s:%d",
-			String.Unpack( map->GetElem(map, i).Key ),
-			*(int32_t *)( map->GetElem(map, i).Value )
+			String.Unpack( map->Get(map, i).Key ),
+			*(int32_t *)( map->Get(map, i).Value )
 		));
 	}
 	Console.WriteLine(String.NewFormat(u8"Empty? %d", map->IsEmpty(map)));
@@ -54,8 +54,8 @@ void main() $_ {
 	for (int32_t i = 0; i < map->GetLength(map); i++) {
 		Console.WriteLine(String.NewFormat(
 			"%s:%d",
-			String.Unpack( map->GetElem(map, i).Key ),
-			*(int32_t *)( map->GetElem(map, i).Value )
+			String.Unpack( map->Get(map, i).Key ),
+			*(int32_t *)( map->Get(map, i).Value )
 		));
 	}
 	Console.NewLine();
@@ -65,12 +65,9 @@ void main() $_ {
 	String_t *s5 = String.New(u8"かきくけこ");
 	String_t *s6 = String.New(u8"さしすせそ");
 
-	int32_t *i4 = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
-	*i4 = -1;
-	int32_t *i5 = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
-	*i5 = -2;
-	int32_t *i6 = (int32_t *)(_Memory.Allocate(sizeof(int32_t)));
-	*i6 = -3;
+	int32_t *i4 = $(int32_t,  -1);
+	int32_t *i5 = $(int32_t, -2);
+	int32_t *i6 = $(int32_t, -3);
 
 	map->Put(map, s4, i4);
 	map->Put(map, s2, i2);
@@ -80,8 +77,8 @@ void main() $_ {
 	for (int32_t i = 0; i < map->GetLength(map); i++) {
 		Console.WriteLine(String.NewFormat(
 			"%s:%d",
-			String.Unpack( map->GetElem(map, i).Key ),
-			*(int32_t *)( map->GetElem(map, i).Value )
+			String.Unpack( map->Get(map, i).Key ),
+			*(int32_t *)( map->Get(map, i).Value )
 		));
 	}
 	Console.NewLine();
@@ -107,8 +104,8 @@ void main() $_ {
 
 	Console.WriteLine(String.NewFormat(
 		"%s:%d",
-		String.Unpack( map->GetElem(map, 3000).Key ),
-		*(int32_t *)( map->GetElem(map, 3000).Value )
+		String.Unpack( map->Get(map, 3000).Key ),
+		*(int32_t *)( map->Get(map, 3000).Value )
 	));
 
 	for (int32_t i = SIZE - 1; 0 <= i; i--) {
@@ -122,8 +119,8 @@ void main() $_ {
 
 	Console.WriteLine(String.NewFormat(
 		"%s:%d",
-		String.Unpack( map->GetElem(map, 0).Key ),
-		*(int32_t *)( map->GetElem(map, 0).Value )
+		String.Unpack( map->Get(map, 0).Key ),
+		*(int32_t *)( map->Get(map, 0).Value )
 	));
 
 	Map.Delete(map);

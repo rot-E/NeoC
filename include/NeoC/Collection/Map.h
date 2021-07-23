@@ -12,10 +12,10 @@
 typedef struct {
 	public void *Key;
 	public void *Value;
-} Elem_t;
+} Item_t;
 
 typedef struct Map_t {
-	Elem_t *_Elem;
+	Item_t *_Item;
 	private int32_t _Size;
 	private bool (* _KeyComparator)(void *mapKey, void *key);
 	private bool (* _ValueComparator)(void *mapValue, void *value);
@@ -34,7 +34,7 @@ typedef struct Map_t {
 
 	/* 取得系 */
 	public int32_t (* GetLength)(struct Map_t *);
-	public Elem_t (* GetElem)(struct Map_t *, int32_t);
+	public Item_t (* Get)(struct Map_t *, int32_t);
 
 	/* 検査系 */
 	public bool (* IsEmpty)(struct Map_t *);
@@ -61,7 +61,7 @@ typedef struct {
 
 	/* 取得系 */
 	public int32_t (* GetLength)(Map_t *);
-	public Elem_t (* GetElem)(Map_t *, int32_t);
+	public Item_t (* Get)(Map_t *, int32_t);
 
 	/* 検査系 */
 	public bool (* IsEmpty)(Map_t *);
