@@ -57,10 +57,6 @@ void main() $_ {
 	String_t *s5 = String.New(u8"かきくけこ");
 	String_t *s6 = String.New(u8"さしすせそ");
 
-	int32_t *i4 = $(int32_t,  -1);
-	int32_t *i5 = $(int32_t, -2);
-	int32_t *i6 = $(int32_t, -3);
-
 	lis->Add(lis, s4);
 	lis->Add(lis, s2);
 	lis->Add(lis, s5);
@@ -74,7 +70,7 @@ void main() $_ {
 	}
 	Console.NewLine();
 
-	/* Map解放 */
+	/* List解放 */
 	List.Delete(lis);
 
 
@@ -110,5 +106,6 @@ void main() $_ {
 		String.Unpack( lis->Get(lis, 0) )
 	));
 
+	/* List解放 */
 	List.Delete(lis);
 } _$
