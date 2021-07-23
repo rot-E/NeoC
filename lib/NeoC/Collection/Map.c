@@ -15,11 +15,11 @@ static void Put(Map_t *map, void *key, void *value) {
 	// 領域不足→確保
 	if (map->_Length + 1 >= map->_Size) {
 		map->_Size += Map._ALLOCATION_BLOCK_SIZE;
-		map->_Set = (Set_t *)(_Memory.ReAllocate(map->_Set, sizeof(Set_t) * map->_Size));
+		map->_Elem = (Elem_t *)(_Memory.ReAllocate(map->_Elem, sizeof(Elem_t) * map->_Size));
 	}
 
 	// 格納
-	map->_Set[map->_Length] = (Set_t){
+	map->_Elem[map->_Length] = (Elem_t){
 		.Key	= key,
 		.Value	= value,
 	};
@@ -35,7 +35,7 @@ static void Remove(Map_t *map, void *key) throws (Map.Exception) {
 	int32_t i;
 	bool existence = false;
 	for (i = 0; i < Map.GetLength(map); i++)
-		if (map->_KeyComparator(Map.GetSet(map, i).Key, key)) {
+		if (map->_KeyComparator(Map.GetElem(map, i).Key, key)) {
 			existence = true;
 			break;
 		}
@@ -45,14 +45,14 @@ static void Remove(Map_t *map, void *key) throws (Map.Exception) {
 	}
 
 	for (int32_t j = i; j < Map.GetLength(map) - 1; j++)
-		map->_Set[j] = map->_Set[j + 1];
+		map->_Elem[j] = map->_Elem[j + 1];
 
 	map->_Length--;
 
 	// 領域過多→解放
 	if (map->_Length < map->_Size - Map._ALLOCATION_BLOCK_SIZE) {
 		map->_Size -= Map._ALLOCATION_BLOCK_SIZE;
-		map->_Set = (Set_t *)(_Memory.ReAllocate(map->_Set, sizeof(Set_t) * map->_Size));
+		map->_Elem = (Elem_t *)(_Memory.ReAllocate(map->_Elem, sizeof(Elem_t) * map->_Size));
 	}
 
 	mtx_unlock(&map->_Mtx);
@@ -62,10 +62,10 @@ static int32_t GetLength(Map_t *map) {
 	return map->_Length;
 }
 
-static Set_t GetSet(Map_t *map, int32_t i) throws (Map.Exception) {
+static Elem_t GetElem(Map_t *map, int32_t i) throws (Map.Exception) {
 	if (map->_Length <= i) throw (Signal.New(Map.Exception));
 
-	return map->_Set[i];
+	return map->_Elem[i];
 }
 
 static bool IsEmpty(Map_t *map) {
@@ -74,25 +74,23 @@ static bool IsEmpty(Map_t *map) {
 
 static bool ContainsKey(Map_t *map, void *key) {
 	for (int32_t i = 0; i < Map.GetLength(map); i++)
-		if (map->_KeyComparator(Map.GetSet(map, i).Key, key)) return true;
+		if (map->_KeyComparator(Map.GetElem(map, i).Key, key)) return true;
 
 	return false;
 }
 
 static bool ContainsValue(Map_t *map, void *value) {
 	for (int32_t i = 0; i < Map.GetLength(map); i++)
-		if (map->_ValueComparator(Map.GetSet(map, i).Value, value)) return true;
+		if (map->_ValueComparator(Map.GetElem(map, i).Value, value)) return true;
 
 	return false;
 }
 
-static Map_t *New(const size_t keySize, const size_t valueSize) {
+static Map_t *New() {
 	Map_t *map = (Map_t *)(_Memory.Allocate(sizeof(Map_t)));
 
-	map->_Set				= (Set_t *)(_Memory.CountedAllocate(Map._ALLOCATION_BLOCK_SIZE, sizeof(Set_t)));
+	map->_Elem				= (Elem_t *)(_Memory.CountedAllocate(Map._ALLOCATION_BLOCK_SIZE, sizeof(Elem_t)));
 	map->_Size				= Map._ALLOCATION_BLOCK_SIZE;
-	map->_KeySize			= keySize;
-	map->_ValueSize			= valueSize;
 	map->_Length			= 0;
 	mtx_init(&map->_Mtx, mtx_plain);
 
@@ -100,7 +98,7 @@ static Map_t *New(const size_t keySize, const size_t valueSize) {
 	map->Put				= Put;
 	map->Remove				= Remove;
 	map->GetLength			= GetLength;
-	map->GetSet				= GetSet;
+	map->GetElem			= GetElem;
 	map->IsEmpty			= IsEmpty;
 	map->ContainsKey		= ContainsKey;
 	map->ContainsValue		= ContainsValue;
@@ -111,7 +109,7 @@ static Map_t *New(const size_t keySize, const size_t valueSize) {
 static void Delete(Map_t *map) {
 	mtx_destroy(&map->_Mtx);
 
-	_Memory.Free(map->_Set);
+	_Memory.Free(map->_Elem);
 	_Memory.Free(map);
 }
 
@@ -128,7 +126,7 @@ _Map Map = {
 	.Remove						= Remove,
 
 	.GetLength					= GetLength,
-	.GetSet						= GetSet,
+	.GetElem						= GetElem,
 
 	.IsEmpty					= IsEmpty,
 	.ContainsKey				= ContainsKey,

@@ -12,13 +12,11 @@
 typedef struct {
 	public void *Key;
 	public void *Value;
-} Set_t;
+} Elem_t;
 
 typedef struct Map_t {
-	Set_t *_Set;
+	Elem_t *_Elem;
 	private int32_t _Size;
-	private int32_t _KeySize;
-	private int32_t _ValueSize;
 	private bool (* _KeyComparator)(void *mapKey, void *key);
 	private bool (* _ValueComparator)(void *mapValue, void *value);
 	private int32_t _Length;
@@ -36,7 +34,7 @@ typedef struct Map_t {
 
 	/* 取得系 */
 	public int32_t (* GetLength)(struct Map_t *);
-	public Set_t (* GetSet)(struct Map_t *, int32_t);
+	public Elem_t (* GetElem)(struct Map_t *, int32_t);
 
 	/* 検査系 */
 	public bool (* IsEmpty)(struct Map_t *);
@@ -49,7 +47,7 @@ typedef struct {
 	public final SignalCode_t Exception;
 	private final int32_t _ALLOCATION_BLOCK_SIZE;
 
-	public Map_t *(* New)(const size_t keySize, const size_t valueSize);
+	public Map_t *(* New)();
 	public void (* Delete)(Map_t *);
 
 	public void (* SetComparator)(Map_t *,
@@ -63,7 +61,7 @@ typedef struct {
 
 	/* 取得系 */
 	public int32_t (* GetLength)(Map_t *);
-	public Set_t (* GetSet)(Map_t *, int32_t);
+	public Elem_t (* GetElem)(Map_t *, int32_t);
 
 	/* 検査系 */
 	public bool (* IsEmpty)(Map_t *);

@@ -7,7 +7,7 @@
 
 void main() $_ {
 	/* 4-tuple生成 */
-	Tuple_t *tp = Tuple.New(4);
+	Tuple_t *tp = Tuple.New(4) in (String_t *, int32_t *, double *);
 
 	/* 領域確保/値配置 */
 	String_t *s = String.New(u8"test string");

@@ -7,7 +7,8 @@
 
 void main() $_ {
 	/* Map生成 */
-	Map_t *map = Map.New(TT(String_t *, int32_t *));
+	Map_t *map = Map.New() in (String_t *, int32_t *);
+
 	map->SetComparator(map,
 		Comparator(mapK, k, String.Equals(mapK, k)),
 		Comparator(mapV, v, *(int32_t *)(mapV) == *(int32_t *)(v))
@@ -33,8 +34,8 @@ void main() $_ {
 	for (int32_t i = 0; i < map->GetLength(map); i++) {
 		Console.WriteLine(String.NewFormat(
 			"%s:%d",
-			String.Unpack((String_t *)( map->GetSet(map, i).Key )),
-			*(int32_t *)( map->GetSet(map, i).Value )
+			String.Unpack( map->GetElem(map, i).Key ),
+			*(int32_t *)( map->GetElem(map, i).Value )
 		));
 	}
 	Console.WriteLine(String.NewFormat(u8"Empty? %d", map->IsEmpty(map)));
@@ -53,8 +54,8 @@ void main() $_ {
 	for (int32_t i = 0; i < map->GetLength(map); i++) {
 		Console.WriteLine(String.NewFormat(
 			"%s:%d",
-			String.Unpack((String_t *)( map->GetSet(map, i).Key )),
-			*(int32_t *)( map->GetSet(map, i).Value )
+			String.Unpack( map->GetElem(map, i).Key ),
+			*(int32_t *)( map->GetElem(map, i).Value )
 		));
 	}
 	Console.NewLine();
@@ -79,8 +80,8 @@ void main() $_ {
 	for (int32_t i = 0; i < map->GetLength(map); i++) {
 		Console.WriteLine(String.NewFormat(
 			"%s:%d",
-			String.Unpack((String_t *)( map->GetSet(map, i).Key )),
-			*(int32_t *)( map->GetSet(map, i).Value )
+			String.Unpack( map->GetElem(map, i).Key ),
+			*(int32_t *)( map->GetElem(map, i).Value )
 		));
 	}
 	Console.NewLine();
@@ -90,7 +91,7 @@ void main() $_ {
 
 
 	/* 大量確保/解放 */
-	map = Map.New(TT(String_t *, int32_t *));
+	map = Map.New() in (String_t *, int32_t *);
 
 	const int32_t SIZE = 5000;
 	String_t *strs[SIZE];
@@ -106,8 +107,8 @@ void main() $_ {
 
 	Console.WriteLine(String.NewFormat(
 		"%s:%d",
-		String.Unpack((String_t *)( map->GetSet(map, 3000).Key )),
-		*(int32_t *)( map->GetSet(map, 3000).Value )
+		String.Unpack( map->GetElem(map, 3000).Key ),
+		*(int32_t *)( map->GetElem(map, 3000).Value )
 	));
 
 	for (int32_t i = SIZE - 1; 0 <= i; i--) {
@@ -121,8 +122,8 @@ void main() $_ {
 
 	Console.WriteLine(String.NewFormat(
 		"%s:%d",
-		String.Unpack((String_t *)( map->GetSet(map, 0).Key )),
-		*(int32_t *)( map->GetSet(map, 0).Value )
+		String.Unpack( map->GetElem(map, 0).Key ),
+		*(int32_t *)( map->GetElem(map, 0).Value )
 	));
 
 	Map.Delete(map);

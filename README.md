@@ -22,7 +22,7 @@ void main() $_ {
    uint8_t target = 'i';
    try {
       defer {
-         Map_t *map = Map.New(TT(String_t *, int32_t *));
+         Map_t *map = Map.New() in (String_t *, int32_t *);
 
          String_t *s1 = String.New(u8"NeoC!    ");
          String_t *s2 = String.New(u8"NeoC!!!  ");
@@ -39,8 +39,8 @@ void main() $_ {
          for (int32_t i = 0; i < map->GetLength(map); i++) {
             Console.WriteLine(String.NewFormat(
                u8"%s : %d",
-               String.Unpack((String_t *)( map->GetSet(map, i).Key )),
-               *(int32_t *)( map->GetSet(map, i).Value )
+               String.Unpack( map->GetElem(map, i).Key ),
+               *(int32_t *)( map->GetElem(map, i).Value )
             ));
          }
       } set

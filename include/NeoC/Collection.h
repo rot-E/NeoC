@@ -1,9 +1,7 @@
 #pragma once
 
 /* ------------------------------------------------------ */
-#define T(T) sizeof(T)
-
-#define TT(KT, VT) sizeof(KT), sizeof(VT)
+#define in(...)
 
 #define Comparator(X, Y, EqEvaFm)			\
 	({										\
