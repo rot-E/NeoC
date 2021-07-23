@@ -19,10 +19,11 @@ typedef struct Stack_t {
 	/* 操作系 */
 	public void (* Push)(struct Stack_t *, void *item);
 	public void *(* Pop)(struct Stack_t *) throws (Stack.Exception);
-	public void *(* Duplicate)(struct Stack_t *) throws (Stack.Exception);
-		public void *(* Dup)(struct Stack_t *) throws (Stack.Exception);
-	public void *(* Exchange)(struct Stack_t *) throws (Stack.Exception);
-	public void *(* Rotate)(struct Stack_t *) throws (Stack.Exception);
+	public void (* Duplicate)(struct Stack_t *) throws (Stack.Exception);
+		public void (* Dup)(struct Stack_t *) throws (Stack.Exception);
+	public void (* Exchange)(struct Stack_t *) throws (Stack.Exception);
+	public void (* LeftRotate)(struct Stack_t *, const int32_t n) throws (Stack.Exception);
+	public void (* RightRotate)(struct Stack_t *, const int32_t n) throws (Stack.Exception);
 
 	/* 取得系 */
 	public void *(* Peek)(struct Stack_t *) throws (Stack.Exception);
@@ -43,10 +44,11 @@ typedef struct {
 	/* 操作系 */
 	public void (* Push)(Stack_t *, void *item);
 	public void *(* Pop)(Stack_t *) throws (Stack.Exception);
-	public void *(* Duplicate)(Stack_t *) throws (Stack.Exception);
-		public void *(* Dup)(Stack_t *) throws (Stack.Exception);
-	public void *(* Exchange)(Stack_t *) throws (Stack.Exception);
-	public void *(* Rotate)(Stack_t *) throws (Stack.Exception);
+	public void (* Duplicate)(Stack_t *) throws (Stack.Exception);
+		public void (* Dup)(Stack_t *) throws (Stack.Exception);
+	public void (* Exchange)(Stack_t *) throws (Stack.Exception);
+	public void (* LeftRotate)(Stack_t *, const int32_t n) throws (Stack.Exception);
+	public void (* RightRotate)(Stack_t *, const int32_t n) throws (Stack.Exception);
 
 	/* 取得系 */
 	public void *(* Peek)(Stack_t *) throws (Stack.Exception);

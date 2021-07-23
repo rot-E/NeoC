@@ -15,7 +15,7 @@ static void Add(List_t *lis, void *item) {
 	// 領域不足→確保
 	if (lis->_Length + 1 >= lis->_Size) {
 		lis->_Size += List._ALLOCATION_BLOCK_SIZE;
-		lis->_Item = _Memory.ReAllocate(lis->_Item, sizeof(void *) * lis->_Size);
+		lis->_Item = _Memory.ReAllocate(lis->_Item, lis->_Size * sizeof(void *));
 	}
 
 	// 格納
@@ -59,7 +59,7 @@ static void RemoveItem(List_t *lis, void *item) throws (List.Exception) {
 	// 領域過多→解放
 	if (lis->_Length < lis->_Size - List._ALLOCATION_BLOCK_SIZE) {
 		lis->_Size -= List._ALLOCATION_BLOCK_SIZE;
-		lis->_Item = _Memory.ReAllocate(lis->_Item, sizeof(void *) * lis->_Size);
+		lis->_Item = _Memory.ReAllocate(lis->_Item, lis->_Size * sizeof(void *));
 	}
 
 	mtx_unlock(&lis->_Mtx);

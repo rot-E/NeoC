@@ -15,7 +15,7 @@ static void Put(Map_t *map, void *key, void *value) {
 	// 領域不足→確保
 	if (map->_Length + 1 >= map->_Size) {
 		map->_Size += Map._ALLOCATION_BLOCK_SIZE;
-		map->_Item = (Item_t *)(_Memory.ReAllocate(map->_Item, sizeof(Item_t) * map->_Size));
+		map->_Item = (Item_t *)(_Memory.ReAllocate(map->_Item, map->_Size * sizeof(Item_t)));
 	}
 
 	// 格納
@@ -49,7 +49,7 @@ static void Remove(Map_t *map, void *key) throws (Map.Exception) {
 	// 領域過多→解放
 	if (map->_Length < map->_Size - Map._ALLOCATION_BLOCK_SIZE) {
 		map->_Size -= Map._ALLOCATION_BLOCK_SIZE;
-		map->_Item = (Item_t *)(_Memory.ReAllocate(map->_Item, sizeof(Item_t) * map->_Size));
+		map->_Item = (Item_t *)(_Memory.ReAllocate(map->_Item, map->_Size * sizeof(Item_t)));
 	}
 
 	mtx_unlock(&map->_Mtx);
