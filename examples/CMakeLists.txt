@@ -11,6 +11,7 @@ add_dependencies(examples
     ExceptionNested
     List
     Map
+    Queue
     SampleCode
     String
     System
@@ -63,6 +64,12 @@ target_link_libraries(List
 
 add_executable(Map Map.c)
 target_link_libraries(Map
+    NeoC
+    Threads::Threads
+)
+
+add_executable(Queue Queue.c)
+target_link_libraries(Queue
     NeoC
     Threads::Threads
 )

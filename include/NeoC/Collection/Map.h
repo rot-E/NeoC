@@ -21,7 +21,7 @@ typedef struct Map_t {
 	private bool (* _ValueComparator)(void *mapValue, void *value);
 	private int32_t _Length;
 
-	mtx_t _Mtx;
+	private mtx_t _Mtx;
 
 	public void (* SetComparator)(struct Map_t *,
 		bool (* keyComparator)(void *mapKey, void *key),

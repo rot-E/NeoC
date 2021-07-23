@@ -30,8 +30,6 @@ static void Put(Map_t *map, void *key, void *value) {
 }
 
 static void Remove(Map_t *map, void *key) throws (Map.Exception) {
-	mtx_lock(&map->_Mtx);
-
 	int32_t i;
 	bool existence = false;
 	for (i = 0; i < Map.GetLength(map); i++)
@@ -39,10 +37,9 @@ static void Remove(Map_t *map, void *key) throws (Map.Exception) {
 			existence = true;
 			break;
 		}
-	if (!existence) {
-		mtx_unlock(&map->_Mtx);
-		throw (Signal.New(Map.Exception));
-	}
+	if (!existence) throw (Signal.New(Map.Exception));
+
+	mtx_lock(&map->_Mtx);
 
 	for (int32_t j = i; j < Map.GetLength(map) - 1; j++)
 		map->_Item[j] = map->_Item[j + 1];
@@ -69,7 +66,7 @@ static Item_t Get(Map_t *map, int32_t idx) throws (Map.Exception) {
 }
 
 static bool IsEmpty(Map_t *map) {
-	return map->_Length == 0;
+	return Map.GetLength(map) == 0;
 }
 
 static bool ContainsKey(Map_t *map, void *key) {

@@ -61,18 +61,10 @@ void main() $_ {
 	Console.NewLine();
 
 	/* 再格納 */
-	String_t *s4 = String.New(u8"あいうえお");
-	String_t *s5 = String.New(u8"かきくけこ");
-	String_t *s6 = String.New(u8"さしすせそ");
-
-	int32_t *i4 = $(int32_t,  -1);
-	int32_t *i5 = $(int32_t, -2);
-	int32_t *i6 = $(int32_t, -3);
-
-	map->Put(map, s4, i4);
+	map->Put(map, String.New(u8"あいうえお"), $(int32_t,  -1));
 	map->Put(map, s2, i2);
-	map->Put(map, s5, i5);
-	map->Put(map, s6, i6);
+	map->Put(map, String.New(u8"かきくけこ"), $(int32_t,  -2));
+	map->Put(map, String.New(u8"さしすせそ"), $(int32_t,  -3));
 
 	for (int32_t i = 0; i < map->GetLength(map); i++) {
 		Console.WriteLine(String.NewFormat(
@@ -92,11 +84,9 @@ void main() $_ {
 
 	const int32_t SIZE = 5000;
 	String_t *strs[SIZE];
-	int32_t *ints[SIZE];
 	for (int32_t i = 0; i < SIZE; i++) {
 		strs[i] = String.NewFormat(u8"STR-%d", i);
-		ints[i] = $(int32_t, i);
-		map->Put(map, strs[i], ints[i]);
+		map->Put(map, strs[i], $(int32_t, i));
 
 		if (i % Map._ALLOCATION_BLOCK_SIZE == 0)
 			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, map->_Size));

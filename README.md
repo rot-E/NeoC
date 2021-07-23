@@ -24,23 +24,15 @@ void main() $_ {
       defer {
          Map_t *map = Map.New() in (String_t *, int32_t *);
 
-         String_t *s1 = String.New(u8"NeoC!    ");
-         String_t *s2 = String.New(u8"NeoC!!!  ");
-         String_t *s3 = String.New(u8"NeoC!!!!!");
-
-         int32_t *i1 = $(int32_t, 1);
-         int32_t *i2 = $(int32_t, 3);
-         int32_t *i3 = $(int32_t, 5);
-
-         map->Put(map, s1, i1);
-         map->Put(map, s2, i2);
-         map->Put(map, s3, i3);
+         map->Put(map, String.New(u8"NeoC!    "), $(int32_t, 1));
+         map->Put(map, String.New(u8"NeoC!!!  "), $(int32_t, 3));
+         map->Put(map, String.New(u8"NeoC!!!!!"), $(int32_t, 5));
 
          for (int32_t i = 0; i < map->GetLength(map); i++) {
             Console.WriteLine(String.NewFormat(
                u8"%s : %d",
-               String.Unpack( map->GetElem(map, i).Key ),
-               *(int32_t *)( map->GetElem(map, i).Value )
+               String.Unpack( map->Get(map, i).Key ),
+               *(int32_t *)( map->Get(map, i).Value )
             ));
          }
       } set

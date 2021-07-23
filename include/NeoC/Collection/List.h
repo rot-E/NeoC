@@ -15,7 +15,7 @@ typedef struct List_t {
 	private bool (* _ItemComparator)(void *listItem, void *item);
 	private int32_t _Length;
 
-	mtx_t _Mtx;
+	private mtx_t _Mtx;
 
 	public void (* SetComparator)(struct List_t *,
 		bool (* itemComparator)(void *listItem, void *item)

@@ -27,9 +27,9 @@ static void Add(List_t *lis, void *item) {
 }
 
 static void Remove(List_t *lis, const int32_t idx) throws (List.Exception) {
-	mtx_lock(&lis->_Mtx);
-
 	if (lis->_Length <= idx) throw (Signal.New(List.Exception));
+
+	mtx_lock(&lis->_Mtx);
 
 	for (int32_t j = idx; j < List.GetLength(lis) - 1; j++)
 		lis->_Item[j] = lis->_Item[j + 1];
@@ -40,8 +40,6 @@ static void Remove(List_t *lis, const int32_t idx) throws (List.Exception) {
 }
 
 static void RemoveItem(List_t *lis, void *item) throws (List.Exception) {
-	mtx_lock(&lis->_Mtx);
-
 	int32_t i;
 	bool existence = false;
 	for (i = 0; i < List.GetLength(lis); i++)
@@ -49,10 +47,9 @@ static void RemoveItem(List_t *lis, void *item) throws (List.Exception) {
 			existence = true;
 			break;
 		}
-	if (!existence) {
-		mtx_unlock(&lis->_Mtx);
-		throw (Signal.New(List.Exception));
-	}
+	if (!existence) throw (Signal.New(List.Exception));
+
+	mtx_lock(&lis->_Mtx);
 
 	for (int32_t j = i; j < List.GetLength(lis) - 1; j++)
 		lis->_Item[j] = lis->_Item[j + 1];
@@ -88,7 +85,7 @@ static int32_t IndexOf(List_t *lis, void *item) throws (List.Failure) {
 }
 
 static bool IsEmpty(List_t *lis) {
-	return lis->_Length == 0;
+	return List.GetLength(lis) == 0;
 }
 
 static bool Contains(List_t *lis, void *item) {
