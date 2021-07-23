@@ -1,17 +1,5 @@
 #pragma once
 
-/* ------------------------------------------------------ */
-#define T(KT, VT) sizeof(KT), sizeof(VT)
-
-#define Comparator(X, Y, EqEvaFm)			\
-	({										\
-		bool _cmptr(void *X, void *Y) {		\
-			return EqEvaFm;					\
-		};									\
-		_cmptr;								\
-	})
-/* ------------------------------------------------------ */
-
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>

@@ -2,11 +2,12 @@
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 #include "NeoC/Exception/Exception.h"
-#include "NeoC/Container/Map.h"
+#include "NeoC/Collection.h"
+#include "NeoC/Collection/Map.h"
 
 void main() $_ {
 	/* Map生成 */
-	Map_t *map = Map.New(T(String_t *, int32_t *));
+	Map_t *map = Map.New(TT(String_t *, int32_t *));
 	map->SetComparator(map,
 		Comparator(mapK, k, String.Equals(mapK, k)),
 		Comparator(mapV, v, *(int32_t *)(mapV) == *(int32_t *)(v))
@@ -89,7 +90,7 @@ void main() $_ {
 
 
 	/* 大量確保/解放 */
-	map = Map.New(T(String_t *, int32_t *));
+	map = Map.New(TT(String_t *, int32_t *));
 
 	const int32_t SIZE = 5000;
 	String_t *strs[SIZE];

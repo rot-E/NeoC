@@ -3,7 +3,8 @@
 #include "NeoC/Console.h"
 #include "NeoC/Exception/Exception.h"
 #include "NeoC/Defer.h"
-#include "NeoC/Container/Map.h"
+#include "NeoC/Collection.h"
+#include "NeoC/Collection/Map.h"
 #include "NeoC/System.h"
 
 void main() $_ {
@@ -13,7 +14,7 @@ void main() $_ {
    uint8_t target = 'i';
    try {
       defer {
-         Map_t *map = Map.New(T(String_t *, int32_t *));
+         Map_t *map = Map.New(TT(String_t *, int32_t *));
 
          String_t *s1 = String.New(u8"NeoC!    ");
          String_t *s2 = String.New(u8"NeoC!!!  ");
