@@ -9,6 +9,7 @@ add_dependencies(examples
     DeferInFunction
     Exception
     ExceptionNested
+    List
     Map
     SampleCode
     String
@@ -50,6 +51,12 @@ target_link_libraries(Exception
 
 add_executable(ExceptionNested ExceptionNested.c)
 target_link_libraries(ExceptionNested
+    NeoC
+    Threads::Threads
+)
+
+add_executable(List List.c)
+target_link_libraries(List
     NeoC
     Threads::Threads
 )

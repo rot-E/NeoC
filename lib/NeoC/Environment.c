@@ -13,7 +13,8 @@ static void _Setup() {
 
 	Tuple._Setup();
 	Map._Setup();
-	//List._Setup();
+	List._Setup();
+	//Set._Setup();
 	//Stack._Setup();
 	//Queue._Setup();
 }

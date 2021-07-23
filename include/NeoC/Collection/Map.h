@@ -34,7 +34,7 @@ typedef struct Map_t {
 
 	/* 取得系 */
 	public int32_t (* GetLength)(struct Map_t *);
-	public Item_t (* Get)(struct Map_t *, int32_t);
+	public Item_t (* Get)(struct Map_t *, int32_t idx);
 
 	/* 検査系 */
 	public bool (* IsEmpty)(struct Map_t *);
@@ -61,7 +61,7 @@ typedef struct {
 
 	/* 取得系 */
 	public int32_t (* GetLength)(Map_t *);
-	public Item_t (* Get)(Map_t *, int32_t);
+	public Item_t (* Get)(Map_t *, int32_t idx);
 
 	/* 検査系 */
 	public bool (* IsEmpty)(Map_t *);

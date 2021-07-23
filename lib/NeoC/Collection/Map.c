@@ -62,10 +62,10 @@ static int32_t GetLength(Map_t *map) {
 	return map->_Length;
 }
 
-static Item_t Get(Map_t *map, int32_t i) throws (Map.Exception) {
-	if (map->_Length <= i) throw (Signal.New(Map.Exception));
+static Item_t Get(Map_t *map, int32_t idx) throws (Map.Exception) {
+	if (map->_Length <= idx) throw (Signal.New(Map.Exception));
 
-	return map->_Item[i];
+	return map->_Item[idx];
 }
 
 static bool IsEmpty(Map_t *map) {
