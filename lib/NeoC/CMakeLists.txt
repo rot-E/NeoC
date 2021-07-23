@@ -13,6 +13,7 @@ endif()
 target_sources(NeoC
     PRIVATE
 	Collection/Map.c
+	Collection/Tuple.c
     Exception/Exception.c
     Exception/Signal.c
     #File/Directory.c

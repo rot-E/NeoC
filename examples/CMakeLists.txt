@@ -18,6 +18,7 @@ add_dependencies(examples
     TCPServer
     Theme
     Theme2
+    Tuple
     UDPClient
     UDPEchoServer
     UDPServer
@@ -70,6 +71,9 @@ target_link_libraries(Theme NeoC)
 
 add_executable(Theme2 Theme2.c)
 target_link_libraries(Theme2 NeoC)
+
+add_executable(Tuple Tuple.c)
+target_link_libraries(Tuple NeoC)
 
 add_executable(UDPClient UDPClient.c)
 target_link_libraries(UDPClient NeoC)
