@@ -1,9 +1,7 @@
 #pragma once
 
 #include <stdio.h>
-
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
+#include "NeoC/Base/Object.h"
 #include "NeoC/SPEC/CC.h"
 #include "NeoC/SPEC/CSI.h"
 #include "NeoC/SPEC/SGR.h"

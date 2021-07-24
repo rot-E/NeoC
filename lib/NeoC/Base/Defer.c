@@ -1,22 +1,22 @@
-#include "NeoC/Defer.h"
+#include "NeoC/Base/Defer.h"
 
-static void _Setup() {
+method static void _Setup() {
 	_Defer._Task = (void (**)())(
 		_Memory.CountedAllocate(_Defer._TASK_MAX, sizeof(void (*)()))
 	);
 }
 
-static void Set(void (* Task)()) {
+method static void Set(void (* Task)()) {
 	if (_Defer._Index >= _Defer._TASK_MAX) _Error.Panic(u8"\e[92m", u8"Defer System");
 
 	_Defer._Task[_Defer._Index++] = Task;
 }
 
-static void Rewind() {
+method static void Rewind() {
 	while (_Defer._Index > 0) _Defer._Task[--_Defer._Index]();
 }
 
-static void *Execute(void *(* Procedure)()) {
+method static void *Execute(void *(* Procedure)()) {
 	void *r = Procedure();
 	_Defer.Rewind();
 	return r;

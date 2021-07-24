@@ -1,6 +1,7 @@
-#include "NeoC/Environment.h"
+#include "NeoC/Base/Environment.h"
 
-static void _Setup() {
+method static void _Setup() {
+	Signal._Setup();
 	_Exception._Setup();
 	_Defer._Setup();
 
@@ -9,14 +10,14 @@ static void _Setup() {
 
 	String._Setup();
 	System._Setup();
-	Socket._Setup();
+/*	Socket._Setup();
 
 	Tuple._Setup();
 	Map._Setup();
 	List._Setup();
 	Set._Setup();
 	Stack._Setup();
-	Queue._Setup();
+	Queue._Setup();*/
 }
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER(Signal_t *sig) {
@@ -29,7 +30,8 @@ static void _DEFAULT_MAIN_EXCEPTION_HANDLER(Signal_t *sig) {
 	);
 
 	if (Signal.MessageExists(sig))
-		fprintf(stderr, u8"\t%s%s%s\n",
+		fprintf(stderr, u8"%s%s%s%s\n",
+			u8"    ",
 			u8"\e[36m",
 			Signal.GetMessage(sig),
 			u8"\e[39m"

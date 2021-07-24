@@ -17,10 +17,8 @@
 /* ------------------------------------------------------ */
 
 #include <stdint.h>
-
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
-#include "NeoC/Memory.h"
+#include "NeoC/Base/Object.h"
+#include "NeoC/Base/Error.h"
 
 class __Defer {
 	private void (* _Setup)();

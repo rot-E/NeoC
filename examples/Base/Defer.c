@@ -1,5 +1,5 @@
-#include "NeoC/Environment.h"
-#include "NeoC/Defer.h"
+#include "NeoC/Base/Defer.h"
+#include "NeoC/Base/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
@@ -26,7 +26,7 @@ void main() $_ {
 		i *= 100;
 	} ret
 
-	printf(u8"%d\n", i);
+	Console.WriteLine(String.NewFormat(u8"%d\n", i));
 
 
 	defer {
@@ -34,12 +34,10 @@ void main() $_ {
 	} set
 
 	int32_t *r = execute {
-		int *v = (int *)(malloc(sizeof(int)));
-		*v = 200;
+		int32_t *v = $(int32_t, 200);
 
 		return v;
 	} ret
 
-	printf(u8"%d\n", *r);
-
+	Console.WriteLine(String.NewFormat(u8"%d", *r));
 } _$

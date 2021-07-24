@@ -11,10 +11,8 @@
 
 #include <stdlib.h>
 #include <sys/mman.h>
-
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
-#include "NeoC/Error.h"
+#include "NeoC/Base/Object.h"
+#include "NeoC/Base/Error.h"
 
 class __Memory {
 	/* 確保系 */

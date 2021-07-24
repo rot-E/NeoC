@@ -1,11 +1,11 @@
-#include "NeoC/Environment.h"
-#include "NeoC/Exception/Signal.h"
-#include "NeoC/Exception/Exception.h"
+#include "NeoC/Base/Exception/Signal.h"
+#include "NeoC/Base/Exception/Exception.h"
+#include "NeoC/Base/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
 void f(SignalCode_t c) throws (c) {
-	throw (Signal.Build(c, "f"));
+	throw (Signal.Build(c, u8"f"));
 }
 
 void main() $_ {
@@ -19,7 +19,7 @@ void main() $_ {
 		try {
 			/* Signal.New + SetMessage */
 			Signal_t *sig = Signal.New(FugaException);
-			Signal.SetMessage(sig, "message from fugaex thrower");
+			Signal.SetMessage(sig, u8"message from fugaex thrower");
 			throw (sig);
 		} catch (FugaException) {
 			Console.WriteErrorLine(String.New(u8"Inner: Catch FugaException"));
@@ -68,7 +68,7 @@ void main() $_ {
 
 	Console.WriteLine(String.NewFormat(u8"%d", result));
 
-	throw (Signal.Build(HogeException, "Message"));
+	throw (Signal.Build(HogeException, u8"Message"));
 
 	f(HogeException);
 } _$

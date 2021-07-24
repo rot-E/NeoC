@@ -12,28 +12,33 @@ endif()
 # https://cmake.org/cmake/help/latest/command/file.html#filesystem
 target_sources(NeoC
     PRIVATE
-    Collection.c
-    Collection/List.c
-    Collection/Map.c
-    Collection/Queue.c
-    Collection/Set.c
-    Collection/Stack.c
-    Collection/Tuple.c
-    Exception/Exception.c
-    Exception/Signal.c
-    #File/Directory.c
-    #File/File.c
+    Base/Object.c
+    Base/Error.c
+    Base/Memory.c
+    Base/Exception/Signal.c
+    Base/Exception/Exception.c
+    Base/Defer.c
+    Base/Environment.c
+
     SPEC/CC.c
     SPEC/CSI.c
     SPEC/SGR.c
-    Console.c
-    Defer.c
-    Environment.c
-    Error.c
-    Memory.c
-    Socket.c
+
     String.c
+    Console.c
     System.c
+    #Socket.c
+
+    #Collection.c
+    #Collection/List.c
+    #Collection/Map.c
+    #Collection/Queue.c
+    #Collection/Set.c
+    #Collection/Stack.c
+    #Collection/Tuple.c
+
+    #File/Directory.c
+    #File/File.c
 )
 
 # NeoCライブラリを生成するために必要なヘッダファイルの場所

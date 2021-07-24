@@ -4,28 +4,68 @@ find_package(Threads REQUIRED)
 
 add_custom_target(examples)
 add_dependencies(examples
-    Console
-    Defer
-    DeferInFunction
+    Object
     Exception
     ExceptionNested
-    List
-    Map
-    OOP
-    Queue
-    SampleCode
-    Stack
+    Defer
+    DeferInFunction
+
     String
-    System
-    TCPClient
-    TCPEchoServer
-    TCPServer
+
+    Console
     Theme
     Theme2
-    Tuple
-    UDPClient
-    UDPEchoServer
-    UDPServer
+
+    System
+
+    #TCPClient
+    #TCPServer
+    #TCPEchoServer
+    #UDPClient
+    #UDPServer
+    #UDPEchoServer
+
+    #List
+    #Map
+    #Queue
+    #Stack
+    #Tuple
+
+    #OOP
+    #SampleCode
+)
+
+add_executable(Object Base/Object.c)
+target_link_libraries(Object
+    NeoC
+)
+
+add_executable(Exception Base/Exception/Exception.c)
+target_link_libraries(Exception
+    NeoC
+)
+
+add_executable(ExceptionNested Base/Exception/ExceptionNested.c)
+target_link_libraries(ExceptionNested
+    NeoC
+)
+
+add_executable(Defer Base/Defer.c)
+target_link_libraries(Defer
+    NeoC
+    Threads::Threads
+)
+
+add_executable(DeferInFunction Base/DeferInFunction.c)
+target_link_libraries(DeferInFunction
+    NeoC
+    Threads::Threads
+)
+
+add_executable(String String.c)
+target_link_libraries(String
+    NeoC
+    Threads::Threads
 )
 
 add_executable(Console Console.c)
@@ -34,26 +74,20 @@ target_link_libraries(Console
     Threads::Threads
 )
 
-add_executable(Defer Defer.c)
-target_link_libraries(Defer
+add_executable(Theme Theme.c)
+target_link_libraries(Theme
     NeoC
     Threads::Threads
 )
 
-add_executable(DeferInFunction DeferInFunction.c)
-target_link_libraries(DeferInFunction
+add_executable(Theme2 Theme2.c)
+target_link_libraries(Theme2
     NeoC
     Threads::Threads
 )
 
-add_executable(Exception Exception.c)
-target_link_libraries(Exception
-    NeoC
-    Threads::Threads
-)
-
-add_executable(ExceptionNested ExceptionNested.c)
-target_link_libraries(ExceptionNested
+add_executable(System System.c)
+target_link_libraries(System
     NeoC
     Threads::Threads
 )
@@ -94,17 +128,6 @@ target_link_libraries(Stack
     Threads::Threads
 )
 
-add_executable(String String.c)
-target_link_libraries(String
-    NeoC
-    Threads::Threads
-)
-
-add_executable(System System.c)
-target_link_libraries(System
-    NeoC
-    Threads::Threads
-)
 
 add_executable(TCPClient TCPClient.c)
 target_link_libraries(TCPClient
@@ -120,18 +143,6 @@ target_link_libraries(TCPEchoServer
 
 add_executable(TCPServer TCPServer.c)
 target_link_libraries(TCPServer
-    NeoC
-    Threads::Threads
-)
-
-add_executable(Theme Theme.c)
-target_link_libraries(Theme
-    NeoC
-    Threads::Threads
-)
-
-add_executable(Theme2 Theme2.c)
-target_link_libraries(Theme2
     NeoC
     Threads::Threads
 )

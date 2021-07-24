@@ -1,28 +1,40 @@
-#include "NeoC/Exception/Exception.h"
+#include "NeoC/Base/Exception/Exception.h"
 
-static Context_t *New() {
-	return (Context_t *)(_Memory.Allocate(sizeof(Context_t)));
+method static Context_t *Init(Context_t *ctx) {
+	Object.Init(act(Object_t, ctx));
+	act(Object_t, ctx)->_Expr	= u8"(Object_t ~> Context_t)";
+
+	ctx->GetExpr				= Object.GetExpr;
 }
 
-static void Delete(Context_t *cxt) {
-	_Memory.Free(cxt);
+method static Context_t *New() {
+	return Context.Init(new (Context_t));
+}
+
+method static void Delete(Context_t *ctx) {
+	delete (ctx);
 }
 
 _Context Context = {
+	.Init			= Init,
 	.New			= New,
 	.Delete			= Delete,
 };
 
 
-static void _Setup() {
-	_Exception._Context = (Context_t *)(_Memory.CountedAllocate(_Exception._NEST_MAX, sizeof(Context_t)));
+method static void _Setup() {
+	Context.GetExpr			= Object.GetExpr;
+
+	_Exception._Context		= (Context_t *)(
+		_Memory.CountedAllocate(_Exception._NEST_MAX, sizeof(Context_t))
+	);
 }
 
-static SignalCode_t AssignSignalCode() {
+method static SignalCode_t AssignSignalCode() {
 	return _Exception._SIGNAL_CODE_MAX++;
 }
 
-static void Try(const void (* Try)(), const void (* Catch)(Signal_t *), const void (* Finally)()) {
+method static void Try(const void (* Try)(), const void (* Catch)(Signal_t *), const void (* Finally)()) {
 	if (_Exception._Nest >= _Exception._NEST_MAX - 1) _Error.Panic("\e[93m", "Exception System");
 
 	bool threw = false;
@@ -37,7 +49,7 @@ static void Try(const void (* Try)(), const void (* Catch)(Signal_t *), const vo
 	if (!threw) _Exception._Nest--;
 }
 
-static void Throw(Signal_t *sig) {
+method static void Throw(Signal_t *sig) {
 	if (_Exception._Nest < 0) _Error.Panic(u8"\e[93m", u8"Exception System");
 
 	_Defer.Rewind();

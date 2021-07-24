@@ -2,8 +2,8 @@
 
 #include <unistd.h>
 
-#include "NeoC/Exception/Signal.h"
-#include "NeoC/Exception/Exception.h"
+#include "NeoC/Base/Exception/Signal.h"
+#include "NeoC/Base/Exception/Exception.h"
 
 class _System {
 	private void (* _Setup)();

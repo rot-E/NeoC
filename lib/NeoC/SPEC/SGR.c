@@ -1,6 +1,6 @@
 #include "NeoC/SPEC/SGR.h"
 
-void _Setup() {
+method void _Setup() {
 	SGR = (_SGR){
 		._Setup					= _Setup, // ?
 

@@ -2,8 +2,7 @@
 
 #include <stdint.h>
 
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
+#include "NeoC/Base/Object.h"
 
 /** ASCII Control Chatacter
  *

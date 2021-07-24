@@ -34,23 +34,27 @@
 #include <setjmp.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
-#include "NeoC/Error.h"
-#include "NeoC/Memory.h"
-#include "NeoC/Defer.h"
-
-#include "NeoC/Exception/Signal.h"
+#include "NeoC/Base/Object.h"
+#include "NeoC/Base/Error.h"
+#include "NeoC/Base/Memory.h"
+#include "NeoC/Base/Exception/Signal.h"
+#include "NeoC/Base/Defer.h"
 
 class Context_t {
+	extends (Object_t);
+
 	private jmp_buf _Context;
 	private Signal_t *_Signal;
+
+	public uint8_t *(* GetExpr)(self_t *);
 } Context_t;
 
 class _Context {
+	public Context_t *(* Init)(Context_t *);
 	public Context_t *(* New)();
 	public void (* Delete)(Context_t *);
+
+	public uint8_t *(* GetExpr)(self_t *);
 } _Context;
 
 extern _Context Context;
