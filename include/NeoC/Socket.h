@@ -21,29 +21,29 @@ class Socket_t {
 	private int32_t _BroadcastSwitch;
 
 	public uint8_t *(* GetExpr)(self_t *);
-	public int32_t (* GetFd)(self *);
+	public int32_t (* GetFd)(self_t *);
 
 	/* TCP */
-	public struct Socket_t *(* Accept)(self *);
+	public struct Socket_t *(* Accept)(self_t *);
 
-	public void (* Send)(self *, String_t *message) throws (Socket.Exception);
-	public String_t *(* Receive)(self *) throws (Socket.Exception, Socket.DisconnectionException);
+	public void (* Send)(self_t *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Receive)(self_t *) throws (Socket.Exception, Socket.DisconnectionException);
 
-	public void (* Disconnect)(self *);
+	public void (* Disconnect)(self_t *);
 
 	/* 共通 */
-	public bool (* UpdateExists)(self *);
+	public bool (* UpdateExists)(self_t *);
 
 	/* UDP */
-	public void (* Configure)(self *, String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
-	public void (* ConfigureBroadcast)(self *, const in_port_t serverPort) throws (Socket.Exception);
+	public void (* Configure)(self_t *, String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
+	public void (* ConfigureBroadcast)(self_t *, const in_port_t serverPort) throws (Socket.Exception);
 
-	public String_t *(* GetDestIPAddr)(self *);
-	public in_port_t (* GetDestPort)(self *);
+	public String_t *(* GetDestIPAddr)(self_t *);
+	public in_port_t (* GetDestPort)(self_t *);
 
-	public void (* Cast)(self *, String_t *message) throws (Socket.Exception);
-	public void (* Broadcast)(self *, String_t *message) throws (Socket.Exception);
-	public String_t *(* Collect)(self *) throws (Socket.Exception);
+	public void (* Cast)(self_t *, String_t *message) throws (Socket.Exception);
+	public void (* Broadcast)(self_t *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Collect)(self_t *) throws (Socket.Exception);
 } Socket_t;
 
 class _Socket {

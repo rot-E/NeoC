@@ -15,26 +15,35 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <threads.h>
-
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
-#include "NeoC/Memory.h"
+#include "NeoC/Base/Object.h"
 
 class Collection_t {
+	extends (Object_t);
+
 	private int32_t _Size;
 	private int32_t _Length;
 	private mtx_t _Mtx;
 
-	public int32_t (* GetLength)(self *);
-	public bool (* IsEmpty)(self *);
+	public uint8_t *(* GetExpr)(self_t *);
+
+	public int32_t (* GetLength)(self_t *);
+	public bool (* IsEmpty)(self_t *);
+
+	public void (* Lock)(self_t *);
+	public void (* Unlock)(self_t *);
 } Collection_t;
 
 class _Collection {
 	public void (* Init)(Collection_t *);
 	public void (* Delete)(Collection_t *);
 
+	public uint8_t *(* GetExpr)(self_t *);
+
 	public int32_t (* GetLength)(self_t *);
 	public bool (* IsEmpty)(self_t *);
+
+	public void (* Lock)(self_t *);
+	public void (* Unlock)(self_t *);
 } _Collection;
 
 extern _Collection Collection;

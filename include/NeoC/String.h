@@ -22,29 +22,29 @@ class String_t {
 	public uint8_t *(* GetExpr)(self_t *);
 
 	/* 取得系 */
-	public uint8_t *(* Unpack)(self *);
-	public int32_t (* GetLength)(self *);
-	public uint8_t (* GetCharAt)(self *, const int32_t index) throws (String.Exception);
-	public uint8_t (* GetHeadChar)(self *) throws (String.Exception);
-	public uint8_t (* GetLastChar)(self *) throws (String.Exception);
+	public uint8_t *(* Unpack)(self_t *);
+	public int32_t (* GetLength)(self_t *);
+	public uint8_t (* GetCharAt)(self_t *, const int32_t index) throws (String.Exception);
+	public uint8_t (* GetHeadChar)(self_t *) throws (String.Exception);
+	public uint8_t (* GetLastChar)(self_t *) throws (String.Exception);
 
-	public int32_t (* FirstIndexOf)(self *, const uint8_t ch) throws (String.Exception, String.Failure);
-	public int32_t (* LastIndexOf)(self *, const uint8_t ch) throws (String.Exception, String.Failure);
+	public int32_t (* FirstIndexOf)(self_t *, const uint8_t ch) throws (String.Exception, String.Failure);
+	public int32_t (* LastIndexOf)(self_t *, const uint8_t ch) throws (String.Exception, String.Failure);
 
 	/* 加工系 */
-	public struct String_t *(* Substring)(self *, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception);
-	public struct String_t *(* DropLastChar)(self *) throws (String.Exception);
-	public struct String_t *(* ReplaceWithChar)(self *, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception);
-	public struct String_t *(* Concat)(self *, struct String_t *str);
-	public struct String_t *(* ConcatChar)(self *, const uint8_t ch);
+	public struct String_t *(* Substring)(self_t *, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception);
+	public struct String_t *(* DropLastChar)(self_t *) throws (String.Exception);
+	public struct String_t *(* ReplaceWithChar)(self_t *, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception);
+	public struct String_t *(* Concat)(self_t *, struct String_t *str);
+	public struct String_t *(* ConcatChar)(self_t *, const uint8_t ch);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(self *);
-	public bool (* Equals)(self *, struct String_t *anString);
-	public bool (* StartsWith)(self *, struct String_t *prefix) throws (String.Exception);
-	public bool (* StartsWithChar)(self *, const uint8_t ch) throws (String.Exception);
-	public bool (* EndsWith)(self *, struct String_t *suffix) throws (String.Exception);
-	public bool (* EndsWithChar)(self *, const uint8_t ch) throws (String.Exception);
+	public bool (* IsEmpty)(self_t *);
+	public bool (* Equals)(self_t *, struct String_t *anString);
+	public bool (* StartsWith)(self_t *, struct String_t *prefix) throws (String.Exception);
+	public bool (* StartsWithChar)(self_t *, const uint8_t ch) throws (String.Exception);
+	public bool (* EndsWith)(self_t *, struct String_t *suffix) throws (String.Exception);
+	public bool (* EndsWithChar)(self_t *, const uint8_t ch) throws (String.Exception);
 } String_t;
 
 class _String {

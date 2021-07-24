@@ -20,15 +20,7 @@
 #define final			// 変更不能
 
 // インスタンスメソッド第一引数の型
-#define self void
-#define this void
-
 #define self_t void
-#define this_t void
-
-#define derived void
-#define sub void
-#define child void
 
 
 /* source */
@@ -51,7 +43,7 @@
 class Object_t {
 	private uint8_t *_Expr;
 
-	public uint8_t *(* GetExpr)(self *);
+	public uint8_t *(* GetExpr)(self_t *);
 } Object_t;
 
 class _Object {
