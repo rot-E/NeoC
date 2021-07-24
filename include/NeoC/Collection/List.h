@@ -11,12 +11,18 @@
 #include "NeoC/Exception/Exception.h"
 
 class List_t {
-	void **_Item;
-	private int32_t _Size;
-	private bool (* _ItemComparator)(void *listItem, void *item);
-	private int32_t _Length;
+	extends (Collection_t);
 
-	private mtx_t _Mtx;
+	public inherit uint8_t *(* GetExpr)(self_t *);
+
+	public inherit int32_t (* GetLength)(self_t *);
+	public inherit bool (* IsEmpty)(self_t *);
+
+	public inherit void (* Lock)(self_t *);
+	public inherit void (* Unlock)(self_t *);
+
+	void **_Item;
+	private bool (* _ItemComparator)(void *listItem, void *item);
 
 	public void (* SetComparator)(struct List_t *,
 		bool (* itemComparator)(void *listItem, void *item)

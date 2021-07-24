@@ -20,7 +20,7 @@ class Socket_t {
 	private struct sockaddr_in *_Addr;
 	private int32_t _BroadcastSwitch;
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 	public int32_t (* GetFd)(self_t *);
 
 	/* TCP */
@@ -64,7 +64,7 @@ class _Socket {
 	public Socket_t *(* NewUDPServer)(const in_port_t listenPort) throws (Socket.Exception);
 	public void (* Delete)(Socket_t *);
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 	public int32_t (* GetFd)(self_t *);
 
 	/* TCP */

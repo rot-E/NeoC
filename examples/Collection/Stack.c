@@ -1,8 +1,7 @@
-#include "NeoC/Environment.h"
+#include "NeoC/Base/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
-#include "NeoC/Exception/Exception.h"
-#include "NeoC/Collection.h"
+#include "NeoC/Collection/Collection.h"
 #include "NeoC/Collection/Stack.h"
 
 void main() $_ {

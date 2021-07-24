@@ -19,7 +19,7 @@ class String_t {
 	private int32_t _Size;
 	private uint8_t *_String;
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 
 	/* 取得系 */
 	public uint8_t *(* Unpack)(self_t *);
@@ -62,7 +62,7 @@ class _String {
 	private void (* Release)(String_t *);
 	public void (* Delete)(String_t *);
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 
 	/* 取得系 */
 	public uint8_t *(* Unpack)(self_t *);

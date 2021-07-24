@@ -7,7 +7,6 @@
 
 // 継承
 #define extends(SPRCLS) private SPRCLS _SPRCLS
-#define inherit(SPRCLS) private SPRCLS _SPRCLS
 
 // 函数・値注釈
 #define private			// 非公開
@@ -15,6 +14,7 @@
 #define public			// 公開
 #define undefined		// 未定義
 #define library			// ライブラリ専用
+#define inherit			// 継承
 
 // 値注釈
 #define final			// 変更不能

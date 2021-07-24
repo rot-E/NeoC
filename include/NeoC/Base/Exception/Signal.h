@@ -13,7 +13,7 @@ class Signal_t {
 	private SignalCode_t _Code;
 	private uint8_t *_Message;
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 
 	public SignalCode_t (* GetSignalCode)(self_t *);
 	public bool (* MessageExists)(self_t *);
@@ -29,7 +29,7 @@ class _Signal {
 	public Signal_t *(* Build)(SignalCode_t code, uint8_t *message);
 	public void (* Delete)(Signal_t *);
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 
 	public SignalCode_t (* GetSignalCode)(self_t *);
 	public bool (* MessageExists)(self_t *);

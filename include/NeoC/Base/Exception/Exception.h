@@ -46,7 +46,7 @@ class Context_t {
 	private jmp_buf _Context;
 	private Signal_t *_Signal;
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 } Context_t;
 
 class _Context {
@@ -54,7 +54,7 @@ class _Context {
 	public Context_t *(* New)();
 	public void (* Delete)(Context_t *);
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public inherit uint8_t *(* GetExpr)(self_t *);
 } _Context;
 
 extern _Context Context;
