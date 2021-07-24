@@ -11,6 +11,7 @@ add_dependencies(examples
     ExceptionNested
     List
     Map
+    OOP
     Queue
     SampleCode
     Stack
@@ -65,6 +66,12 @@ target_link_libraries(List
 
 add_executable(Map Map.c)
 target_link_libraries(Map
+    NeoC
+    Threads::Threads
+)
+
+add_executable(OOP OOP/Main.c OOP/Derived.c OOP/Base.c)
+target_link_libraries(OOP
     NeoC
     Threads::Threads
 )

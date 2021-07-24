@@ -1,11 +1,11 @@
 #include "NeoC/Collection.h"
 
-static int32_t GetLength(derived *col) {
-	return ((Collection_t *)(col))->_Length;
+static int32_t GetLength(self *col) {
+	return act(Collection_t, col)->_Length;
 }
 
-static bool IsEmpty(derived *col) {
-	return ((Collection_t *)(col))->_Length == 0;
+static bool IsEmpty(self *col) {
+	return act(Collection_t, col)->_Length == 0;
 }
 
 static void Init(Collection_t *col) {
