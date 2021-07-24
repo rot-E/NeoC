@@ -11,24 +11,24 @@ static int32_t GetFd(Socket_t *sock) {
 	return sock->_Socket;
 }
 
-static Socket_t *Accept(Socket_t *self) {
-	return Socket.New(accept(self->_Socket, NULL, NULL));
+static Socket_t *Accept(Socket_t *sock) {
+	return Socket.New(accept(sock->_Socket, NULL, NULL));
 }
 
-static void Send(Socket_t *self, String_t *message) throws (Socket.Exception) {
+static void Send(Socket_t *sock, String_t *message) throws (Socket.Exception) {
 	String_t *data = String.Concat(message, Socket.CRLF);
 	// defer String.Delete(data);
 
-	int32_t result = send(self->_Socket, String.Unpack(data), String.GetLength(data), 0);
+	int32_t result = send(sock->_Socket, String.Unpack(data), String.GetLength(data), 0);
 	String.Delete(data);
 	if (result == -1) throw (Signal.New(Socket.Exception));
 }
 
-static String_t *Receive(Socket_t *self) throws (Socket.Exception, Socket.DisconnectionException) {
+static String_t *Receive(Socket_t *sock) throws (Socket.Exception, Socket.DisconnectionException) {
 	String_t *data = String.NewN(Socket.DATA_MAX_SIZE);
 	// defer? String.Delete(data);
 
-	int32_t result = recv(self->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
+	int32_t result = recv(sock->_Socket, String.Unpack(data), Socket.DATA_MAX_SIZE - 1, 0);
 	if (result == 0) throw (Signal.New(Socket.DisconnectionException));
 	if (result == -1) throw (Signal.New(Socket.Exception));
 
@@ -44,72 +44,72 @@ static String_t *Receive(Socket_t *self) throws (Socket.Exception, Socket.Discon
 	}
 }
 
-static void Disconnect(Socket_t *self) {
-	close(self->_Socket);
+static void Disconnect(Socket_t *sock) {
+	close(sock->_Socket);
 }
 
-static bool UpdateExists(Socket_t *self) {
-	fd_set tmp = self->_FDState;
-	select(self->_Socket + 1, &tmp, NULL, NULL, &(struct timeval){ .tv_sec = 0, .tv_usec = 0 });
+static bool UpdateExists(Socket_t *sock) {
+	fd_set tmp = sock->_FDState;
+	select(sock->_Socket + 1, &tmp, NULL, NULL, &(struct timeval){ .tv_sec = 0, .tv_usec = 0 });
 
-	return FD_ISSET(self->_Socket, &tmp);
+	return FD_ISSET(sock->_Socket, &tmp);
 }
 
-static void Configure(Socket_t *self, String_t *host, const in_port_t port) throws (Socket.Exception) {
+static void Configure(Socket_t *sock, String_t *host, const in_port_t port) throws (Socket.Exception) {
 	// 名前解決
 	struct hostent *hent = gethostbyname(String.Unpack(host));
 	if (hent == NULL) throw (Signal.New(Socket.Exception));
 
 	// 接続情報構成
-	self->_Addr = (struct sockaddr_in *)(
+	sock->_Addr = (struct sockaddr_in *)(
 		_Memory.Allocate(sizeof(struct sockaddr_in))
 	);
-	memset(self->_Addr, 0, sizeof(*self->_Addr));
+	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
 
-	self->_Addr->sin_family		= AF_INET;
-	self->_Addr->sin_port		= htons(port);
-	memcpy((struct in_addr *)(&self->_Addr->sin_addr), hent->h_addr_list[0], hent->h_length);
+	sock->_Addr->sin_family		= AF_INET;
+	sock->_Addr->sin_port		= htons(port);
+	memcpy((struct in_addr *)(&sock->_Addr->sin_addr), hent->h_addr_list[0], hent->h_length);
 }
 
-static void ConfigureBroadcast(Socket_t *self, const in_port_t port) throws (Socket.Exception) {
+static void ConfigureBroadcast(Socket_t *sock, const in_port_t port) throws (Socket.Exception) {
 	// 接続情報構成
-	self->_Addr = (struct sockaddr_in *)(
+	sock->_Addr = (struct sockaddr_in *)(
 		_Memory.Allocate(sizeof(struct sockaddr_in))
 	);
-	memset(self->_Addr, 0, sizeof(*self->_Addr));
+	memset(sock->_Addr, 0, sizeof(*sock->_Addr));
 
-	self->_Addr->sin_family			= AF_INET;
-	self->_Addr->sin_port			= htons(port);
-	self->_Addr->sin_addr.s_addr	= htonl(INADDR_BROADCAST);
+	sock->_Addr->sin_family			= AF_INET;
+	sock->_Addr->sin_port			= htons(port);
+	sock->_Addr->sin_addr.s_addr	= htonl(INADDR_BROADCAST);
 
 	// ソケットの設定
-	self->_BroadcastSwitch = 1;
+	sock->_BroadcastSwitch = 1;
 
-	int32_t result = setsockopt(self->_Socket, SOL_SOCKET, SO_BROADCAST, (void *)(&self->_BroadcastSwitch), sizeof(self->_BroadcastSwitch));
+	int32_t result = setsockopt(sock->_Socket, SOL_SOCKET, SO_BROADCAST, (void *)(&sock->_BroadcastSwitch), sizeof(sock->_BroadcastSwitch));
 	if (result == -1) throw (Signal.New(Socket.Exception));
 }
 
-static String_t *GetDestIPAddr(Socket_t *self) {
-	return String.New(inet_ntoa(self->_Addr->sin_addr));
+static String_t *GetDestIPAddr(Socket_t *sock) {
+	return String.New(inet_ntoa(sock->_Addr->sin_addr));
 }
 
-static in_port_t GetDestPort(Socket_t *self) {
-	return ntohs(self->_Addr->sin_port);
+static in_port_t GetDestPort(Socket_t *sock) {
+	return ntohs(sock->_Addr->sin_port);
 }
 
-static void Cast(Socket_t *self, String_t *message) throws (Socket.Exception) {
-	int32_t result = sendto(self->_Socket, String.Unpack(message), String.GetLength(message), 0, (struct sockaddr *)(self->_Addr), sizeof(*self->_Addr));
+static void Cast(Socket_t *sock, String_t *message) throws (Socket.Exception) {
+	int32_t result = sendto(sock->_Socket, String.Unpack(message), String.GetLength(message), 0, (struct sockaddr *)(sock->_Addr), sizeof(*sock->_Addr));
 	if (result == -1) throw (Signal.New(Socket.Exception));
 }
 
-static void Broadcast(Socket_t *self, String_t *message) throws (Socket.Exception) {
-	Socket.Cast(self, message);
+static void Broadcast(Socket_t *sock, String_t *message) throws (Socket.Exception) {
+	Socket.Cast(sock, message);
 }
 
-static String_t *Collect(Socket_t *self) throws (Socket.Exception) {
+static String_t *Collect(Socket_t *sock) throws (Socket.Exception) {
 	String_t *str = String.NewN(Socket.DATA_MAX_SIZE);
-	int32_t result = recvfrom(self->_Socket, String.Unpack(str), String.GetLength(str) - 1, 0, (struct sockaddr *)(self->_Addr), ({
-		socklen_t tmp = sizeof(*self->_Addr);
+	int32_t result = recvfrom(sock->_Socket, String.Unpack(str), String.GetLength(str) - 1, 0, (struct sockaddr *)(sock->_Addr), ({
+		socklen_t tmp = sizeof(*sock->_Addr);
 		&tmp;
 	})); // 危うい？
 	if (result == -1) throw (Signal.New(Socket.Exception));

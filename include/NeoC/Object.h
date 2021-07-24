@@ -5,11 +5,16 @@
 #define class typedef struct
 
 // 継承
-#define extends(SPRCLS)	private SPRCLS _SPRCLS
+#define extends(SPRCLS) private SPRCLS _SPRCLS
+#define inherit(SPRCLS) private SPRCLS _SPRCLS
 
-#define base void
-#define super void
-#define parent void
+#define act(T, VAR) ((T *)(VAR))
+
+#define self void
+#define this void
+
+#define self_t void
+#define this_t void
 
 #define derived void
 #define sub void

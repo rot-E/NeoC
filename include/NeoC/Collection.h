@@ -25,8 +25,8 @@ class Collection_t {
 	private int32_t _Length;
 	private mtx_t _Mtx;
 
-	public int32_t (* GetLength)(sub *);
-	public bool (* IsEmpty)(sub *);
+	public int32_t (* GetLength)(derived *);
+	public bool (* IsEmpty)(derived *);
 } Collection_t;
 
 class _Collection {

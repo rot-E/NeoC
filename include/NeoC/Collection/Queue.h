@@ -18,17 +18,17 @@ class Queue_t {
 	private mtx_t _Mtx;
 
 	/* 操作系 */
-	public void (* Enqueue)(struct Queue_t *, void *item);
-		public void (* Enq)(struct Queue_t *, void *item);
-	public void *(* Dequeue)(struct Queue_t *) throws (Queue.Exception);
-		public void *(* Deq)(struct Queue_t *) throws (Queue.Exception);
+	public void (* Enqueue)(self *, void *item);
+		public void (* Enq)(self *, void *item);
+	public void *(* Dequeue)(self *) throws (Queue.Exception);
+		public void *(* Deq)(self *) throws (Queue.Exception);
 
 	/* 取得系 */
-	public void *(* Peek)(struct Queue_t *) throws (Queue.Exception);
-	public int32_t (* GetLength)(super *);
+	public void *(* Peek)(self *) throws (Queue.Exception);
+	public int32_t (* GetLength)(self *);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(super *);
+	public bool (* IsEmpty)(self *);
 } Queue_t;
 
 class _Queue {
@@ -40,17 +40,17 @@ class _Queue {
 	public void (* Delete)(Queue_t *);
 
 	/* 操作系 */
-	public void (* Enqueue)(Queue_t *, void *item);
-		public void (* Enq)(Queue_t *, void *item);
-	public void *(* Dequeue)(Queue_t *) throws (Queue.Exception);
-		public void *(* Deq)(Queue_t *) throws (Queue.Exception);
+	public void (* Enqueue)(self_t *, void *item);
+		public void (* Enq)(self_t *, void *item);
+	public void *(* Dequeue)(self_t *) throws (Queue.Exception);
+		public void *(* Deq)(self_t *) throws (Queue.Exception);
 
 	/* 取得系 */
-	public void *(* Peek)(Queue_t *) throws (Queue.Exception);
-	public int32_t (* GetLength)(super *);
+	public void *(* Peek)(self_t *) throws (Queue.Exception);
+	public int32_t (* GetLength)(self_t *);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(super *);
+	public bool (* IsEmpty)(self_t *);
 } _Queue;
 
 extern _Queue Queue;
