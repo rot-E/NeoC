@@ -30,7 +30,7 @@ add_dependencies(examples
     #Stack
     #Tuple
 
-    #OOP
+    OOPMain
     #SampleCode
 )
 
@@ -140,20 +140,8 @@ target_link_libraries(Map
     Threads::Threads
 )
 
-add_executable(OOP OOP/Main.c OOP/Derived.c OOP/Base.c)
-target_link_libraries(OOP
-    NeoC
-    Threads::Threads
-)
-
 add_executable(Queue Queue.c)
 target_link_libraries(Queue
-    NeoC
-    Threads::Threads
-)
-
-add_executable(SampleCode SampleCode.c)
-target_link_libraries(SampleCode
     NeoC
     Threads::Threads
 )
@@ -171,3 +159,14 @@ target_link_libraries(Tuple
     Threads::Threads
 )
 
+add_executable(OOPMain OOP/Main.c OOP/Derived.c OOP/Base.c)
+target_link_libraries(OOPMain
+    NeoC
+    Threads::Threads
+)
+
+add_executable(SampleCode SampleCode.c)
+target_link_libraries(SampleCode
+    NeoC
+    Threads::Threads
+)

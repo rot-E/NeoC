@@ -1,5 +1,4 @@
-#include "NeoC/Base/Environment.h"
-#include "NeoC/Socket.h"
+#include "NeoC/NeoC.h"
 
 void main() $_ {
 	Socket_t *svr = Socket.NewUDPServer(10001);

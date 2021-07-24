@@ -1,11 +1,4 @@
-#include "NeoC/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
-#include "NeoC/Exception/Exception.h"
-#include "NeoC/Defer.h"
-#include "NeoC/Collection.h"
-#include "NeoC/Collection/Map.h"
-#include "NeoC/System.h"
+#include "NeoC/NeoC.h"
 
 void main() $_ {
    String_t *text = String.New(u8"NeoC is a Neo C Programming Environment Library !");

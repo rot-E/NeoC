@@ -14,23 +14,26 @@ static Derived_t *Init(Derived_t *der) {
 	if (!Derived._Initialised) Derived._Setup();
 
 	Base.Init(act(Base_t, der));
+	// 基底クラスのフィールド・メソッド変更等
+	//
 
 	// フィールドの初期化: 基底クラスのフィールドも上書き可能
 	//
 
 	// メソッドの設定: 函数ポインタの上書きでoverride可能
-	act(Derived_t, der)->GetNum = act(Base_t, der)->GetNum;
-	act(Derived_t, der)->AddNum = AddNum;
+	der->GetNum = Base.GetNum;
+				// 可能: act(Base_t, der)->GetNum;
+	der->AddNum = AddNum;
 
 	return der;
 }
 
 static Derived_t *New() {
-	return Derived.Init(new(Derived_t));
+	return Derived.Init(new (Derived_t));
 }
 
 static void Delete(Derived_t *der) {
-	delete(der);
+	delete (der);
 }
 
 _Derived Derived = {

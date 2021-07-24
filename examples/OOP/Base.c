@@ -15,11 +15,11 @@ static Base_t *Init(Base_t *base) {
 }
 
 static Base_t *New() {
-	return Base.Init(new(Base_t));
+	return Base.Init(new (Base_t));
 }
 
 static void Delete(Base_t *base) {
-	delete(base);
+	delete (base);
 }
 
 _Base Base = {

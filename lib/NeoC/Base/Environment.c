@@ -13,11 +13,11 @@ method static void _Setup() {
 	Socket._Setup();
 
 /*	Tuple._Setup();
-	Map._Setup();
 	List._Setup();
-	Set._Setup();
 	Stack._Setup();
-	Queue._Setup();*/
+	Queue._Setup();
+	Set._Setup();
+	Map._Setup();*/
 }
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER(Signal_t *sig) {

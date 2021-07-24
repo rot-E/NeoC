@@ -1,13 +1,12 @@
 #pragma once
 
 #include <stdint.h>
-
-#include "NeoC/Object.h"
+#include "NeoC/Base/Object.h"
 
 class Base_t {
 	private int32_t _Num;
 
-	public int32_t (* GetNum)(self *);
+	public int32_t (* GetNum)(self_t *);
 } Base_t;
 
 class _Base {

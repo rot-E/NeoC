@@ -1,8 +1,22 @@
-#include "NeoC/Environment.h"
+#include "NeoC/Base/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 
 #include "Derived.h"
+
+void f(Base_t *b) {
+	Console.WriteLine(String.NewFormat(
+		"%d",
+		b->GetNum(b)
+	));
+}
+
+void g(self_t *b) {
+	Console.WriteLine(String.NewFormat(
+		"%d",
+		Base.GetNum(b)
+	));
+}
 
 void main() $_ {
 	Derived_t *der = Derived.New();
@@ -24,4 +38,7 @@ void main() $_ {
 		"%d",
 		der->GetNum(der)
 	));
+
+	f(act(Base_t, der));
+	g(der);
 } _$
