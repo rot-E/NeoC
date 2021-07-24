@@ -19,6 +19,8 @@ class String_t {
 	private int32_t _Size;
 	private uint8_t *_String;
 
+	public uint8_t *(* GetExpr)(self_t *);
+
 	/* 取得系 */
 	public uint8_t *(* Unpack)(self *);
 	public int32_t (* GetLength)(self *);
@@ -59,6 +61,8 @@ class _String {
 	public void (* Reduce)(String_t *) throws (String.Exception);
 	private void (* Release)(String_t *);
 	public void (* Delete)(String_t *);
+
+	public uint8_t *(* GetExpr)(self_t *);
 
 	/* 取得系 */
 	public uint8_t *(* Unpack)(self_t *);

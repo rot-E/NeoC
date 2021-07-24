@@ -11,19 +11,18 @@ add_dependencies(examples
     DeferInFunction
 
     String
-
     Console
     Theme
     Theme2
 
     System
 
-    #TCPClient
-    #TCPServer
-    #TCPEchoServer
-    #UDPClient
-    #UDPServer
-    #UDPEchoServer
+    TCPClient
+    TCPServer
+    TCPEchoServer
+    UDPClient
+    UDPServer
+    UDPEchoServer
 
     #List
     #Map
@@ -92,6 +91,43 @@ target_link_libraries(System
     Threads::Threads
 )
 
+add_executable(TCPClient TCPClient.c)
+target_link_libraries(TCPClient
+    NeoC
+    Threads::Threads
+)
+
+add_executable(TCPServer TCPServer.c)
+target_link_libraries(TCPServer
+    NeoC
+    Threads::Threads
+)
+
+add_executable(TCPEchoServer TCPEchoServer.c)
+target_link_libraries(TCPEchoServer
+    NeoC
+    Threads::Threads
+)
+
+add_executable(UDPClient UDPClient.c)
+target_link_libraries(UDPClient
+    NeoC
+    Threads::Threads
+)
+
+add_executable(UDPServer UDPServer.c)
+target_link_libraries(UDPServer
+    NeoC
+    Threads::Threads
+)
+
+add_executable(UDPEchoServer UDPEchoServer.c)
+target_link_libraries(UDPEchoServer
+    NeoC
+    Threads::Threads
+)
+
+
 add_executable(List List.c)
 target_link_libraries(List
     NeoC
@@ -129,44 +165,9 @@ target_link_libraries(Stack
 )
 
 
-add_executable(TCPClient TCPClient.c)
-target_link_libraries(TCPClient
-    NeoC
-    Threads::Threads
-)
-
-add_executable(TCPEchoServer TCPEchoServer.c)
-target_link_libraries(TCPEchoServer
-    NeoC
-    Threads::Threads
-)
-
-add_executable(TCPServer TCPServer.c)
-target_link_libraries(TCPServer
-    NeoC
-    Threads::Threads
-)
-
 add_executable(Tuple Tuple.c)
 target_link_libraries(Tuple
     NeoC
     Threads::Threads
 )
 
-add_executable(UDPClient UDPClient.c)
-target_link_libraries(UDPClient
-    NeoC
-    Threads::Threads
-)
-
-add_executable(UDPEchoServer UDPEchoServer.c)
-target_link_libraries(UDPEchoServer
-    NeoC
-    Threads::Threads
-)
-
-add_executable(UDPServer UDPServer.c)
-target_link_libraries(UDPServer
-    NeoC
-    Threads::Threads
-)

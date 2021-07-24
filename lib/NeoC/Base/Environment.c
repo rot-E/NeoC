@@ -10,9 +10,9 @@ method static void _Setup() {
 
 	String._Setup();
 	System._Setup();
-/*	Socket._Setup();
+	Socket._Setup();
 
-	Tuple._Setup();
+/*	Tuple._Setup();
 	Map._Setup();
 	List._Setup();
 	Set._Setup();

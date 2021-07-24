@@ -27,7 +27,7 @@ target_sources(NeoC
     String.c
     Console.c
     System.c
-    #Socket.c
+    Socket.c
 
     #Collection.c
     #Collection/List.c

@@ -13,9 +13,9 @@ class Signal_t {
 	private SignalCode_t _Code;
 	private uint8_t *_Message;
 
-	public uint8_t *(* GetExpr)(self_t *);
+	public uint8_t *(* GetExpr)(self *);
 
-	public SignalCode_t (* GetSignalCode)(self_t *);
+	public SignalCode_t (* GetSignalCode)(self *);
 	public bool (* MessageExists)(self *);
 	public void (* SetMessage)(self *, const uint8_t *message);
 	public uint8_t *(* GetMessage)(self *);

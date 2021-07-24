@@ -5,44 +5,45 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/select.h>
-
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
-#include "NeoC/Memory.h"
-#include "NeoC/Exception/Signal.h"
-#include "NeoC/Exception/Exception.h"
-#include "NeoC/Defer.h"
+#include "NeoC/Base/Object.h"
+#include "NeoC/Base/Memory.h"
+#include "NeoC/Base/Exception/Signal.h"
+#include "NeoC/Base/Exception/Exception.h"
+#include "NeoC/Base/Defer.h"
 #include "NeoC/String.h"
 
 class Socket_t {
+	extends (Object_t);
+
 	private int32_t _Socket;
 	private fd_set _FDState;
 	private struct sockaddr_in *_Addr;
 	private int32_t _BroadcastSwitch;
 
-	public int32_t (* GetFd)(struct Socket_t *);
+	public uint8_t *(* GetExpr)(self_t *);
+	public int32_t (* GetFd)(self *);
 
 	/* TCP */
-	public struct Socket_t *(* Accept)(struct Socket_t *);
+	public struct Socket_t *(* Accept)(self *);
 
-	public void (* Send)(struct Socket_t *, String_t *message) throws (Socket.Exception);
-	public String_t *(* Receive)(struct Socket_t *) throws (Socket.Exception, Socket.DisconnectionException);
+	public void (* Send)(self *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Receive)(self *) throws (Socket.Exception, Socket.DisconnectionException);
 
-	public void (* Disconnect)(struct Socket_t *);
+	public void (* Disconnect)(self *);
 
 	/* 共通 */
-	public bool (* UpdateExists)(struct Socket_t *);
+	public bool (* UpdateExists)(self *);
 
 	/* UDP */
-	public void (* Configure)(struct Socket_t *, String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
-	public void (* ConfigureBroadcast)(struct Socket_t *, const in_port_t serverPort) throws (Socket.Exception);
+	public void (* Configure)(self *, String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
+	public void (* ConfigureBroadcast)(self *, const in_port_t serverPort) throws (Socket.Exception);
 
-	public String_t *(* GetDestIPAddr)(struct Socket_t *);
-	public in_port_t (* GetDestPort)(struct Socket_t *);
+	public String_t *(* GetDestIPAddr)(self *);
+	public in_port_t (* GetDestPort)(self *);
 
-	public void (* Cast)(struct Socket_t *, String_t *message) throws (Socket.Exception);
-	public void (* Broadcast)(struct Socket_t *, String_t *message) throws (Socket.Exception);
-	public String_t *(* Collect)(struct Socket_t *) throws (Socket.Exception);
+	public void (* Cast)(self *, String_t *message) throws (Socket.Exception);
+	public void (* Broadcast)(self *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Collect)(self *) throws (Socket.Exception);
 } Socket_t;
 
 class _Socket {
@@ -55,6 +56,7 @@ class _Socket {
 	protected final int32_t DATA_MAX_SIZE;
 
 	// TODO: 内部の処理の共通化
+	public Socket_t *(* Init)(Socket_t *, const int32_t socket);
 	public Socket_t *(* New)(const int32_t socket);
 	public Socket_t *(* NewTCPClient)(String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
 	public Socket_t *(* NewTCPServer)(const in_port_t listenPort) throws (Socket.Exception);
@@ -62,29 +64,30 @@ class _Socket {
 	public Socket_t *(* NewUDPServer)(const in_port_t listenPort) throws (Socket.Exception);
 	public void (* Delete)(Socket_t *);
 
-	public int32_t (* GetFd)(Socket_t *);
+	public uint8_t *(* GetExpr)(self_t *);
+	public int32_t (* GetFd)(self_t *);
 
 	/* TCP */
-	public Socket_t *(* Accept)(Socket_t *);
+	public Socket_t *(* Accept)(self_t *);
 
-	public void (* Send)(Socket_t *, String_t *message) throws (Socket.Exception);
-	public String_t *(* Receive)(Socket_t *) throws (Socket.Exception, Socket.DisconnectionException);
+	public void (* Send)(self_t *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Receive)(self_t *) throws (Socket.Exception, Socket.DisconnectionException);
 
-	public void (* Disconnect)(Socket_t *);
+	public void (* Disconnect)(self_t *);
 
 	/* 共通 */
-	public bool (* UpdateExists)(Socket_t *);
+	public bool (* UpdateExists)(self_t *);
 
 	/* UDP */
-	public void (* Configure)(Socket_t *, String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
-	public void (* ConfigureBroadcast)(Socket_t *, const in_port_t serverPort) throws (Socket.Exception);
+	public void (* Configure)(self_t *, String_t *serverHost, const in_port_t serverPort) throws (Socket.Exception);
+	public void (* ConfigureBroadcast)(self_t *, const in_port_t serverPort) throws (Socket.Exception);
 
-	public String_t *(* GetDestIPAddr)(Socket_t *);
-	public in_port_t (* GetDestPort)(Socket_t *);
+	public String_t *(* GetDestIPAddr)(self_t *);
+	public in_port_t (* GetDestPort)(self_t *);
 
-	public void (* Cast)(Socket_t *, String_t *message) throws (Socket.Exception);
-	public void (* Broadcast)(Socket_t *, String_t *message) throws (Socket.Exception);
-	public String_t *(* Collect)(Socket_t *) throws (Socket.Exception);
+	public void (* Cast)(self_t *, String_t *message) throws (Socket.Exception);
+	public void (* Broadcast)(self_t *, String_t *message) throws (Socket.Exception);
+	public String_t *(* Collect)(self_t *) throws (Socket.Exception);
 } _Socket;
 
 extern _Socket Socket;

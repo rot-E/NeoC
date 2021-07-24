@@ -1,9 +1,9 @@
-#include "NeoC/Environment.h"
-#include "NeoC/Socket.h"
-#include "NeoC/Exception/Exception.h"
+#include "NeoC/Base/Exception/Exception.h"
+#include "NeoC/Base/Environment.h"
 #include "NeoC/String.h"
 #include "NeoC/Console.h"
 #include "NeoC/System.h"
+#include "NeoC/Socket.h"
 
 #include "NeoC/Debug.h"
 

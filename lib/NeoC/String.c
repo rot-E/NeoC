@@ -3,6 +3,8 @@
 method static void _Setup() {
 	String.Exception signal;
 	String.Failure signal;
+
+	String.GetExpr = Object.GetExpr;
 }
 
 method static uint8_t *Unpack(self_t *str) {
@@ -142,10 +144,15 @@ method static bool EndsWithChar(self_t *str, const uint8_t ch) throws (String.Ex
 }
 
 method static String_t *Init(String_t *str, const uint8_t *string) {
+	Object.Init(act(Object_t, str));
+	act(Object_t, str)->_Expr	= u8"(Object_t ~> String_t)";
+
 	str->_Size					= (string != NULL)? strlen(string) + 1 : 1;
 	str->_String				= (uint8_t *)(_Memory.CountedAllocate(str->_Size, sizeof(uint8_t)));
 	if (string != NULL) strncpy(str->_String, string, strlen(string));
 	str->_String[(string != NULL)? str->_Size - 1 : 0] = CC.NUL;
+
+	str->GetExpr				= Object.GetExpr;
 
 	str->Unpack					= Unpack;
 	str->GetLength				= GetLength;
