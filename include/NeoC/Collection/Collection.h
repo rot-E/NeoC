@@ -34,6 +34,8 @@ class Collection_t {
 } Collection_t;
 
 class _Collection {
+	public void (* _Setup)();
+
 	public void (* Init)(Collection_t *);
 	public void (* Delete)(Collection_t *);
 

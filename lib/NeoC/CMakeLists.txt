@@ -29,13 +29,13 @@ target_sources(NeoC
     System.c
     Socket.c
 
-    #Collection/Collection.c
-    #Collection/List.c
-    #Collection/Map.c
-    #Collection/Queue.c
-    #Collection/Set.c
-    #Collection/Stack.c
+    Collection/Collection.c
     #Collection/Tuple.c
+    #Collection/List.c
+    #Collection/Stack.c
+    #Collection/Queue.c
+    #Collection/Map.c
+    #Collection/Set.c
 
     #File/Directory.c
     #File/File.c

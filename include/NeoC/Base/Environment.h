@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <threads.h>
 #include "NeoC/Base/Object.h"
 
 #include "NeoC/Base/Exception/Signal.h"
@@ -23,6 +24,7 @@
 #include "NeoC/System.h"
 #include "NeoC/Socket.h"
 
+#include "NeoC/Collection/Collection.h"
 /*#include "NeoC/Collection/Tuple.h"
 #include "NeoC/Collection/List.h"
 #include "NeoC/Collection/Stack.h"

@@ -1,34 +1,54 @@
 #include "NeoC/Collection/Collection.h"
 
-static int32_t GetLength(self *col) {
+method static void _Setup() {
+	Collection.GetExpr = Object.GetExpr;
+}
+
+method static int32_t GetLength(self_t *col) {
 	return act(Collection_t, col)->_Length;
 }
 
-static bool IsEmpty(self *col) {
+method static bool IsEmpty(self_t *col) {
 	return act(Collection_t, col)->_Length == 0;
 }
 
-static void Init(Collection_t *col) {
-	Collection.Init(act(Collection_t, q));
-	act(Collection_t, q)->_Expr		= u8"(Object_t ~> Collection_t)";
-
-	col->_Size 						= 0;
-	col->_Length					= 0;
-	mtx_init(&col->_Mtx, mtx_plain);
-
-	col->GetLength					= GetLength;
-	col->IsEmpty					= IsEmpty;
+method static void Lock(self_t *col) {
+	mtx_lock(&act(Collection_t, col)->_Mtx);
 }
 
-static void Delete(Collection_t *col) {
+method static void Unlock(self_t *col) {
+	mtx_unlock(&act(Collection_t, col)->_Mtx);
+}
+
+method static void Init(Collection_t *col) {
+	Object.Init(act(Object_t, col));
+	act(Object_t, col)->_Expr	= u8"(Object_t ~> Collection_t)";
+
+	col->_Size 					= 0;
+	col->_Length				= 0;
+	mtx_init(&col->_Mtx, mtx_plain);
+
+	col->GetExpr				= Object.GetExpr;
+
+	col->GetLength				= GetLength;
+	col->IsEmpty				= IsEmpty;
+	col->Lock					= Lock;
+	col->Unlock					= Unlock;
+}
+
+method static void Delete(Collection_t *col) {
 	delete (col);
 }
 
 _Collection Collection = {
+	._Setup			= _Setup,
+
 	.Init			= Init,
 	.Delete			= Delete,
 
 	.GetLength		= GetLength,
-
 	.IsEmpty		= IsEmpty,
+
+	.Lock			= Lock,
+	.Unlock			= Unlock,
 };
