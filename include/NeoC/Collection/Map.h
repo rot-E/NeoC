@@ -6,15 +6,16 @@
 #include <threads.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 
-typedef struct {
+class {
 	public void *Key;
 	public void *Value;
 } Item_t;
 
-typedef struct Map_t {
+class Map_t {
 	Item_t *_Item;
 	private int32_t _Size;
 	private bool (* _KeyComparator)(void *mapKey, void *key);
@@ -42,7 +43,7 @@ typedef struct Map_t {
 	public bool (* ContainsValue)(struct Map_t *, void *value);
 } Map_t;
 
-typedef struct {
+class _Map {
 	private void (* _Setup)();
 	public final SignalCode_t Exception;
 	private final int32_t _ALLOCATION_BLOCK_SIZE;

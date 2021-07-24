@@ -36,18 +36,19 @@
 #include <stdlib.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Error.h"
 #include "NeoC/Memory.h"
 #include "NeoC/Defer.h"
 
 #include "NeoC/Exception/Signal.h"
 
-typedef struct {
+class Context_t {
 	private jmp_buf _Context;
 	private Signal_t *_Signal;
 } Context_t;
 
-typedef struct {
+class _Context {
 	public Context_t *(* New)();
 	public void (* Delete)(Context_t *);
 } _Context;
@@ -55,7 +56,7 @@ typedef struct {
 extern _Context Context;
 
 
-typedef struct {
+class __Exception {
 	private void (* _Setup)();
 
 	private uint32_t _SIGNAL_CODE_MAX;

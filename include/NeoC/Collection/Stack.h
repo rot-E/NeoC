@@ -5,11 +5,12 @@
 #include <threads.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Memory.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 
-typedef struct Stack_t {
+class Stack_t {
 	private void **_Item;
 	private int32_t _Size;
 	private int32_t _Length;
@@ -33,7 +34,7 @@ typedef struct Stack_t {
 	public bool (* IsEmpty)(struct Stack_t *);
 } Stack_t;
 
-typedef struct {
+class _Stack {
 	private void (* _Setup)();
 	public final SignalCode_t Exception;
 	private final int32_t _ALLOCATION_BLOCK_SIZE;

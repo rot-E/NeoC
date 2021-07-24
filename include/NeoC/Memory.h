@@ -13,9 +13,10 @@
 #include <sys/mman.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Error.h"
 
-typedef struct {
+class __Memory {
 	/* 確保系 */
 	public void *(* Allocate)(const size_t size);
 	public void *(* CountedAllocate)(const size_t n, const size_t size);

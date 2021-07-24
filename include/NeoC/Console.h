@@ -3,12 +3,13 @@
 #include <stdio.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/SPEC/CC.h"
 #include "NeoC/SPEC/CSI.h"
 #include "NeoC/SPEC/SGR.h"
 #include "NeoC/String.h"
 
-typedef struct {
+class _Console {
 	public void (* SetState)(uint8_t *escSeq);
 	public void (* SetColour)(uint8_t *colour);
 	public void (* SetDefaultColour)();

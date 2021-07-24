@@ -3,6 +3,7 @@
 #include <stdint.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Memory.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
@@ -17,7 +18,7 @@
  * cf. https://en.wikipedia.org/wiki/ANSI_escape_code
  */
 
-typedef struct {
+class _CSI {
 	private void (* _Setup)();
 
 	public final SignalCode_t Exception;

@@ -5,11 +5,12 @@
 #include <threads.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Memory.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 
-typedef struct Queue_t {
+class Queue_t {
 	private void **_Item;
 	private int32_t _Size;
 	private int32_t _Length;
@@ -30,7 +31,7 @@ typedef struct Queue_t {
 	public bool (* IsEmpty)(struct Queue_t *);
 } Queue_t;
 
-typedef struct {
+class _Queue {
 	private void (* _Setup)();
 	public final SignalCode_t Exception;
 	private final int32_t _ALLOCATION_BLOCK_SIZE;

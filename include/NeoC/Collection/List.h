@@ -6,10 +6,11 @@
 #include <threads.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 
-typedef struct List_t {
+class List_t {
 	void **_Item;
 	private int32_t _Size;
 	private bool (* _ItemComparator)(void *listItem, void *item);
@@ -36,7 +37,7 @@ typedef struct List_t {
 	public bool (* Contains)(struct List_t *, void *item);
 } List_t;
 
-typedef struct {
+class _List {
 	private void (* _Setup)();
 	public final SignalCode_t Exception;
 	public final SignalCode_t Failure;

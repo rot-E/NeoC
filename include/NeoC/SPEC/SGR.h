@@ -3,6 +3,7 @@
 #include <stdint.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 
 #include "NeoC/SPEC/CSI.h"
 
@@ -14,7 +15,7 @@
  * cf. https://en.wikipedia.org/wiki/ANSI_escape_code
  */
 
-typedef struct {
+class _SGR {
 	private void (* _Setup)();
 
 	public struct {

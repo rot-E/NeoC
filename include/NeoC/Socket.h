@@ -6,13 +6,15 @@
 #include <arpa/inet.h>
 #include <sys/select.h>
 
+#include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Memory.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 #include "NeoC/Defer.h"
 #include "NeoC/String.h"
 
-typedef struct Socket_t {
+class Socket_t {
 	private int32_t _Socket;
 	private fd_set _FDState;
 	private struct sockaddr_in *_Addr;
@@ -43,7 +45,7 @@ typedef struct Socket_t {
 	public String_t *(* Collect)(struct Socket_t *) throws (Socket.Exception);
 } Socket_t;
 
-typedef struct {
+class _Socket {
 	private void (* _Setup)();
 
 	public final SignalCode_t Exception;

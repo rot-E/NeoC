@@ -5,7 +5,7 @@
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 
-typedef struct {
+class _System {
 	private void (* _Setup)();
 
 	public final SignalCode_t Exception;

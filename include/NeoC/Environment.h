@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Exception/Exception.h"
 #include "NeoC/Defer.h"
 #include "NeoC/SPEC/CSI.h"
@@ -27,7 +28,7 @@
 #include "NeoC/Collection/Queue.h"
 #include "NeoC/Exception/Signal.h"
 
-typedef struct {
+class __Environment {
 	private void (* _Setup)();
 
 	private void (* _MAIN_EXCEPTION_HANDLER)(Signal_t *);

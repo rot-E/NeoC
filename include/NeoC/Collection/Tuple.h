@@ -3,11 +3,12 @@
 #include <stdint.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Memory.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 
-typedef struct Tuple_t {
+class Tuple_t {
 	private void **_Item;
 	private int32_t _Size;
 
@@ -16,7 +17,7 @@ typedef struct Tuple_t {
 	private int32_t (* GetSize)(struct Tuple_t *);
 } Tuple_t;
 
-typedef struct {
+class _Tuple {
 	private void (* _Setup)();
 	public final SignalCode_t Exception;
 

@@ -8,13 +8,14 @@
 #include <stdarg.h>
 
 #include "NeoC/Annotation.h"
+#include "NeoC/Object.h"
 #include "NeoC/Memory.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
 #include "NeoC/SPEC/CC.h"
 #include "NeoC/Abbreviation.h"
 
-typedef struct String_t {
+class String_t {
 	private int32_t _Size;
 	private uint8_t *_String;
 
@@ -44,7 +45,7 @@ typedef struct String_t {
 	public bool (* EndsWithChar)(struct String_t *, const uint8_t ch) throws (String.Exception);
 } String_t;
 
-typedef struct {
+class _String {
 	private void (* _Setup)();
 
 	public final SignalCode_t Exception;
