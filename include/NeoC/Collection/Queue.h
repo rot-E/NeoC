@@ -9,12 +9,12 @@
 #include "NeoC/Memory.h"
 #include "NeoC/Exception/Signal.h"
 #include "NeoC/Exception/Exception.h"
+#include "NeoC/Collection.h"
 
 class Queue_t {
-	private void **_Item;
-	private int32_t _Size;
-	private int32_t _Length;
+	extends (Collection_t);
 
+	private void **_Item;
 	private mtx_t _Mtx;
 
 	/* 操作系 */
@@ -25,10 +25,10 @@ class Queue_t {
 
 	/* 取得系 */
 	public void *(* Peek)(struct Queue_t *) throws (Queue.Exception);
-	public int32_t (* GetLength)(struct Queue_t *);
+	public int32_t (* GetLength)(super *);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(struct Queue_t *);
+	public bool (* IsEmpty)(super *);
 } Queue_t;
 
 class _Queue {
@@ -47,10 +47,10 @@ class _Queue {
 
 	/* 取得系 */
 	public void *(* Peek)(Queue_t *) throws (Queue.Exception);
-	public int32_t (* GetLength)(Queue_t *);
+	public int32_t (* GetLength)(super *);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(Queue_t *);
+	public bool (* IsEmpty)(super *);
 } _Queue;
 
 extern _Queue Queue;

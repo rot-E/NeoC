@@ -70,14 +70,14 @@ void main() $_ {
 		q->Enq(q, String.NewFormat(u8"STR-%d", i));
 
 		if (i % Queue._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, q->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, ((Collection_t *)(q))->_Size));
 	}
 
 	for (int32_t i = SIZE - 2; 0 <= i; i--) {
 		q->Deq(q);
 
 		if ((i - 1) % List._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, q->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, ((Collection_t *)(q))->_Size));
 	}
 
 	Console.WriteLine(String.NewFormat(
