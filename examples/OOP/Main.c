@@ -10,11 +10,15 @@ void main() $_ {
 	Console.WriteLine(String.NewFormat(
 		"%d",
 		der->GetNum(der)
-		// 代替可能: Derived.GetNum(der, 3)
+	));
+
+	Console.WriteLine(String.NewFormat(
+		"%d",
+		Derived.GetNum(der)
 	));
 
 	der->AddNum(der, 3);
-	// 代替可能: Derived.AddNum(der, 3);
+	Derived.AddNum(der, 6);
 
 	Console.WriteLine(String.NewFormat(
 		"%d",
