@@ -25,9 +25,9 @@ add_dependencies(examples
     UDPEchoServer
 
     #Tuple
-    #List
+    List
     #Stack
-    #Queue
+    Queue
     #Map
 
     OOPMain

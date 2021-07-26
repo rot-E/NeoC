@@ -1,7 +1,7 @@
 #include "NeoC/Base/Environment.h"
 
 method static void _Setup() {
-	Signal._Setup();
+	/// Signal._Setup();
 	_Exception._Setup();
 	_Defer._Setup();
 
@@ -12,14 +12,14 @@ method static void _Setup() {
 	System._Setup();
 	Socket._Setup();
 
-	Collection._Setup();
-/*	Tuple._Setup();
+	/// Collection._Setup();
+//	Tuple._Setup();
 	List._Setup();
-	Stack._Setup();
+//	Stack._Setup();
 	Queue._Setup();
-	Map._Setup();
-	Set._Setup();
-*/}
+//	Map._Setup();
+//	Set._Setup();
+}
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER(Signal_t *sig) {
 	fprintf(stderr, u8"%s%s%s%s%s\n",

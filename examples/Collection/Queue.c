@@ -49,9 +49,10 @@ void main() $_ {
 	q->Enqueue(q, String.New(u8"さしすせそ"));
 
 	while (!q->IsEmpty(q)) {
+		const int32_t i = q->GetLength(q);
 		Console.WriteLine(String.NewFormat(
 			"%d: %s",
-			q->GetLength(q),
+			i, // ここでGetLengthを呼ぶと次のDeq後の値が返される
 			String.Unpack(q->Dequeue(q))
 		));
 	}
@@ -75,7 +76,7 @@ void main() $_ {
 	for (int32_t i = SIZE - 2; 0 <= i; i--) {
 		q->Deq(q);
 
-		if ((i - 1) % List._ALLOCATION_BLOCK_SIZE == 0)
+		if ((i - 1) % Queue._ALLOCATION_BLOCK_SIZE == 0)
 			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, ((Collection_t *)(q))->_Size));
 	}
 

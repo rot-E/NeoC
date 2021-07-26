@@ -1,8 +1,8 @@
 #include "NeoC/Base/Exception/Signal.h"
 
-method static void _Setup() {
-	Signal.GetExpr = Object.GetExpr;
-}
+/// method static void _Setup() {
+	/// Signal.GetExpr = Object.GetExpr;
+/// }
 
 method static SignalCode_t GetSignalCode(self_t *sig) {
 	return act(Signal_t, sig)->_Code;
@@ -21,12 +21,12 @@ method static uint8_t *GetMessage(self_t *sig) {
 }
 
 method static Signal_t *Init(Signal_t *sig, SignalCode_t code) {
-	Object.Init(act(Object_t, sig));
-	act(Object_t, sig)->_Expr	= u8"(Object_t ~> Signal_t)";
+	/// Object.Init(act(Object_t, sig));
+	/// act(Object_t, sig)->_Expr	= u8"(Object_t ~> Signal_t)";
 
 	sig->_Code					= code;
 
-	sig->GetExpr				= Object.GetExpr;
+	/// sig->GetExpr				= Object.GetExpr;
 
 	sig->GetSignalCode			= GetSignalCode;
 	sig->MessageExists			= MessageExists;
@@ -53,7 +53,7 @@ method static void Delete(Signal_t *sig) {
 }
 
 _Signal Signal = {
-	._Setup				= _Setup,
+	/// ._Setup				= _Setup,
 
 	.Init				= Init,
 	.New				= New,

@@ -1,14 +1,16 @@
 #include "NeoC/Collection/Queue.h"
 
-static void _Setup() {
+method static void _Setup() {
 	Queue.Exception signal;
 
+	Queue.Lock			= Collection.Lock;
+	Queue.Unlock		= Collection.Unlock;
 	Queue.GetLength		= Collection.GetLength;
 	Queue.IsEmpty		= Collection.IsEmpty;
 }
 
-static void Enqueue(self_t *q, void *item) {
-	mtx_lock(&act(Collection_t, q)->_Mtx);
+method static void Enqueue(self_t *q, void *item) {
+	Queue.Lock(q);
 
 	// 領域不足→確保
 	if (Queue.GetLength(q) + 1 >= act(Collection_t, q)->_Size) {
@@ -21,13 +23,13 @@ static void Enqueue(self_t *q, void *item) {
 
 	act(Collection_t, q)->_Length++;
 
-	mtx_unlock(&act(Collection_t, q)->_Mtx);
+	Queue.Unlock(q);
 }
 
-static void *Dequeue(self_t *q) throws (Queue.Exception) {
+method static void *Dequeue(self_t *q) throws (Queue.Exception) {
 	if (Queue.GetLength(q) <= 0) throw (Signal.New(Queue.Exception));
 
-	mtx_lock(&act(Collection_t, q)->_Mtx);
+	Queue.Lock(q);
 
 	void *retv = act(Queue_t, q)->_Item[0];
 
@@ -43,22 +45,20 @@ static void *Dequeue(self_t *q) throws (Queue.Exception) {
 		act(Queue_t, q)->_Item = _Memory.ReAllocate(act(Queue_t, q)->_Item, act(Collection_t, q)->_Size * sizeof(void *));
 	}
 
-	mtx_unlock(&act(Collection_t, q)->_Mtx);
+	Queue.Unlock(q);
 
 	return retv;
 }
 
-static void *Peek(self_t *q) throws (Queue.Exception) {
+method static void *Peek(self_t *q) throws (Queue.Exception) {
 	if (Queue.GetLength(q) <= 0) throw (Signal.New(Queue.Exception));
 
 	return act(Queue_t, q)->_Item[0];
 }
 
-static Queue_t *New() {
-	Queue_t *q = (Queue_t *)(_Memory.Allocate(sizeof(Queue_t)));
-
+method static Queue_t *Init(Queue_t *q) {
 	Collection.Init(act(Collection_t, q));
-	act(Collection_t, q)->_Size	= Queue._ALLOCATION_BLOCK_SIZE;
+	act(Collection_t, q)->_Size		= Queue._ALLOCATION_BLOCK_SIZE;
 
 	q->_Item						= _Memory.CountedAllocate(Queue._ALLOCATION_BLOCK_SIZE, sizeof(void *));
 
@@ -66,24 +66,31 @@ static Queue_t *New() {
 		q->Enq						= Enqueue;
 	q->Dequeue						= Dequeue;
 		q->Deq						= Dequeue;
+	q->Lock							= Collection.Lock;
+	q->Unlock						= Collection.Unlock;
 	q->Peek							= Peek;
-	q->GetLength					= act(Collection_t, q)->GetLength;
-	q->IsEmpty						= act(Collection_t, q)->IsEmpty;
+	q->GetLength					= Collection.GetLength;
+	q->IsEmpty						= Collection.IsEmpty;
 
 	return q;
 }
 
-static void Delete(Queue_t *q) {
-	mtx_destroy(&q->_Mtx);
+method static Queue_t *New() {
+	return Queue.Init(new (Queue_t));
+}
+
+method static void Delete(Queue_t *q) {
+	mtx_destroy(&act(Collection_t, q)->_Mtx);
 
 	_Memory.Free(q->_Item);
-	_Memory.Free(q);
+	delete (q);
 }
 
 _Queue Queue = {
 	._Setup						= _Setup,
 	._ALLOCATION_BLOCK_SIZE		= 1000,
 
+	.Init						= Init,
 	.New						= New,
 	.Delete						= Delete,
 

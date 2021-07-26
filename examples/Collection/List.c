@@ -77,7 +77,7 @@ void main() $_ {
 		lis->Add(lis, String.NewFormat(u8"STR-%d", i));
 
 		if (i % List._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, lis->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, act(Collection_t, lis)->_Size));
 	}
 
 	Console.WriteLine(String.NewFormat(
@@ -98,7 +98,7 @@ void main() $_ {
 		lis->Remove(lis, i);
 
 		if ((i - 1) % List._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, lis->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, act(Collection_t, lis)->_Size));
 	}
 
 	Console.WriteLine(String.NewFormat(

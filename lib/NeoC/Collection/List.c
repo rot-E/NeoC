@@ -1,139 +1,150 @@
 #include "NeoC/Collection/List.h"
 
-static void _Setup() {
+method static void _Setup() {
 	List.Exception signal;
 	List.Failure signal;
+
+	List.Lock			= Collection.Lock;
+	List.Unlock			= Collection.Unlock;
+	List.GetLength		= Collection.GetLength;
+	List.IsEmpty		= Collection.IsEmpty;
 }
 
-static void SetComparator(List_t *lis, bool (* itemComparator)(void *listItem, void *item)) {
-	lis->_ItemComparator = itemComparator;
+method static void SetComparator(self_t *lis, bool (* itemComparator)(void *listItem, void *item)) {
+	act(List_t, lis)->_ItemComparator = itemComparator;
 }
 
-static void Add(List_t *lis, void *item) {
-	mtx_lock(&lis->_Mtx);
+method static void Add(self_t *lis, void *item) {
+	List.Lock(lis);
 
 	// 領域不足→確保
-	if (lis->_Length + 1 >= lis->_Size) {
-		lis->_Size += List._ALLOCATION_BLOCK_SIZE;
-		lis->_Item = _Memory.ReAllocate(lis->_Item, lis->_Size * sizeof(void *));
+	if (List.GetLength(lis) + 1 >= act(Collection_t, lis)->_Size) {
+		act(Collection_t, lis)->_Size += List._ALLOCATION_BLOCK_SIZE;
+		act(List_t, lis)->_Item = _Memory.ReAllocate(
+			act(List_t, lis)->_Item,
+			act(Collection_t, lis)->_Size * sizeof(void *)
+		);
 	}
 
 	// 格納
-	lis->_Item[lis->_Length] = item;
+	act(List_t, lis)->_Item[List.GetLength(lis)] = item;
 
-	lis->_Length++;
+	act(Collection_t, lis)->_Length++;
 
-	mtx_unlock(&lis->_Mtx);
+	List.Unlock(lis);
 }
 
-static void Remove(List_t *lis, const int32_t idx) throws (List.Exception) {
-	if (lis->_Length <= idx) throw (Signal.New(List.Exception));
+method static void Remove(self_t *lis, const int32_t idx) throws (List.Exception) {
+	if (List.GetLength(lis) <= idx) throw (Signal.New(List.Exception));
 
-	mtx_lock(&lis->_Mtx);
+	List.Lock(lis);
 
 	for (int32_t j = idx; j < List.GetLength(lis) - 1; j++)
-		lis->_Item[j] = lis->_Item[j + 1];
+		act(List_t, lis)->_Item[j] = act(List_t, lis)->_Item[j + 1];
 
-	lis->_Length--;
+	act(Collection_t, lis)->_Length--;
 
 	// 領域過多→解放
-	if (lis->_Length < lis->_Size - List._ALLOCATION_BLOCK_SIZE) {
-		lis->_Size -= List._ALLOCATION_BLOCK_SIZE;
-		lis->_Item = _Memory.ReAllocate(lis->_Item, lis->_Size * sizeof(void *));
+	if (List.GetLength(lis) < act(Collection_t, lis)->_Size - List._ALLOCATION_BLOCK_SIZE) {
+		act(Collection_t, lis)->_Size -= List._ALLOCATION_BLOCK_SIZE;
+		act(List_t, lis)->_Item = _Memory.ReAllocate(
+			act(List_t, lis)->_Item,
+			act(Collection_t, lis)->_Size * sizeof(void *)
+		);
 	}
 
-	mtx_unlock(&lis->_Mtx);
+	List.Unlock(lis);
 }
 
-static void RemoveItem(List_t *lis, void *item) throws (List.Exception) {
+method static void RemoveItem(self_t *lis, void *item) throws (List.Exception) {
 	int32_t i;
 	bool existence = false;
 	for (i = 0; i < List.GetLength(lis); i++)
-		if (lis->_ItemComparator(List.Get(lis, i), item)) {
+		if (act(List_t, lis)->_ItemComparator(List.Get(lis, i), item)) {
 			existence = true;
 			break;
 		}
 	if (!existence) throw (Signal.New(List.Exception));
 
-	mtx_lock(&lis->_Mtx);
+	List.Lock(lis);
 
 	for (int32_t j = i; j < List.GetLength(lis) - 1; j++)
-		lis->_Item[j] = lis->_Item[j + 1];
+		act(List_t, lis)->_Item[j] = act(List_t, lis)->_Item[j + 1];
 
-	lis->_Length--;
+	act(Collection_t, lis)->_Length--;
 
 	// 領域過多→解放
-	if (lis->_Length < lis->_Size - List._ALLOCATION_BLOCK_SIZE) {
-		lis->_Size -= List._ALLOCATION_BLOCK_SIZE;
-		lis->_Item = _Memory.ReAllocate(lis->_Item, lis->_Size * sizeof(void *));
+	if (List.GetLength(lis) < act(Collection_t, lis)->_Size - List._ALLOCATION_BLOCK_SIZE) {
+		act(Collection_t, lis)->_Size -= List._ALLOCATION_BLOCK_SIZE;
+		act(List_t, lis)->_Item = _Memory.ReAllocate(
+			act(List_t, lis)->_Item,
+			act(Collection_t, lis)->_Size * sizeof(void *)
+		);
 	}
 
-	mtx_unlock(&lis->_Mtx);
+	List.Unlock(lis);
 }
 
-static int32_t GetLength(List_t *lis) {
-	return lis->_Length;
+method static void *Get(self_t *lis, int32_t idx) {
+	if (List.GetLength(lis) <= idx) throw (Signal.New(List.Exception));
+
+	return act(List_t, lis)->_Item[idx];
 }
 
-static void *Get(List_t *lis, int32_t idx) {
-	if (lis->_Length <= idx) throw (Signal.New(List.Exception));
-
-	return lis->_Item[idx];
-}
-
-static int32_t IndexOf(List_t *lis, void *item) throws (List.Failure) {
+method static int32_t IndexOf(self_t *lis, void *item) throws (List.Failure) {
 	for (int32_t i = 0; i < List.GetLength(lis); i++) {
-		if (lis->_ItemComparator(List.Get(lis, i), item))
+		if (act(List_t, lis)->_ItemComparator(List.Get(lis, i), item))
 			return i;
 	}
 
 	throw (Signal.New(List.Failure));
 }
 
-static bool IsEmpty(List_t *lis) {
-	return List.GetLength(lis) == 0;
-}
-
-static bool Contains(List_t *lis, void *item) {
+method static bool Contains(self_t *lis, void *item) {
 	for (int32_t i = 0; i < List.GetLength(lis); i++) {
-		if (lis->_ItemComparator(List.Get(lis, i), item))
+		if (act(List_t, lis)->_ItemComparator(List.Get(lis, i), item))
 			return true;
 	}
 	return false;
 }
 
-static List_t *New() {
-	List_t *lis = (List_t *)(_Memory.Allocate(sizeof(List_t)));
+method static List_t *Init(List_t *lis) {
+	Collection.Init(act(Collection_t, lis));
+	act(Collection_t, lis)->_Size	= List._ALLOCATION_BLOCK_SIZE;
 
-	lis->_Item				= _Memory.CountedAllocate(List._ALLOCATION_BLOCK_SIZE, sizeof(void *));
-	lis->_Size				= List._ALLOCATION_BLOCK_SIZE;
-	lis->_Length			= 0;
-	mtx_init(&lis->_Mtx, mtx_plain);
+	lis->_Item						= _Memory.CountedAllocate(List._ALLOCATION_BLOCK_SIZE, sizeof(void *));
 
-	lis->SetComparator		= SetComparator;
-	lis->Add				= Add;
-	lis->Remove				= Remove;
-	lis->RemoveItem			= RemoveItem;
-	lis->GetLength			= GetLength;
-	lis->Get				= Get;
-	lis->IndexOf			= IndexOf;
-	lis->IsEmpty			= IsEmpty;
-	lis->Contains			= Contains;
+	lis->SetComparator				= SetComparator;
+	lis->Add						= Add;
+	lis->Remove						= Remove;
+	lis->RemoveItem					= RemoveItem;
+	lis->Lock						= Collection.Lock;
+	lis->Unlock						= Collection.Unlock;
+	lis->GetLength					= Collection.GetLength;
+	lis->Get						= Get;
+	lis->IndexOf					= IndexOf;
+	lis->IsEmpty					= Collection.IsEmpty;
+	lis->Contains					= Contains;
 
 	return lis;
 }
 
-static void Delete(List_t *lis) {
-	mtx_destroy(&lis->_Mtx);
+method static List_t *New() {
+	return List.Init(new (List_t));
+}
+
+method static void Delete(List_t *lis) {
+	mtx_destroy(&act(Collection_t, lis)->_Mtx);
 
 	_Memory.Free(lis->_Item);
-	_Memory.Free(lis);
+	delete (lis);
 }
 
 _List List = {
 	._Setup						= _Setup,
 	._ALLOCATION_BLOCK_SIZE		= 1000,
 
+	.Init						= Init,
 	.New						= New,
 	.Delete						= Delete,
 
@@ -143,10 +154,6 @@ _List List = {
 	.Remove						= Remove,
 	.RemoveItem					= RemoveItem,
 
-	.GetLength					= GetLength,
 	.Get						= Get,
 	.IndexOf					= IndexOf,
-
-	.IsEmpty					= IsEmpty,
-	.Contains					= Contains,
 };
