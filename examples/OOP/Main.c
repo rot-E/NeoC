@@ -6,14 +6,14 @@
 
 void f(Base_t *b) {
 	Console.WriteLine(String.NewFormat(
-		"%d",
+		u8"%d",
 		b->GetNum(b)
 	));
 }
 
 void g(self_t *b) {
 	Console.WriteLine(String.NewFormat(
-		"%d",
+		u8"%d",
 		Base.GetNum(b)
 	));
 }
@@ -22,12 +22,12 @@ void main() $_ {
 	Derived_t *der = Derived.New();
 
 	Console.WriteLine(String.NewFormat(
-		"%d",
+		u8"%d",
 		der->GetNum(der)
 	));
 
 	Console.WriteLine(String.NewFormat(
-		"%d",
+		u8"%d",
 		Derived.GetNum(der)
 	));
 
@@ -35,7 +35,7 @@ void main() $_ {
 	Derived.AddNum(der, 6);
 
 	Console.WriteLine(String.NewFormat(
-		"%d",
+		u8"%d",
 		der->GetNum(der)
 	));
 
