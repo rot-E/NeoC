@@ -29,7 +29,7 @@
 #include "NeoC/Collection/List.h"
 //#include "NeoC/Collection/Stack.h"
 #include "NeoC/Collection/Queue.h"
-//#include "NeoC/Collection/Map.h"
+#include "NeoC/Collection/Map.h"
 //#include "NeoC/Collection/Set.h"
 
 class __Environment {

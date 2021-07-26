@@ -88,7 +88,7 @@ void main() $_ {
 		map->Put(map, strs[i], $(int32_t, i));
 
 		if (i % Map._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, map->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, act(Collection_t, map)->_Size));
 	}
 
 	Console.WriteLine(String.NewFormat(
@@ -103,7 +103,7 @@ void main() $_ {
 		map->Remove(map, strs[i]);
 
 		if ((i - 1) % Map._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, map->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, act(Collection_t, map)->_Size));
 	}
 
 	Console.WriteLine(String.NewFormat(

@@ -34,7 +34,7 @@ target_sources(NeoC
     Collection/List.c
     #Collection/Stack.c
     Collection/Queue.c
-    #Collection/Map.c
+    Collection/Map.c
     #Collection/Set.c
 
     #File/Directory.c

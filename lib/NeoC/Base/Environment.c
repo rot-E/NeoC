@@ -17,7 +17,7 @@ method static void _Setup() {
 	List._Setup();
 //	Stack._Setup();
 	Queue._Setup();
-//	Map._Setup();
+	Map._Setup();
 //	Set._Setup();
 }
 

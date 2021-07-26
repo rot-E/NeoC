@@ -28,7 +28,7 @@ add_dependencies(examples
     List
     #Stack
     Queue
-    #Map
+    Map
 
     OOPMain
     #SampleCode
