@@ -127,6 +127,8 @@ method static Stack_t *New() {
 }
 
 method static void Delete(Stack_t *st) {
+	if (st == NULL) return;
+
 	mtx_destroy(&act(Collection_t, st)->_Mtx);
 
 	_Memory.Free(act(Stack_t, st)->_Item);

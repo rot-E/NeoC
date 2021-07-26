@@ -36,6 +36,8 @@ static Tuple_t *New(const int32_t size) {
 }
 
 static void Delete(Tuple_t *tp) {
+	if (tp == NULL) return;
+
 	_Memory.Free(act(Tuple_t, tp)->_Item);
 	delete (tp);
 }

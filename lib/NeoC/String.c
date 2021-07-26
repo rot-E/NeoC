@@ -225,7 +225,7 @@ method static void Release(String_t *str) {
 }
 
 method static void Delete(String_t *str) {
-//	if (str == NULL) return;
+	if (str == NULL) return;
 
 	String.Release(str);
 	delete (str);

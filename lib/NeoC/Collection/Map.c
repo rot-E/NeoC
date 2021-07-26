@@ -111,6 +111,8 @@ method static Map_t *New() {
 }
 
 static void Delete(Map_t *map) {
+	if (map == NULL) return;
+
 	mtx_destroy(&act(Collection_t, map)->_Mtx);
 
 	_Memory.Free(map->_Item);

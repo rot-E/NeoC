@@ -37,6 +37,8 @@ method static Collection_t *Init(Collection_t *col) {
 }
 
 method static void Delete(Collection_t *col) {
+	if (col == NULL) return;
+
 	delete (col);
 }
 

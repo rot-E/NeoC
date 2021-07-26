@@ -134,6 +134,8 @@ method static List_t *New() {
 }
 
 method static void Delete(List_t *lis) {
+	if (lis == NULL) return;
+
 	mtx_destroy(&act(Collection_t, lis)->_Mtx);
 
 	_Memory.Free(lis->_Item);

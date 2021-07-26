@@ -80,6 +80,8 @@ method static Queue_t *New() {
 }
 
 method static void Delete(Queue_t *q) {
+	if (q == NULL) return;
+
 	mtx_destroy(&act(Collection_t, q)->_Mtx);
 
 	_Memory.Free(q->_Item);

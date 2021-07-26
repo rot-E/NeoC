@@ -13,6 +13,8 @@ method static Context_t *New() {
 }
 
 method static void Delete(Context_t *ctx) {
+	if (ctx == NULL) return;
+
 	delete (ctx);
 }
 

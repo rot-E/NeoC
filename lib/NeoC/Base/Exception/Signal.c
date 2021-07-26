@@ -48,6 +48,8 @@ method static Signal_t *Build(SignalCode_t code, uint8_t *message) {
 }
 
 method static void Delete(Signal_t *sig) {
+	if (sig == NULL) return;
+
 	delete (sig->_Message);
 	delete (sig);
 }

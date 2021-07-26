@@ -17,6 +17,8 @@ method static Object_t *New() {
 }
 
 method static void Delete(Object_t *obj) {
+	if (obj == NULL) return;
+
 	delete (obj);
 }
 
