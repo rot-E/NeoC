@@ -35,7 +35,7 @@ void main() $_ {
 
          for (int32_t i = 0; i < String.GetLength(text); i++) {
             Console.WriteChar((i == fi || i == li)? '^' : ' ');
-         System.USleep(50 * 1000);
+            System.USleep(50 * 1000);
          }
          Console.NewLine();
       } ret
