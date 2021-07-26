@@ -1,7 +1,6 @@
 #pragma once
 
 #include <unistd.h>
-
 #include "NeoC/Base/Exception/Signal.h"
 #include "NeoC/Base/Exception/Exception.h"
 

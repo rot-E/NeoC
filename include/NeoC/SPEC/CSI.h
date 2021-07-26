@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdint.h>
-
 #include "NeoC/Base/Object.h"
 #include "NeoC/Base/Memory.h"
 #include "NeoC/Base/Exception/Signal.h"

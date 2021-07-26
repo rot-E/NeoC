@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdint.h>
-
 #include "NeoC/Base/Object.h"
 
 /** ASCII Control Chatacter

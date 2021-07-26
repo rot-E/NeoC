@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <threads.h>
-
 #include "NeoC/Annotation.h"
 #include "NeoC/Object.h"
 #include "NeoC/Memory.h"
