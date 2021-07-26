@@ -10,11 +10,11 @@ method static void _Setup() {
 	List.IsEmpty		= Collection.IsEmpty;
 }
 
-method static void SetComparator(self_t *lis, bool (* itemComparator)(void *listItem, void *item)) {
+method static void SetComparator(self_t *lis, bool (* itemComparator)(any *listItem, any *item)) {
 	act(List_t, lis)->_ItemComparator = itemComparator;
 }
 
-method static void Add(self_t *lis, void *item) {
+method static void Add(self_t *lis, any *item) {
 	List.Lock(lis);
 
 	// 領域不足→確保
@@ -22,7 +22,7 @@ method static void Add(self_t *lis, void *item) {
 		act(Collection_t, lis)->_Size += List._ALLOCATION_BLOCK_SIZE;
 		act(List_t, lis)->_Item = _Memory.ReAllocate(
 			act(List_t, lis)->_Item,
-			act(Collection_t, lis)->_Size * sizeof(void *)
+			act(Collection_t, lis)->_Size * sizeof(any *)
 		);
 	}
 
@@ -49,14 +49,14 @@ method static void Remove(self_t *lis, const int32_t idx) throws (List.Exception
 		act(Collection_t, lis)->_Size -= List._ALLOCATION_BLOCK_SIZE;
 		act(List_t, lis)->_Item = _Memory.ReAllocate(
 			act(List_t, lis)->_Item,
-			act(Collection_t, lis)->_Size * sizeof(void *)
+			act(Collection_t, lis)->_Size * sizeof(any *)
 		);
 	}
 
 	List.Unlock(lis);
 }
 
-method static void RemoveItem(self_t *lis, void *item) throws (List.Exception) {
+method static void RemoveItem(self_t *lis, any *item) throws (List.Exception) {
 	int32_t i;
 	bool existence = false;
 	for (i = 0; i < List.GetLength(lis); i++)
@@ -78,20 +78,20 @@ method static void RemoveItem(self_t *lis, void *item) throws (List.Exception) {
 		act(Collection_t, lis)->_Size -= List._ALLOCATION_BLOCK_SIZE;
 		act(List_t, lis)->_Item = _Memory.ReAllocate(
 			act(List_t, lis)->_Item,
-			act(Collection_t, lis)->_Size * sizeof(void *)
+			act(Collection_t, lis)->_Size * sizeof(any *)
 		);
 	}
 
 	List.Unlock(lis);
 }
 
-method static void *Get(self_t *lis, int32_t idx) {
+method static any *Get(self_t *lis, int32_t idx) {
 	if (List.GetLength(lis) <= idx) throw (Signal.New(List.Exception));
 
 	return act(List_t, lis)->_Item[idx];
 }
 
-method static int32_t IndexOf(self_t *lis, void *item) throws (List.Failure) {
+method static int32_t IndexOf(self_t *lis, any *item) throws (List.Failure) {
 	for (int32_t i = 0; i < List.GetLength(lis); i++) {
 		if (act(List_t, lis)->_ItemComparator(List.Get(lis, i), item))
 			return i;
@@ -100,7 +100,7 @@ method static int32_t IndexOf(self_t *lis, void *item) throws (List.Failure) {
 	throw (Signal.New(List.Failure));
 }
 
-method static bool Contains(self_t *lis, void *item) {
+method static bool Contains(self_t *lis, any *item) {
 	for (int32_t i = 0; i < List.GetLength(lis); i++) {
 		if (act(List_t, lis)->_ItemComparator(List.Get(lis, i), item))
 			return true;
@@ -112,7 +112,7 @@ method static List_t *Init(List_t *lis) {
 	Collection.Init(act(Collection_t, lis));
 	act(Collection_t, lis)->_Size	= List._ALLOCATION_BLOCK_SIZE;
 
-	lis->_Item						= _Memory.CountedAllocate(List._ALLOCATION_BLOCK_SIZE, sizeof(void *));
+	lis->_Item						= _Memory.CountedAllocate(List._ALLOCATION_BLOCK_SIZE, sizeof(any *));
 
 	lis->SetComparator				= SetComparator;
 	lis->Add						= Add;

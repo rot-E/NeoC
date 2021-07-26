@@ -1,19 +1,19 @@
 #include "NeoC/Base/Memory.h"
 
-static void *_Inspect(void *ptr) {
+static any *_Inspect(any *ptr) {
 	if (ptr == NULL) _Error.Panic(u8"\e[36m", u8"Memory System");
 	return ptr;
 }
 
-method static void *Allocate(const size_t size) {
+method static any *Allocate(const size_t size) {
 	return _Inspect(malloc(size));;
 }
 
-method static void *CountedAllocate(const size_t n, const size_t size) {
+method static any *CountedAllocate(const size_t n, const size_t size) {
 	return _Inspect(calloc(n, size));
 }
 
-method static void *SharedAllocate(const size_t size) {
+method static any *SharedAllocate(const size_t size) {
 	return _Inspect(
 		mmap(
 			NULL,
@@ -25,11 +25,11 @@ method static void *SharedAllocate(const size_t size) {
 	);
 }
 
-method static void *ReAllocate(void *ptr, const size_t size) {
+method static any *ReAllocate(any *ptr, const size_t size) {
 	return _Inspect(realloc(ptr, size));
 }
 
-method static void Free(void *ptr) {
+method static void Free(any *ptr) {
 	free(ptr);
 }
 

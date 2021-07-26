@@ -5,7 +5,7 @@
 
 #define Comparator(X, Y, EqEvaFm)			\
 	({										\
-		bool _cmptr(void *X, void *Y) {		\
+		bool _cmptr(any *X, any *Y) {		\
 			return EqEvaFm;					\
 		};									\
 		_cmptr;								\

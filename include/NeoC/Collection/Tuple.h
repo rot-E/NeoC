@@ -9,11 +9,11 @@
 #include "NeoC/Exception/Exception.h"
 
 class Tuple_t {
-	private void **_Item;
+	private any **_Item;
 	private int32_t _Size;
 
-	private void (* Set)(struct Tuple_t *, const int32_t idx, void *item) throws (Tuple.Exception);
-	private void *(* Get)(struct Tuple_t *, const int32_t idx) throws (Tuple.Exception);
+	private void (* Set)(struct Tuple_t *, const int32_t idx, any *item) throws (Tuple.Exception);
+	private any *(* Get)(struct Tuple_t *, const int32_t idx) throws (Tuple.Exception);
 	private int32_t (* GetSize)(struct Tuple_t *);
 } Tuple_t;
 
@@ -24,8 +24,8 @@ class _Tuple {
 	private Tuple_t *(* New)(const int32_t size);
 	private void (* Delete)(Tuple_t *);
 
-	private void (* Set)(Tuple_t *, const int32_t idx, void *item) throws (Tuple.Exception);
-	private void *(* Get)(Tuple_t *, const int32_t idx) throws (Tuple.Exception);
+	private void (* Set)(Tuple_t *, const int32_t idx, any *item) throws (Tuple.Exception);
+	private any *(* Get)(Tuple_t *, const int32_t idx) throws (Tuple.Exception);
 	private int32_t (* GetSize)(Tuple_t *);
 } _Tuple;
 

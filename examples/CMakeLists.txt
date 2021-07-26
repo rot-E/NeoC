@@ -29,6 +29,7 @@ add_dependencies(examples
     #Stack
     Queue
     Map
+    #Set
 
     OOPMain
     SampleCode
@@ -159,6 +160,12 @@ target_link_libraries(Map
     NeoC
     Threads::Threads
 )
+
+#add_executable(Set Collection/Set.c)
+#target_link_libraries(Set
+#    NeoC
+#    Threads::Threads
+#)
 
 add_executable(OOPMain OOP/Main.c OOP/Derived.c OOP/Base.c)
 target_link_libraries(OOPMain

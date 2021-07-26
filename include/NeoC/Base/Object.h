@@ -22,6 +22,8 @@
 // インスタンスメソッド第一引数の型
 #define self_t void
 
+// 汎用ポインタ用
+#define any void
 
 /* source */
 // メソッド注釈

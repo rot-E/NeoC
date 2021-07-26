@@ -12,18 +12,18 @@
 class Queue_t {
 	extends (Collection_t);
 
-	private void **_Item;
+	private any **_Item;
 
 	/* 操作系 */
-	public void (* Enqueue)(self_t *, void *item);
-		public void (* Enq)(self_t *, void *item);
-	public void *(* Dequeue)(self_t *) throws (Queue.Exception);
-		public void *(* Deq)(self_t *) throws (Queue.Exception);
+	public void (* Enqueue)(self_t *, any *item);
+		public void (* Enq)(self_t *, any *item);
+	public any *(* Dequeue)(self_t *) throws (Queue.Exception);
+		public any *(* Deq)(self_t *) throws (Queue.Exception);
 	public inherit void (* Lock)(self_t *);
 	public inherit void (* Unlock)(self_t *);
 
 	/* 取得系 */
-	public void *(* Peek)(self_t *) throws (Queue.Exception);
+	public any *(* Peek)(self_t *) throws (Queue.Exception);
 	public inherit int32_t (* GetLength)(self_t *);
 
 	/* 検査系 */
@@ -40,15 +40,15 @@ class _Queue {
 	public void (* Delete)(Queue_t *);
 
 	/* 操作系 */
-	public void (* Enqueue)(self_t *, void *item);
-		public void (* Enq)(self_t *, void *item);
-	public void *(* Dequeue)(self_t *) throws (Queue.Exception);
-		public void *(* Deq)(self_t *) throws (Queue.Exception);
+	public void (* Enqueue)(self_t *, any *item);
+		public void (* Enq)(self_t *, any *item);
+	public any *(* Dequeue)(self_t *) throws (Queue.Exception);
+		public any *(* Deq)(self_t *) throws (Queue.Exception);
 	public inherit void (* Lock)(self_t *);
 	public inherit void (* Unlock)(self_t *);
 
 	/* 取得系 */
-	public void *(* Peek)(self_t *) throws (Queue.Exception);
+	public any *(* Peek)(self_t *) throws (Queue.Exception);
 	public inherit int32_t (* GetLength)(self_t *);
 
 	/* 検査系 */

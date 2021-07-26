@@ -9,12 +9,12 @@ method static void _Setup() {
 	Map.IsEmpty		= Collection.IsEmpty;
 }
 
-method static void SetComparator(self_t *map, bool (* keyComparator)(void *mapKey, void *key), bool (* valueComparator)(void *mapValue, void *value)) {
+method static void SetComparator(self_t *map, bool (* keyComparator)(any *mapKey, any *key), bool (* valueComparator)(any *mapValue, any *value)) {
 	act(Map_t, map)->_KeyComparator		= keyComparator;
 	act(Map_t, map)->_ValueComparator	= valueComparator;
 }
 
-method static void Put(self_t *map, void *key, void *value) {
+method static void Put(self_t *map, any *key, any *value) {
 	Map.Lock(map);
 
 	// 領域不足→確保
@@ -37,7 +37,7 @@ method static void Put(self_t *map, void *key, void *value) {
 	Map.Unlock(map);
 }
 
-method static void Remove(self_t *map, void *key) throws (Map.Exception) {
+method static void Remove(self_t *map, any *key) throws (Map.Exception) {
 	int32_t i;
 	bool existence = false;
 	for (i = 0; i < Map.GetLength(map); i++)
@@ -72,14 +72,14 @@ method static Item_t Get(self_t *map, int32_t idx) throws (Map.Exception) {
 	return act(Map_t, map)->_Item[idx];
 }
 
-method static bool ContainsKey(self_t *map, void *key) {
+method static bool ContainsKey(self_t *map, any *key) {
 	for (int32_t i = 0; i < Map.GetLength(map); i++)
 		if (act(Map_t, map)->_KeyComparator(Map.Get(map, i).Key, key)) return true;
 
 	return false;
 }
 
-method static bool ContainsValue(self_t *map, void *value) {
+method static bool ContainsValue(self_t *map, any *value) {
 	for (int32_t i = 0; i < Map.GetLength(map); i++)
 		if (act(Map_t, map)->_ValueComparator(Map.Get(map, i).Value, value)) return true;
 

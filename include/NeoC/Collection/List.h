@@ -12,27 +12,27 @@
 class List_t {
 	extends (Collection_t);
 
-	void **_Item;
-	private bool (* _ItemComparator)(void *listItem, void *item);
+	any **_Item;
+	private bool (* _ItemComparator)(any *listItem, any *item);
 
 	/* 操作系 */
 	public void (* SetComparator)(self_t *,
-		bool (* itemComparator)(void *listItem, void *item)
+		bool (* itemComparator)(any *listItem, any *item)
 	);
-	public void (* Add)(self_t *, void *item);
+	public void (* Add)(self_t *, any *item);
 	public void (* Remove)(self_t *, const int32_t idx) throws (List.Exception);
-	public void (* RemoveItem)(self_t *, void *item) throws (List.Exception);
+	public void (* RemoveItem)(self_t *, any *item) throws (List.Exception);
 	public inherit void (* Lock)(self_t *);
 	public inherit void (* Unlock)(self_t *);
 
 	/* 取得系 */
 	public inherit int32_t (* GetLength)(self_t *);
-	public void *(* Get)(self_t *, int32_t idx);
-	public int32_t (* IndexOf)(self_t *, void *item) throws (List.Failure);
+	public any *(* Get)(self_t *, int32_t idx);
+	public int32_t (* IndexOf)(self_t *, any *item) throws (List.Failure);
 
 	/* 検査系 */
 	public inherit bool (* IsEmpty)(self_t *);
-	public bool (* Contains)(self_t *, void *item);
+	public bool (* Contains)(self_t *, any *item);
 } List_t;
 
 class _List {
@@ -47,22 +47,22 @@ class _List {
 
 	/* 操作系 */
 	public void (* SetComparator)(self_t *,
-		bool (* itemComparator)(void *listItem, void *item)
+		bool (* itemComparator)(any *listItem, any *item)
 	);
-	public void (* Add)(self_t *, void *item);
+	public void (* Add)(self_t *, any *item);
 	public void (* Remove)(self_t *, const int32_t idx) throws (List.Exception);
-	public void (* RemoveItem)(self_t *, void *item) throws (List.Exception);
+	public void (* RemoveItem)(self_t *, any *item) throws (List.Exception);
 	public inherit void (* Lock)(self_t *);
 	public inherit void (* Unlock)(self_t *);
 
 	/* 取得系 */
 	public inherit int32_t (* GetLength)(self_t *);
-	public void *(* Get)(self_t *, const int32_t idx);
-	public int32_t (* IndexOf)(self_t *, void *item) throws (List.Failure);
+	public any *(* Get)(self_t *, const int32_t idx);
+	public int32_t (* IndexOf)(self_t *, any *item) throws (List.Failure);
 
 	/* 検査系 */
 	public inherit bool (* IsEmpty)(self_t *);
-	public bool (* Contains)(self_t *, void *item);
+	public bool (* Contains)(self_t *, any *item);
 } _List;
 
 extern _List List;

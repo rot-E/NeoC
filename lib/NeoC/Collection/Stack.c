@@ -4,13 +4,13 @@ static void _Setup() {
 	Stack.Exception signal;
 }
 
-static void Push(Stack_t *st, void *item) {
+static void Push(Stack_t *st, any *item) {
 	mtx_lock(&st->_Mtx);
 
 	// 領域不足→確保
 	if (st->_Length + 1 >= st->_Size) {
 		st->_Size += Stack._ALLOCATION_BLOCK_SIZE;
-		st->_Item = _Memory.ReAllocate(st->_Item, st->_Size * sizeof(void *));
+		st->_Item = _Memory.ReAllocate(st->_Item, st->_Size * sizeof(any *));
 	}
 
 	// 格納
@@ -21,18 +21,18 @@ static void Push(Stack_t *st, void *item) {
 	mtx_unlock(&st->_Mtx);
 }
 
-static void *Pop(Stack_t *st) throws (Stack.Exception) {
+static any *Pop(Stack_t *st) throws (Stack.Exception) {
 	if (st->_Length <= 0) throw (Signal.New(Stack.Exception));
 
 	mtx_lock(&st->_Mtx);
 
-	void *retv = st->_Item[st->_Length - 1];
+	any *retv = st->_Item[st->_Length - 1];
 	st->_Length--;
 
 	// 領域過多→解放
 	if (st->_Length < st->_Size - Stack._ALLOCATION_BLOCK_SIZE) {
 		st->_Size -= Stack._ALLOCATION_BLOCK_SIZE;
-		st->_Item = _Memory.ReAllocate(st->_Item, st->_Size * sizeof(void *));
+		st->_Item = _Memory.ReAllocate(st->_Item, st->_Size * sizeof(any *));
 	}
 
 	mtx_unlock(&st->_Mtx);
@@ -45,8 +45,8 @@ static void Duplicate(Stack_t *st) throws (Stack.Exception) {
 }
 
 static void Exchange(Stack_t *st) throws (Stack.Exception) {
-	void *top = Stack.Pop(st);
-	void *next = Stack.Pop(st);
+	any *top = Stack.Pop(st);
+	any *next = Stack.Pop(st);
 	Stack.Push(st, top);
 	Stack.Push(st, next);
 }
@@ -83,7 +83,7 @@ static void RightRotate(Stack_t *st, const int32_t n) throws (Stack.Exception) {
 		Stack.Push(st, Stack.Pop(top));
 }
 
-static void *Peek(Stack_t *st) throws (Stack.Exception) {
+static any *Peek(Stack_t *st) throws (Stack.Exception) {
 	if (st->_Length <= 0) throw (Signal.New(Stack.Exception));
 
 	return st->_Item[st->_Length - 1];
@@ -100,7 +100,7 @@ static bool IsEmpty(Stack_t *st) {
 static Stack_t *New() {
 	Stack_t *st = (Stack_t *)(_Memory.Allocate(sizeof(Stack_t)));
 
-	st->_Item			= _Memory.CountedAllocate(Stack._ALLOCATION_BLOCK_SIZE, sizeof(void *));
+	st->_Item			= _Memory.CountedAllocate(Stack._ALLOCATION_BLOCK_SIZE, sizeof(any *));
 	st->_Size			= Stack._ALLOCATION_BLOCK_SIZE;
 	st->_Length			= 0;
 	mtx_init(&st->_Mtx, mtx_plain);

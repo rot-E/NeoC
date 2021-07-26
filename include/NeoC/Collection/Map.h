@@ -10,8 +10,8 @@
 #include "NeoC/Collection/Collection.h"
 
 class {
-	public void *Key;
-	public void *Value;
+	public any *Key;
+	public any *Value;
 } Item_t;
 
 class Map_t {
@@ -19,16 +19,16 @@ class Map_t {
 
 	Item_t *_Item;
 
-	private bool (* _KeyComparator)(void *mapKey, void *key);
-	private bool (* _ValueComparator)(void *mapValue, void *value);
+	private bool (* _KeyComparator)(any *mapKey, any *key);
+	private bool (* _ValueComparator)(any *mapValue, any *value);
 
 	/* 操作系 */
 	public void (* SetComparator)(self_t *,
-		bool (* keyComparator)(void *mapKey, void *key),
-		bool (* valueComparator)(void *mapValue, void *value)
+		bool (* keyComparator)(any *mapKey, any *key),
+		bool (* valueComparator)(any *mapValue, any *value)
 	);
-	public void (* Put)(self_t *, void *key, void *value);
-	public void (* Remove)(self_t *, void *key) throws (Map.Exception);
+	public void (* Put)(self_t *, any *key, any *value);
+	public void (* Remove)(self_t *, any *key) throws (Map.Exception);
 	public inherit void (* Lock)(self_t *);
 	public inherit void (* Unlock)(self_t *);
 
@@ -38,8 +38,8 @@ class Map_t {
 
 	/* 検査系 */
 	public inherit bool (* IsEmpty)(self_t *);
-	public bool (* ContainsKey)(self_t *, void *key);
-	public bool (* ContainsValue)(self_t *, void *value);
+	public bool (* ContainsKey)(self_t *, any *key);
+	public bool (* ContainsValue)(self_t *, any *value);
 } Map_t;
 
 class _Map {
@@ -53,11 +53,11 @@ class _Map {
 
 	/* 操作系 */
 	public void (* SetComparator)(self_t *,
-		bool (* keyComparator)(void *mapKey, void *key),
-		bool (* valueComparator)(void *mapValue, void *value)
+		bool (* keyComparator)(any *mapKey, any *key),
+		bool (* valueComparator)(any *mapValue, any *value)
 	);
-	public void (* Put)(self_t *, void *key, void *value);
-	public void (* Remove)(self_t *, void *key) throws (Map.Exception);
+	public void (* Put)(self_t *, any *key, any *value);
+	public void (* Remove)(self_t *, any *key) throws (Map.Exception);
 	public inherit void (* Lock)(self_t *);
 	public inherit void (* Unlock)(self_t *);
 
@@ -67,8 +67,8 @@ class _Map {
 
 	/* 検査系 */
 	public inherit bool (* IsEmpty)(self_t *);
-	public bool (* ContainsKey)(self_t *, void *key);
-	public bool (* ContainsValue)(self_t *, void *value);
+	public bool (* ContainsKey)(self_t *, any *key);
+	public bool (* ContainsValue)(self_t *, any *value);
 } _Map;
 
 extern _Map Map;

@@ -4,13 +4,13 @@ static void _Setup() {
 	Tuple.Exception signal;
 }
 
-static void Set(Tuple_t *tp, const int32_t idx, void *item) throws (Tuple.Exception) {
+static void Set(Tuple_t *tp, const int32_t idx, any *item) throws (Tuple.Exception) {
 	if (tp->_Size <= idx) throw (Signal.New(Tuple.Exception));
 
 	tp->_Item[idx] = item;
 }
 
-static void *Get(Tuple_t *tp, const int32_t idx) throws (Tuple.Exception) {
+static any *Get(Tuple_t *tp, const int32_t idx) throws (Tuple.Exception) {
 	if (tp->_Size <= idx) throw (Signal.New(Tuple.Exception));
 
 	return tp->_Item[idx];
@@ -23,7 +23,7 @@ static int32_t GetSize(Tuple_t *tp) {
 static Tuple_t *New(const int32_t size) {
 	Tuple_t *tp = (Tuple_t *)(_Memory.Allocate(sizeof(Tuple_t)));
 
-	tp->_Item		= _Memory.CountedAllocate(size, sizeof(void *));
+	tp->_Item		= _Memory.CountedAllocate(size, sizeof(any *));
 	tp->_Size		= size;
 
 	tp->Set			= Set;

@@ -3,35 +3,32 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <threads.h>
-
-#include "NeoC/Annotation.h"
-#include "NeoC/Object.h"
-#include "NeoC/Memory.h"
-#include "NeoC/Exception/Signal.h"
-#include "NeoC/Exception/Exception.h"
+#include "NeoC/Base/Object.h"
+#include "NeoC/Base/Memory.h"
+#include "NeoC/Base/Exception/Signal.h"
+#include "NeoC/Base/Exception/Exception.h"
 
 class Stack_t {
-	private void **_Item;
-	private int32_t _Size;
-	private int32_t _Length;
+	extends (Collection_t);
 
-	private mtx_t _Mtx;
+	private any **_Item;
 
 	/* 操作系 */
-	public void (* Push)(struct Stack_t *, void *item);
-	public void *(* Pop)(struct Stack_t *) throws (Stack.Exception);
-	public void (* Duplicate)(struct Stack_t *) throws (Stack.Exception);
-		public void (* Dup)(struct Stack_t *) throws (Stack.Exception);
-	public void (* Exchange)(struct Stack_t *) throws (Stack.Exception);
-	public void (* LeftRotate)(struct Stack_t *, const int32_t n) throws (Stack.Exception);
-	public void (* RightRotate)(struct Stack_t *, const int32_t n) throws (Stack.Exception);
-
+	public void (* Push)(self_t *, any *item);
+	public any *(* Pop)(self_t *) throws (Stack.Exception);
+	public void (* Duplicate)(self_t *) throws (Stack.Exception);
+		public void (* Dup)(self_t *) throws (Stack.Exception);
+	public void (* Exchange)(self_t *) throws (Stack.Exception);
+	public void (* LeftRotate)(self_t *, const int32_t n) throws (Stack.Exception);
+	public void (* RightRotate)(self_t *, const int32_t n) throws (Stack.Exception);
+	public inherit void (* Lock)(self_t *);
+	public inherit void (* Unlock)(self_t *);
 	/* 取得系 */
-	public void *(* Peek)(struct Stack_t *) throws (Stack.Exception);
-	public int32_t (* GetLength)(struct Stack_t *);
+	public any *(* Peek)(self_t *) throws (Stack.Exception);
+	public inherit int32_t (* GetLength)(self_t *);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(struct Stack_t *);
+	public inherit bool (* IsEmpty)(self_t *);
 } Stack_t;
 
 class _Stack {
@@ -40,23 +37,23 @@ class _Stack {
 	private final int32_t _ALLOCATION_BLOCK_SIZE;
 
 	public Stack_t *(* New)();
-	public void (* Delete)(Stack_t *);
+	public void (* Delete)(self_t *);
 
 	/* 操作系 */
-	public void (* Push)(Stack_t *, void *item);
-	public void *(* Pop)(Stack_t *) throws (Stack.Exception);
-	public void (* Duplicate)(Stack_t *) throws (Stack.Exception);
-		public void (* Dup)(Stack_t *) throws (Stack.Exception);
-	public void (* Exchange)(Stack_t *) throws (Stack.Exception);
-	public void (* LeftRotate)(Stack_t *, const int32_t n) throws (Stack.Exception);
-	public void (* RightRotate)(Stack_t *, const int32_t n) throws (Stack.Exception);
+	public void (* Push)(self_t *, any *item);
+	public any *(* Pop)(self_t *) throws (Stack.Exception);
+	public void (* Duplicate)(self_t *) throws (Stack.Exception);
+		public void (* Dup)(self_t *) throws (Stack.Exception);
+	public void (* Exchange)(self_t *) throws (Stack.Exception);
+	public void (* LeftRotate)(self_t *, const int32_t n) throws (Stack.Exception);
+	public void (* RightRotate)(self_t *, const int32_t n) throws (Stack.Exception);
 
 	/* 取得系 */
-	public void *(* Peek)(Stack_t *) throws (Stack.Exception);
-	public int32_t (* GetLength)(Stack_t *);
+	public any *(* Peek)(self_t *) throws (Stack.Exception);
+	public int32_t (* GetLength)(self_t *);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(Stack_t *);
+	public bool (* IsEmpty)(self_t *);
 } _Stack;
 
 extern _Stack Stack;
