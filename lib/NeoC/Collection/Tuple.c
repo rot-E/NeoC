@@ -4,25 +4,23 @@ static void _Setup() {
 	Tuple.Exception signal;
 }
 
-static void Set(Tuple_t *tp, const int32_t idx, any *item) throws (Tuple.Exception) {
-	if (tp->_Size <= idx) throw (Signal.New(Tuple.Exception));
+static void Set(self_t *tp, const int32_t idx, any *item) throws (Tuple.Exception) {
+	if (act(Tuple_t, tp)->_Size <= idx) throw (Signal.New(Tuple.Exception));
 
-	tp->_Item[idx] = item;
+	act(Tuple_t, tp)->_Item[idx] = item;
 }
 
-static any *Get(Tuple_t *tp, const int32_t idx) throws (Tuple.Exception) {
-	if (tp->_Size <= idx) throw (Signal.New(Tuple.Exception));
+static any *Get(self_t *tp, const int32_t idx) throws (Tuple.Exception) {
+	if (act(Tuple_t, tp)->_Size <= idx) throw (Signal.New(Tuple.Exception));
 
-	return tp->_Item[idx];
+	return act(Tuple_t, tp)->_Item[idx];
 }
 
-static int32_t GetSize(Tuple_t *tp) {
-	return tp->_Size;
+static int32_t GetSize(self_t *tp) {
+	return act(Tuple_t, tp)->_Size;
 }
 
-static Tuple_t *New(const int32_t size) {
-	Tuple_t *tp = (Tuple_t *)(_Memory.Allocate(sizeof(Tuple_t)));
-
+static Tuple_t *Init(Tuple_t *tp, const int32_t size) {
 	tp->_Item		= _Memory.CountedAllocate(size, sizeof(any *));
 	tp->_Size		= size;
 
@@ -33,13 +31,19 @@ static Tuple_t *New(const int32_t size) {
 	return tp;
 }
 
+static Tuple_t *New(const int32_t size) {
+	return Tuple.Init(new (Tuple_t), size);
+}
+
 static void Delete(Tuple_t *tp) {
-	_Memory.Free(tp);
+	_Memory.Free(act(Tuple_t, tp)->_Item);
+	delete (tp);
 }
 
 _Tuple Tuple = {
 	._Setup		= _Setup,
 
+	.Init		= Init,
 	.New		= New,
 	.Delete		= Delete,
 

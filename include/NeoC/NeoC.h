@@ -20,7 +20,7 @@
 #include "Socket.h"
 
 #include "Collection/Collection.h"
-//#include "Collection/Tuple.h"
+#include "Collection/Tuple.h"
 #include "Collection/List.h"
 #include "Collection/Stack.h"
 #include "Collection/Queue.h"

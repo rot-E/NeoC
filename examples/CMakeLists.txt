@@ -24,9 +24,9 @@ add_dependencies(examples
     UDPServer
     UDPEchoServer
 
-    #Tuple
+    Tuple
     List
-    #Stack
+    Stack
     Queue
     Map
     #Set
@@ -161,11 +161,11 @@ target_link_libraries(Map
     Threads::Threads
 )
 
-#add_executable(Set Collection/Set.c)
-#target_link_libraries(Set
-#    NeoC
-#    Threads::Threads
-#)
+add_executable(Set Collection/Set.c)
+target_link_libraries(Set
+    NeoC
+    Threads::Threads
+)
 
 add_executable(OOPMain OOP/Main.c OOP/Derived.c OOP/Base.c)
 target_link_libraries(OOPMain

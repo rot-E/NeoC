@@ -13,9 +13,9 @@ method static void _Setup() {
 	Socket._Setup();
 
 	/// Collection._Setup();
-//	Tuple._Setup();
+	Tuple._Setup();
 	List._Setup();
-//	Stack._Setup();
+	Stack._Setup();
 	Queue._Setup();
 	Map._Setup();
 //	Set._Setup();

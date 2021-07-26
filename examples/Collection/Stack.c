@@ -95,14 +95,14 @@ void main() $_ {
 		st->Push(st, String.NewFormat(u8"STR-%d", i));
 
 		if (i % Stack._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, st->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, act(Collection_t, st)->_Size));
 	}
 
 	for (int32_t i = SIZE - 1; 0 <= i; i--) {
 		st->Pop(st);
 
 		if ((i - 1) % List._ALLOCATION_BLOCK_SIZE == 0)
-			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, st->_Size));
+			Console.WriteLine(String.NewFormat("Idx: %d, Size: %d", i, act(Collection_t, st)->_Size));
 	}
 
 	Stack.Delete(st);

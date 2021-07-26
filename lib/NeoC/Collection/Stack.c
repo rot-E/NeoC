@@ -1,57 +1,68 @@
 #include "NeoC/Collection/Stack.h"
 
-static void _Setup() {
+method static void _Setup() {
 	Stack.Exception signal;
+
+	Stack.Lock			= Collection.Lock;
+	Stack.Unlock		= Collection.Unlock;
+	Stack.GetLength		= Collection.GetLength;
+	Stack.IsEmpty		= Collection.IsEmpty;
 }
 
-static void Push(Stack_t *st, any *item) {
-	mtx_lock(&st->_Mtx);
+method static void Push(self_t *st, any *item) {
+	Stack.Lock(st);
 
 	// 領域不足→確保
-	if (st->_Length + 1 >= st->_Size) {
-		st->_Size += Stack._ALLOCATION_BLOCK_SIZE;
-		st->_Item = _Memory.ReAllocate(st->_Item, st->_Size * sizeof(any *));
+	if (Stack.GetLength(st) + 1 >= act(Collection_t, st)->_Size) {
+		act(Collection_t, st)->_Size += Stack._ALLOCATION_BLOCK_SIZE;
+		act(Stack_t, st)->_Item = _Memory.ReAllocate(
+			act(Stack_t, st)->_Item,
+			act(Collection_t, st)->_Size * sizeof(any *)
+		);
 	}
 
 	// 格納
-	st->_Item[st->_Length] = item;
+	act(Stack_t, st)->_Item[Stack.GetLength(st)] = item;
 
-	st->_Length++;
+	act(Collection_t, st)->_Length++;
 
-	mtx_unlock(&st->_Mtx);
+	Stack.Unlock(st);
 }
 
-static any *Pop(Stack_t *st) throws (Stack.Exception) {
-	if (st->_Length <= 0) throw (Signal.New(Stack.Exception));
+static any *Pop(self_t *st) throws (Stack.Exception) {
+	if (Stack.GetLength(st) <= 0) throw (Signal.New(Stack.Exception));
 
-	mtx_lock(&st->_Mtx);
+	Stack.Lock(st);
 
-	any *retv = st->_Item[st->_Length - 1];
-	st->_Length--;
+	any *retv = act(Stack_t, st)->_Item[Stack.GetLength(st) - 1];
+	act(Collection_t, st)->_Length--;
 
 	// 領域過多→解放
-	if (st->_Length < st->_Size - Stack._ALLOCATION_BLOCK_SIZE) {
-		st->_Size -= Stack._ALLOCATION_BLOCK_SIZE;
-		st->_Item = _Memory.ReAllocate(st->_Item, st->_Size * sizeof(any *));
+	if (Stack.GetLength(st) < act(Collection_t, st)->_Size - Stack._ALLOCATION_BLOCK_SIZE) {
+		act(Collection_t, st)->_Size -= Stack._ALLOCATION_BLOCK_SIZE;
+		act(Stack_t, st)->_Item = _Memory.ReAllocate(
+			act(Stack_t, st)->_Item,
+			act(Collection_t, st)->_Size * sizeof(any *)
+		);
 	}
 
-	mtx_unlock(&st->_Mtx);
+	Stack.Unlock(st);
 
 	return retv;
 }
 
-static void Duplicate(Stack_t *st) throws (Stack.Exception) {
+static void Duplicate(self_t *st) throws (Stack.Exception) {
 	Stack.Push(st, Stack.Peek(st));
 }
 
-static void Exchange(Stack_t *st) throws (Stack.Exception) {
-	any *top = Stack.Pop(st);
-	any *next = Stack.Pop(st);
+static void Exchange(self_t *st) throws (Stack.Exception) {
+	Stack_t *top = Stack.Pop(st);
+	Stack_t *next = Stack.Pop(st);
 	Stack.Push(st, top);
 	Stack.Push(st, next);
 }
 
-static void LeftRotate(Stack_t *st, const int32_t n) throws (Stack.Exception) {
+static void LeftRotate(self_t *st, const int32_t n) throws (Stack.Exception) {
 	Stack_t *btm = Stack.New();
 	for (int32_t i = 0; i < n; i++)
 		Stack.Push(btm, Stack.Pop(st));
@@ -67,7 +78,7 @@ static void LeftRotate(Stack_t *st, const int32_t n) throws (Stack.Exception) {
 		Stack.Push(st, Stack.Pop(top));
 }
 
-static void RightRotate(Stack_t *st, const int32_t n) throws (Stack.Exception) {
+static void RightRotate(self_t *st, const int32_t n) throws (Stack.Exception) {
 	Stack_t *btm = Stack.New();
 	for (int32_t i = Stack.GetLength(st) - n; 0 < i; i--)
 		Stack.Push(btm, Stack.Pop(st));
@@ -83,53 +94,50 @@ static void RightRotate(Stack_t *st, const int32_t n) throws (Stack.Exception) {
 		Stack.Push(st, Stack.Pop(top));
 }
 
-static any *Peek(Stack_t *st) throws (Stack.Exception) {
-	if (st->_Length <= 0) throw (Signal.New(Stack.Exception));
+static any *Peek(self_t *st) throws (Stack.Exception) {
+	if (Stack.GetLength(st) <= 0) throw (Signal.New(Stack.Exception));
 
-	return st->_Item[st->_Length - 1];
+	return act(Stack_t, st)->_Item[Stack.GetLength(st) - 1];
 }
 
-static int32_t GetLength(Stack_t *st) {
-	return st->_Length;
-}
+method static Stack_t *Init(Stack_t *st) {
+	Collection.Init(act(Collection_t, st));
+	act(Collection_t, st)->_Size		= Stack._ALLOCATION_BLOCK_SIZE;
 
-static bool IsEmpty(Stack_t *st) {
-	return Stack.GetLength(st) == 0;
-}
+	st->_Item							= _Memory.CountedAllocate(Stack._ALLOCATION_BLOCK_SIZE, sizeof(any *));
 
-static Stack_t *New() {
-	Stack_t *st = (Stack_t *)(_Memory.Allocate(sizeof(Stack_t)));
-
-	st->_Item			= _Memory.CountedAllocate(Stack._ALLOCATION_BLOCK_SIZE, sizeof(any *));
-	st->_Size			= Stack._ALLOCATION_BLOCK_SIZE;
-	st->_Length			= 0;
-	mtx_init(&st->_Mtx, mtx_plain);
-
-	st->Push			= Push;
-	st->Pop				= Pop;
-	st->Duplicate		= Duplicate;
-		st->Dup			= Duplicate;
-	st->Exchange		= Exchange;
-	st->LeftRotate		= LeftRotate;
-	st->RightRotate		= RightRotate;
-	st->Peek			= Peek;
-	st->GetLength		= GetLength;
-	st->IsEmpty			= IsEmpty;
+	st->Push							= Push;
+	st->Pop								= Pop;
+	st->Duplicate						= Duplicate;
+		st->Dup							= Duplicate;
+	st->Exchange						= Exchange;
+	st->LeftRotate						= LeftRotate;
+	st->RightRotate						= RightRotate;
+	st->Lock							= Collection.Lock;
+	st->Unlock							= Collection.Unlock;
+	st->Peek							= Peek;
+	st->GetLength						= Collection.GetLength;
+	st->IsEmpty							= Collection.IsEmpty;
 
 	return st;
 }
 
-static void Delete(Stack_t *st) {
-	mtx_destroy(&st->_Mtx);
+method static Stack_t *New() {
+	return Stack.Init(new (Stack_t));
+}
 
-	_Memory.Free(st->_Item);
-	_Memory.Free(st);
+method static void Delete(Stack_t *st) {
+	mtx_destroy(&act(Collection_t, st)->_Mtx);
+
+	_Memory.Free(act(Stack_t, st)->_Item);
+	delete (st);
 }
 
 _Stack Stack = {
 	._Setup						= _Setup,
 	._ALLOCATION_BLOCK_SIZE		= 1000,
 
+	.Init						= Init,
 	.New						= New,
 	.Delete						= Delete,
 
@@ -142,6 +150,4 @@ _Stack Stack = {
 	.RightRotate				= RightRotate,
 
 	.Peek						= Peek,
-	.GetLength					= GetLength,
-	.IsEmpty					= IsEmpty,
 };

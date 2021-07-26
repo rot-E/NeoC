@@ -7,6 +7,7 @@
 #include "NeoC/Base/Memory.h"
 #include "NeoC/Base/Exception/Signal.h"
 #include "NeoC/Base/Exception/Exception.h"
+#include "NeoC/Collection/Collection.h"
 
 class Stack_t {
 	extends (Collection_t);
@@ -23,6 +24,7 @@ class Stack_t {
 	public void (* RightRotate)(self_t *, const int32_t n) throws (Stack.Exception);
 	public inherit void (* Lock)(self_t *);
 	public inherit void (* Unlock)(self_t *);
+
 	/* 取得系 */
 	public any *(* Peek)(self_t *) throws (Stack.Exception);
 	public inherit int32_t (* GetLength)(self_t *);
@@ -36,8 +38,9 @@ class _Stack {
 	public final SignalCode_t Exception;
 	private final int32_t _ALLOCATION_BLOCK_SIZE;
 
+	public Stack_t *(* Init)(Stack_t *);
 	public Stack_t *(* New)();
-	public void (* Delete)(self_t *);
+	public void (* Delete)(Stack_t *);
 
 	/* 操作系 */
 	public void (* Push)(self_t *, any *item);
@@ -47,13 +50,15 @@ class _Stack {
 	public void (* Exchange)(self_t *) throws (Stack.Exception);
 	public void (* LeftRotate)(self_t *, const int32_t n) throws (Stack.Exception);
 	public void (* RightRotate)(self_t *, const int32_t n) throws (Stack.Exception);
+	public inherit void (* Lock)(self_t *);
+	public inherit void (* Unlock)(self_t *);
 
 	/* 取得系 */
 	public any *(* Peek)(self_t *) throws (Stack.Exception);
-	public int32_t (* GetLength)(self_t *);
+	public inherit int32_t (* GetLength)(self_t *);
 
 	/* 検査系 */
-	public bool (* IsEmpty)(self_t *);
+	public inherit bool (* IsEmpty)(self_t *);
 } _Stack;
 
 extern _Stack Stack;
