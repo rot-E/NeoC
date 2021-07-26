@@ -31,7 +31,7 @@ add_dependencies(examples
     Map
 
     OOPMain
-    #SampleCode
+    SampleCode
 )
 
 add_executable(Object Base/Object.c)
