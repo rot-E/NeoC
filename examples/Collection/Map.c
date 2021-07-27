@@ -1,8 +1,8 @@
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
-#include "NeoC/Collection/Collection.h"
-#include "NeoC/Collection/Map.h"
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/Console.h>
+#include <NeoC/Collection/Collection.h>
+#include <NeoC/Collection/Map.h>
 
 void main() $_ {
 	/* Map生成 */

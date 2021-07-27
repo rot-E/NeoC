@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "NeoC/Base/Object.h"
+#include <NeoC/Base/Object.h>
 
 #include "Base.h"
 

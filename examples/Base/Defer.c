@@ -1,7 +1,7 @@
-#include "NeoC/Base/Defer.h"
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
+#include <NeoC/Base/Defer.h>
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/Console.h>
 
 void main() $_ {
 	int32_t i = 1;

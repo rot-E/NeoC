@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "NeoC/Base/Object.h"
+#include <NeoC/Base/Object.h>
 
 class Base_t {
 	private int32_t _Num;

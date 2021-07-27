@@ -1,7 +1,7 @@
-#include "NeoC/Base/Defer.h"
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
+#include <NeoC/Base/Defer.h>
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/Console.h>
 
 String_t *fn() {
 		// 組立に使った領域は事後解放

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "NeoC/Base/Object.h"
+#include <NeoC/Base/Object.h>
 
 void main() {
 	Object_t *obj = Object.New();

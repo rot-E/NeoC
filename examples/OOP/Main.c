@@ -1,6 +1,6 @@
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/Console.h>
 
 #include "Derived.h"
 

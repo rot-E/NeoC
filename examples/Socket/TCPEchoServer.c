@@ -1,4 +1,4 @@
-#include "NeoC/NeoC.h"
+#include <NeoC.h>
 
 void main() $_ {
 	Socket_t *listener = Socket.NewTCPServer(10001);

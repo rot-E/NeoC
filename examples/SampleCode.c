@@ -1,4 +1,4 @@
-#include "NeoC/NeoC.h"
+#include <NeoC.h>
 
 void main() $_ {
    String_t *text = String.New(u8"NeoC is a Neo C Programming Environment Library !");

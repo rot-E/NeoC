@@ -1,9 +1,9 @@
-#include "NeoC/Base/Exception/Exception.h"
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/SPEC/CC.h"
-#include "NeoC/SPEC/SGR.h"
-#include "NeoC/Console.h"
+#include <NeoC/Base/Exception/Exception.h>
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/SPEC/CC.h>
+#include <NeoC/SPEC/SGR.h>
+#include <NeoC/Console.h>
 
 void main() $_ {
 	String_t *neoC = String.New(u8"NeoC");

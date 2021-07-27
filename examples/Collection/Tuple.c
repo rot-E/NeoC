@@ -1,8 +1,8 @@
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
-#include "NeoC/Collection/Collection.h"
-#include "NeoC/Collection/Tuple.h"
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/Console.h>
+#include <NeoC/Collection/Collection.h>
+#include <NeoC/Collection/Tuple.h>
 
 void main() $_ {
 	/* 4-tuple生成 */

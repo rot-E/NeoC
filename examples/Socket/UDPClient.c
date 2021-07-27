@@ -1,9 +1,9 @@
-#include "NeoC/Base/Exception/Exception.h"
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
-#include "NeoC/System.h"
-#include "NeoC/Socket.h"
+#include <NeoC/Base/Exception/Exception.h>
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/Console.h>
+#include <NeoC/System.h>
+#include <NeoC/Socket.h>
 
 void main() $_ {
 	Socket_t *cli = NULL;

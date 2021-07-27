@@ -1,8 +1,8 @@
-#include "NeoC/Base/Environment.h"
-#include "NeoC/String.h"
-#include "NeoC/Console.h"
-#include "NeoC/Collection/Collection.h"
-#include "NeoC/Collection/List.h"
+#include <NeoC/Base/Environment.h>
+#include <NeoC/String.h>
+#include <NeoC/Console.h>
+#include <NeoC/Collection/Collection.h>
+#include <NeoC/Collection/List.h>
 
 void main() $_ {
 	/* List生成 */
