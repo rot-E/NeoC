@@ -6,7 +6,7 @@ Neo C Programming Environment Library
 
 &emsp;&emsp;&emsp;__↓↓↓ Sample Code (examples/SampleCode.c) ↓↓↓__
 ```C
-#include "NeoC/NeoC.h"
+#include <NeoC.h>
 
 void main() $_ {
    String_t *text = String.New(u8"NeoC is a Neo C Programming Environment Library !");
