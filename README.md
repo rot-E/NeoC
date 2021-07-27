@@ -146,7 +146,7 @@ $ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthr
 <br><br>
 
 ### 2. CMakeを使用する場合
-View [Hiroya-W/NeoC-sample-project](https://github.com/Hiroya-W/NeoC-sample-project)
+Visit [Hiroya-W/NeoC-sample-project](https://github.com/Hiroya-W/NeoC-sample-project)
 <br><br>
 
 ## License
