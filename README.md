@@ -59,8 +59,9 @@ Dependencies: **`Git` `CMake` `GNU Make` `GCC`**
 <br><br>
 
 ### 1. NeoC Library
-CMakeを用いてビルド環境を作成した後ビルドを実施する。
-NeoCライブラリはGCC拡張を利用しているため、コンパイラはGCCを利用しなければならない。環境によっては `CMAKE_C_COMPILER` オプションによる指定が必要である。
+CMakeを用いてビルド環境を作成した後にビルドを行う。
+
+NeoCライブラリはGCC拡張を使用しているため、コンパイラにはGCCを使用しなければならず、環境によっては `CMAKE_C_COMPILER` オプションによる指定が必要である。
 ```fish
              $ git clone https://github.com/RotationE/NeoC.git
              $ cd NeoC
@@ -70,22 +71,25 @@ NeoCライブラリはGCC拡張を利用しているため、コンパイラはG
 [NeoC/build/]$ make -j
 ```
 **→ `NeoC/include/` `NeoC/build/lib/libNeoC.a`**
-<br><br>
+<br><br><br><br>
 
-ビルド環境を作成する際に、以下のオプションを利用することができる。
-- `CMAKE_C_COMPILER`
-- `CMAKE_BUILD_TYPE`
-- `CMAKE_INSTALL_PREFIX`
-- `NEOC_BUILD_SHARED_LIBS`
-`CMAKE_C_COMPILER` では、利用するコンパイラを指定できる。
-GCC拡張機能を利用しているため、コンパイラにはGCCを利用する必要がある。
+ビルド環境の作成時には、以下のオプションが利用可能である。
+
+- `CMAKE_C_COMPILER` 使用するコンパイラの指定
+- `CMAKE_BUILD_TYPE` `Debug` または `Release`
+- `CMAKE_INSTALL_PREFIX` ライブラリのインストールディレクトリの指定 (インストールする場合)
+- `NEOC_BUILD_SHARED_LIBS` ライブラリの形式の指定： 静的ライブラリ または 共有ライブラリ
+<br><br><br>
+
+`CMAKE_C_COMPILER` では、使用するコンパイラを指定できる。
+GCC拡張を使用しているため、コンパイラにはGCCを使用する必要がある。
 (特にMacなど)デフォルトで利用するコンパイラがGCC以外である場合は、以下のように適切に指定する必要がある。
 ```fish
 [NeoC/build/]$ cmake .. -DCMAKE_C_COMPILER=/usr/bin/gcc
 ```
+<br>
 
 `CMAKE_BUILD_TYPE` では、`Debug` か `Release` などが利用できる。
-
 ```fish
 # デバッグするために、-gオプションをつける
 [NeoC/build/]$ cmake .. -DCMAKE_BUILD_TYPE=Debug
@@ -93,6 +97,7 @@ GCC拡張機能を利用しているため、コンパイラにはGCCを利用�
 # 最適化をするために、-O3オプションをつける
 [NeoC/build/]$ cmake .. -DCMAKE_BUILD_TYPE=Release
 ```
+<br>
 
 `CMAKE_INSTALL_PREFIX` では、NeoCライブラリのインストールディレクトリを指定できる。
 指定しない場合は `/usr/local/` 以下にインストールされる。
@@ -100,6 +105,7 @@ GCC拡張機能を利用しているため、コンパイラにはGCCを利用�
 ```fish
 [NeoC/build/]$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local
 ```
+<br>
 
 `NEOC_BUILD_SHARED_LIBS` では、ライブラリを静的ライブラリではなく共有ライブラリとして出力する事ができる。
 指定しなければ、静的ライブラリとして `libNeoC.a` が出力される。
@@ -122,8 +128,9 @@ GCC拡張機能を利用しているため、コンパイラにはGCCを利用�
 <br><br>
 
 ## Install
-ライブラリとヘッダファイルをインストールする。
-インストールする際には、ビルド環境を作成する際に、`CMAKE_BUILD_TYPE`は`Release`、`CMAKE_INSTALL_PREFIX`にインストールディレクトリを指定することを推奨する。
+`NeoC/include/` `NeoC/build/lib/libNeoC.a` を任意のディレクトリに配置する。
+
+インストールする場合、ビルド環境の作成の際に `CMAKE_BUILD_TYPE` では `Release` を、`CMAKE_INSTALL_PREFIX` では配置先のディレクトリの指定を行うことを推奨する。
 ```fish
 [NeoC/build/]$ cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/.local
 [NeoC/build/]$ make install -j
@@ -131,7 +138,7 @@ GCC拡張機能を利用しているため、コンパイラにはGCCを利用�
 <br>
 
 ## Usage
-### 1. makeshift...
+### 1. 一時凌ぎの場合...
 ```fish
 $ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthread Source.c -o Exec
 ```
