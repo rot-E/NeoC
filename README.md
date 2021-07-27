@@ -71,18 +71,13 @@ NeoCライブラリはGCC拡張を使用しているため、コンパイラに�
 [NeoC/build/]$ make -j
 ```
 **→ `NeoC/include/` `NeoC/build/lib/libNeoC.a`**
-<br><br><br><br>
-
-ビルド環境の作成時には、以下のオプションが利用可能である。
-
-- `CMAKE_C_COMPILER` 使用するコンパイラの指定
-- `CMAKE_BUILD_TYPE` `Debug` または `Release`
-- `CMAKE_INSTALL_PREFIX` ライブラリのインストールディレクトリの指定 (インストールする場合)
-- `NEOC_BUILD_SHARED_LIBS` ライブラリの形式の指定： 静的ライブラリ または 共有ライブラリ
 <br><br><br>
 
-`CMAKE_C_COMPILER` では、使用するコンパイラを指定できる。
+#### Options
+ビルド環境の作成時には、以下のオプションが利用可能である。
+<br><br>
 
+##### `CMAKE_C_COMPILER` - 使用するコンパイラの指定
 GCC拡張を使用しているため、コンパイラにはGCCを使用する必要がある。
 (特にMacなど)デフォルトで利用するコンパイラがGCC以外である場合は、以下のように適切に指定する必要がある。
 ```fish
@@ -90,7 +85,8 @@ GCC拡張を使用しているため、コンパイラにはGCCを使用する�
 ```
 <br>
 
-`CMAKE_BUILD_TYPE` では、`Debug` や `Release` などを選択できる。
+##### `CMAKE_BUILD_TYPE`
+`Debug` や `Release` などを選択できる。
 ```fish
 # デバッグするために、-gオプションをつける
 [NeoC/build/]$ cmake .. -DCMAKE_BUILD_TYPE=Debug
@@ -100,18 +96,16 @@ GCC拡張を使用しているため、コンパイラにはGCCを使用する�
 ```
 <br>
 
-`CMAKE_INSTALL_PREFIX` では、NeoCライブラリのインストールディレクトリを指定できる。
-
+##### `CMAKE_INSTALL_PREFIX` - インストールディレクトリの指定
 無指定の場合、`/usr/local/` 以下にインストールされる。
-
 尚、インストール場所として `$HOME/.local/` がよく利用され、これを指定するには、以下のようにする。
 ```fish
 [NeoC/build/]$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local
 ```
 <br>
 
-`NEOC_BUILD_SHARED_LIBS` では、ライブラリを静的ライブラリではなく共有ライブラリとして出力する事ができる。
-
+##### `NEOC_BUILD_SHARED_LIBS` - ライブラリの出力形式の指定
+ライブラリを静的ライブラリではなく共有ライブラリとして出力する事ができる。
 無指定の場合、静的ライブラリを選択したものとして処理される。
 ```fish
 [NeoC/build/]$ cmake .. -DNEOC_BUILD_SHARED_LIBS=ON
