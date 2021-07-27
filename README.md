@@ -98,7 +98,7 @@ GCC拡張を使用しているため、コンパイラにはGCCを使用する�
 
 ##### `CMAKE_INSTALL_PREFIX` - インストールディレクトリの指定
 無指定の場合、`/usr/local/` 以下にインストールされる。
-尚、インストール場所として `$HOME/.local/` がよく利用され、これを指定するには、以下のようにする。
+尚、インストール場所として `$HOME/.local/` がしばしば用いられ、これを指定するには、以下のようにする。
 ```fish
 [NeoC/build/]$ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local
 ```
