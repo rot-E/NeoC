@@ -131,10 +131,15 @@ GCC拡張機能を利用しているため、コンパイラにはGCCを利用�
 <br>
 
 ## Usage
+### 1. makeshift...
 ```fish
 $ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthread Source.c -o Exec
 ```
 **→** `./Exec`
+<br><br>
+
+### 2. Using CMake
+View [Hiroya-W/NeoC-sample-project](https://github.com/Hiroya-W/NeoC-sample-project)
 <br><br>
 
 ## License
