@@ -125,7 +125,7 @@ GCC拡張を使用しているため、コンパイラにはGCCを使用する�
 ```
 <br><br>
 
-## Install
+## Installation
 `NeoC/include/` `NeoC/build/lib/libNeoC.a` を任意のディレクトリに配置する。
 
 インストールする場合、ビルド環境の作成の際に `CMAKE_BUILD_TYPE` には `Release` を、`CMAKE_INSTALL_PREFIX` には配置先のディレクトリを指定することを推奨する。
