@@ -69,7 +69,7 @@ NeoCライブラリはGCC拡張を利用しているため、コンパイラはG
 [NeoC/build/]$ cmake ..
 [NeoC/build/]$ make -j
 ```
-**→** `build/lib/libNeoC.a`
+**→ `NeoC/include/` `NeoC/build/lib/libNeoC.a`**
 <br><br>
 
 ビルド環境を作成する際に、以下のオプションを利用することができる。
@@ -77,7 +77,7 @@ NeoCライブラリはGCC拡張を利用しているため、コンパイラはG
 - `CMAKE_BUILD_TYPE`
 - `CMAKE_INSTALL_PREFIX`
 - `NEOC_BUILD_SHARED_LIBS`
-`CMAKE_C_COMPILER` では、利用するコンパイラを指定出来る。
+`CMAKE_C_COMPILER` では、利用するコンパイラを指定できる。
 GCC拡張機能を利用しているため、コンパイラにはGCCを利用する必要がある。
 (特にMacなど)デフォルトで利用するコンパイラがGCC以外である場合は、以下のように適切に指定する必要がある。
 ```fish
@@ -112,15 +112,8 @@ GCC拡張機能を利用しているため、コンパイラにはGCCを利用�
 ```fish
 [NeoC/build/]$ make examples -j
 ```
-**→** `build/examples/*`
+**→ `NeoC/build/examples/*`**
 <br><br><br>
-
-### 3. Using NeoC Libary
-```fish
-$ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthread Source.c -o Exec
-```
-**→** `Exec`
-<br><br>
 
 ## Clean
 ```fish
@@ -136,6 +129,13 @@ $ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthr
 [NeoC/build/]$ make install -j
 ```
 <br>
+
+## Usage
+```fish
+$ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthread Source.c -o Exec
+```
+**→** `./Exec`
+<br><br>
 
 ## License
 &emsp;[`AGPLv3`](https://www.gnu.org/licenses/agpl-3.0.html)
