@@ -145,7 +145,7 @@ $ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthr
 **→** `./Exec`
 <br><br>
 
-### 2. Using CMake
+### 2. CMakeを使用する場合
 View [Hiroya-W/NeoC-sample-project](https://github.com/Hiroya-W/NeoC-sample-project)
 <br><br>
 
