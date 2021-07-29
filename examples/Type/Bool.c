@@ -9,37 +9,37 @@ void main() $_ {
 
 	Console.WriteLine(String.NewFormat(
 		"~%s(%d) = %s(%d)",
-		Bool.ToString(b1),
+		Bool.GetExpr(b1),
 		Bool.Unpack(b1),
-		Bool.ToString(Bool.Not(b1)),
+		Bool.GetExpr(Bool.Not(b1)),
 		Bool.Unpack(Bool.Not(b1))
 	));
 
 	Console.WriteLine(String.NewFormat(
 		"%s * %s = %s",
-		Bool.ToString(b1),
-		Bool.ToString(b2),
-		Bool.ToString(Bool.And(b1, b2))
+		Bool.GetExpr(b1),
+		Bool.GetExpr(b2),
+		Bool.GetExpr(Bool.And(b1, b2))
 	));
 
 	Console.WriteLine(String.NewFormat(
 		"%s + %s = %s",
-		Bool.ToString(b1),
-		Bool.ToString(b2),
-		Bool.ToString(Bool.Or(b1, b2))
+		Bool.GetExpr(b1),
+		Bool.GetExpr(b2),
+		Bool.GetExpr(Bool.Or(b1, b2))
 	));
 
 	Console.WriteLine(String.NewFormat(
 		"%s ~* %s = %s",
-		Bool.ToString(b1),
-		Bool.ToString(b2),
-		Bool.ToString(Bool.Nand(b1, b2))
+		Bool.GetExpr(b1),
+		Bool.GetExpr(b2),
+		Bool.GetExpr(Bool.Nand(b1, b2))
 	));
 
 	Console.WriteLine(String.NewFormat(
 		"%s ~+ %s = %s",
-		Bool.ToString(b1),
-		Bool.ToString(b2),
-		Bool.ToString(Bool.Nand(b1, b2))
+		Bool.GetExpr(b1),
+		Bool.GetExpr(b2),
+		Bool.GetExpr(Bool.Nand(b1, b2))
 	));
 } _$

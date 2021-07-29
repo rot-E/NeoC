@@ -4,7 +4,7 @@ method static bool Unpack(self_t *b) {
 	return act(Bool_t, b)->_bool;
 }
 
-method static uint8_t *ToString(self_t *b) {
+method static uint8_t *GetExpr(self_t *b) {
 	return (Bool.Unpack(b))? u8"true" : u8"false";
 }
 
@@ -29,15 +29,17 @@ method static self_t *Nor(self_t *b1, self_t *b2) {
 }
 
 method static Bool_t *Init(Bool_t *b , bool bl) {
-	b->_bool		= bl;
+	act(PrimitiveWrapper_i, b)->GetExpr		= GetExpr;
 
-	b->Unpack		= Unpack;
-	b->ToString		= ToString;
-	b->Not			= Not;
-	b->And			= And;
-	b->Or			= Or;
-	b->Nand			= Nand;
-	b->Nor			= Nor;
+	b->_bool								= bl;
+
+	b->Unpack								= Unpack;
+	b->GetExpr								= GetExpr;
+	b->Not									= Not;
+	b->And									= And;
+	b->Or									= Or;
+	b->Nand									= Nand;
+	b->Nor									= Nor;
 
 	return b;
 }
@@ -52,14 +54,13 @@ method static void Delete(Bool_t *b) {
 	delete (b);
 }
 
-
 _Bool_ Bool = {
 	.Init		= Init,
 	.New		= New,
 	.Delete		= Delete,
 
 	.Unpack		= Unpack,
-	.ToString	= ToString,
+	.GetExpr	= GetExpr,
 
 	.Not		= Not,
 	.And		= And,

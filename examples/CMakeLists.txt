@@ -10,6 +10,7 @@ add_dependencies(examples
     Defer
     DeferInFunction
 
+    Bit
     Bool
     String
 
@@ -63,6 +64,12 @@ target_link_libraries(Defer
 
 add_executable(DeferInFunction Base/DeferInFunction.c)
 target_link_libraries(DeferInFunction
+    NeoC
+    Threads::Threads
+)
+
+add_executable(Bit Type/Bit.c)
+target_link_libraries(Bit
     NeoC
     Threads::Threads
 )

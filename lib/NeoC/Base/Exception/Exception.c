@@ -1,15 +1,11 @@
 #include "NeoC/Base/Exception/Exception.h"
 
-/// method static Context_t *Init(Context_t *ctx) {
-	/// Object.Init(act(Object_t, ctx));
-	/// act(Object_t, ctx)->_Expr	= u8"(Object_t ~> Context_t)";
-
-	/// ctx->GetExpr				= Object.GetExpr;
-/// }
+method static Context_t *Init(Context_t *ctx) {
+	return ctx;
+}
 
 method static Context_t *New() {
-	/// return Context.Init(new (Context_t));
-	return new (Context_t);
+	return Context.Init(new (Context_t));
 }
 
 method static void Delete(Context_t *ctx) {
@@ -19,15 +15,13 @@ method static void Delete(Context_t *ctx) {
 }
 
 _Context Context = {
-	/// .Init			= Init,
+	.Init			= Init,
 	.New			= New,
 	.Delete			= Delete,
 };
 
 
 method static void _Setup() {
-	/// Context.GetExpr			= Object.GetExpr;
-
 	_Exception._Context		= (Context_t *)(
 		_Memory.CountedAllocate(_Exception._NEST_MAX, sizeof(Context_t))
 	);

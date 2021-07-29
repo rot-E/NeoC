@@ -5,8 +5,14 @@
 // クラス定義
 #define class typedef struct
 
+// インターフェース定義
+#define interface typedef struct
+
 // 継承
 #define extends(SPRCLS) private SPRCLS _SPRCLS
+
+// 実装
+#define implements(ITRFC) private ITRFC _ITRFC
 
 // 函数・値注釈
 #define private			// 非公開
@@ -15,6 +21,7 @@
 #define undefined		// 未定義
 #define library			// ライブラリ専用
 #define inherit			// 継承
+#define actualize		// 実装
 
 // 値注釈
 #define final			// 変更不能

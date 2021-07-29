@@ -18,13 +18,9 @@
 #include "NeoC/Base/Object.h"
 
 class Collection_t {
-	/// extends (Object_t);
-
 	private int32_t _Size;
 	private int32_t _Length;
 	private mtx_t _Mtx;
-
-	/// public uint8_t *(* GetExpr)(self_t *);
 
 	public int32_t (* GetLength)(self_t *);
 	public bool (* IsEmpty)(self_t *);
@@ -34,12 +30,10 @@ class Collection_t {
 } Collection_t;
 
 class _Collection {
-	/// public void (* _Setup)();
+	public void (* _Setup)();
 
 	public Collection_t *(* Init)(Collection_t *);
 	public void (* Delete)(Collection_t *);
-
-	/// public uint8_t *(* GetExpr)(self_t *);
 
 	public int32_t (* GetLength)(self_t *);
 	public bool (* IsEmpty)(self_t *);

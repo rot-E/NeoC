@@ -1,18 +1,18 @@
 #include "NeoC/Base/Environment.h"
 
 method static void _Setup() {
-	/// Signal._Setup();
 	_Exception._Setup();
 	_Defer._Setup();
 
 	CSI._Setup();
 	SGR._Setup();
 
+	Bit._Setup();
 	String._Setup();
+
 	System._Setup();
 	Socket._Setup();
 
-	/// Collection._Setup();
 	Tuple._Setup();
 	List._Setup();
 	Stack._Setup();

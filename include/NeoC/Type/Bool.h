@@ -2,12 +2,15 @@
 
 #include <stdbool.h>
 #include "NeoC/Base/Object.h"
+#include "NeoC/Type/PrimitiveWrapper.h"
 
 class Bool_t {
+	implements (PrimitiveWrapper_i);
+
 	private bool _bool;
 
 	public bool (* Unpack)(self_t *);
-	public uint8_t *(* ToString)(self_t *);
+	public actualize uint8_t *(* GetExpr)(self_t *);
 
 	public self_t *(* Not)(self_t *);
 	public self_t *(* And)(self_t *, self_t *);
@@ -21,7 +24,7 @@ class _Bool_ {
 	public void (* Delete)(Bool_t *);
 
 	public bool (* Unpack)(self_t *);
-	public uint8_t *(* ToString)(self_t *);
+	public actualize uint8_t *(* GetExpr)(self_t *);
 
 	public self_t *(* Not)(self_t *);
 	public self_t *(* And)(self_t *, self_t *);

@@ -41,20 +41,14 @@
 #include "NeoC/Base/Defer.h"
 
 class Context_t {
-	/// extends (Object_t);
-
 	private jmp_buf _Context;
 	private Signal_t *_Signal;
-
-	/// public inherit uint8_t *(* GetExpr)(self_t *);
 } Context_t;
 
 class _Context {
-	/// public Context_t *(* Init)(Context_t *);
+	public Context_t *(* Init)(Context_t *);
 	public Context_t *(* New)();
 	public void (* Delete)(Context_t *);
-
-	/// public inherit uint8_t *(* GetExpr)(self_t *);
 } _Context;
 
 extern _Context Context;

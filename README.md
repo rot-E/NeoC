@@ -25,7 +25,7 @@ void main() $_ {
             Console.WriteLine(String.NewFormat(
                u8"%s : %s",
                String.Unpack( map->Get(map, i).Key ),
-               Bool.ToString( map->Get(map, i).Value )
+               Bool.GetExpr( map->Get(map, i).Value )
             ));
          }
       } set
