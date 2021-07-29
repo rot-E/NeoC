@@ -25,7 +25,6 @@
 #include "NeoC/Collection/Stack.h"
 #include "NeoC/Collection/Queue.h"
 #include "NeoC/Collection/Map.h"
-//#include "NeoC/Collection/Set.h"
 
 //#include "NeoC/File/Directory.h"
 //#include "NeoC/File/File.h"

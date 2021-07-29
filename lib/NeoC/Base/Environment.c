@@ -18,7 +18,6 @@ method static void _Setup() {
 	Stack._Setup();
 	Queue._Setup();
 	Map._Setup();
-//	Set._Setup();
 }
 
 static void _DEFAULT_MAIN_EXCEPTION_HANDLER(Signal_t *sig) {
