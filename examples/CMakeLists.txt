@@ -10,7 +10,7 @@ add_dependencies(examples
     Defer
     DeferInFunction
 
-    #Bool
+    Bool
     String
 
     Console
@@ -63,6 +63,12 @@ target_link_libraries(Defer
 
 add_executable(DeferInFunction Base/DeferInFunction.c)
 target_link_libraries(DeferInFunction
+    NeoC
+    Threads::Threads
+)
+
+add_executable(Bool Type/Bool.c)
+target_link_libraries(Bool
     NeoC
     Threads::Threads
 )
@@ -159,12 +165,6 @@ target_link_libraries(Queue
 
 add_executable(Map Collection/Map.c)
 target_link_libraries(Map
-    NeoC
-    Threads::Threads
-)
-
-add_executable(Set Collection/Set.c)
-target_link_libraries(Set
     NeoC
     Threads::Threads
 )
