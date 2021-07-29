@@ -25,9 +25,10 @@ target_sources(NeoC
     SPEC/CSI.c
     SPEC/SGR.c
 
+    Type/String.c
     Type/Bit.c
     Type/Bool.c
-    Type/String.c
+    Type/Int32.c
 
     Console.c
     System.c

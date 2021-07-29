@@ -24,6 +24,12 @@ method static self_t *Or(self_t *b1, self_t *b2) {
 	return Bit.New(Bit.Unpack(b1) || Bit.Unpack(b2));
 }
 
+method static self_t *Xor(self_t *b1, self_t *b2) {
+	if (Bit.Unpack(b1) == 1 && Bit.Unpack(b1) == Bit.Unpack(b2))
+		return Bit.New(0);
+	else return Bit.Or(b1, b2);
+}
+
 method static self_t *Nand(self_t *b1, self_t *b2) {
 	return Bit.New(!(Bit.Unpack(b1) && Bit.Unpack(b2)));
 }
@@ -42,6 +48,7 @@ method static Bit_t *Init(Bit_t *bit, const int32_t b) {
 	bit->Not									= Not;
 	bit->And									= And;
 	bit->Or										= Or;
+	bit->Xor									= Xor;
 	bit->Nand									= Nand;
 	bit->Nor									= Nor;
 
@@ -72,6 +79,7 @@ _Bit Bit = {
 	.Not		= Not,
 	.And		= And,
 	.Or			= Or,
+	.Xor		= Xor,
 	.Nand		= Nand,
 	.Nor		= Nor,
 };

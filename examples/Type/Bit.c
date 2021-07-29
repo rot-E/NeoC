@@ -30,6 +30,13 @@ void main() $_ {
 	));
 
 	Console.WriteLine(String.NewFormat(
+		"%s ^ %s = %s",
+		Bit.GetExpr(b1),
+		Bit.GetExpr(b2),
+		Bit.GetExpr(Bit.Xor(b1, b2))
+	));
+
+	Console.WriteLine(String.NewFormat(
 		"%s ~* %s = %s",
 		Bit.GetExpr(b1),
 		Bit.GetExpr(b2),

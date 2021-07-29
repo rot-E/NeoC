@@ -30,6 +30,13 @@ void main() $_ {
 	));
 
 	Console.WriteLine(String.NewFormat(
+		"%s ^ %s = %s",
+		Bool.GetExpr(b1),
+		Bool.GetExpr(b2),
+		Bool.GetExpr(Bool.Xor(b1, b2))
+	));
+
+	Console.WriteLine(String.NewFormat(
 		"%s ~* %s = %s",
 		Bool.GetExpr(b1),
 		Bool.GetExpr(b2),

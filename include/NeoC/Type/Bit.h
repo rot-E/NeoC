@@ -17,6 +17,7 @@ class Bit_t {
 	public self_t *(* Not)(self_t *);
 	public self_t *(* And)(self_t *, self_t *);
 	public self_t *(* Or)(self_t *, self_t *);
+	public self_t *(* Xor)(self_t *, self_t *);
 	public self_t *(* Nand)(self_t *, self_t *);
 	public self_t *(* Nor)(self_t *, self_t *);
 } Bit_t;
@@ -35,6 +36,7 @@ class _Bit {
 	public self_t *(* Not)(self_t *);
 	public self_t *(* And)(self_t *, self_t *);
 	public self_t *(* Or)(self_t *, self_t *);
+	public self_t *(* Xor)(self_t *, self_t *);
 	public self_t *(* Nand)(self_t *, self_t *);
 	public self_t *(* Nor)(self_t *, self_t *);
 } _Bit;

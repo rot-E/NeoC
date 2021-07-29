@@ -20,6 +20,12 @@ method static self_t *Or(self_t *b1, self_t *b2) {
 	return Bool.New(Bool.Unpack(b1) || Bool.Unpack(b2));
 }
 
+method static self_t *Xor(self_t *b1, self_t *b2) {
+	if (Bool.Unpack(b1) == 1 && Bool.Unpack(b1) == Bool.Unpack(b2))
+		return Bool.New(false);
+	else return Bool.Or(b1, b2);
+}
+
 method static self_t *Nand(self_t *b1, self_t *b2) {
 	return Bool.New(!(Bool.Unpack(b1) && Bool.Unpack(b2)));
 }
@@ -38,6 +44,7 @@ method static Bool_t *Init(Bool_t *b , bool bl) {
 	b->Not									= Not;
 	b->And									= And;
 	b->Or									= Or;
+	b->Xor									= Xor;
 	b->Nand									= Nand;
 	b->Nor									= Nor;
 
@@ -65,6 +72,7 @@ _Bool_ Bool = {
 	.Not		= Not,
 	.And		= And,
 	.Or			= Or,
+	.Xor		= Xor,
 	.Nand		= Nand,
 	.Nor		= Nor,
 };

@@ -15,7 +15,9 @@
 #include "NeoC/SPEC/SGR.h"
 
 #include "NeoC/Type/String.h"
+#include "NeoC/Type/Bit.h"
 #include "NeoC/Type/Bool.h"
+#include "NeoC/Type/Int32.h"
 
 #include "NeoC/Console.h"
 #include "NeoC/System.h"

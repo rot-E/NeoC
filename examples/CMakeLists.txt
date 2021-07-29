@@ -10,9 +10,9 @@ add_dependencies(examples
     Defer
     DeferInFunction
 
+    String
     Bit
     Bool
-    String
 
     Console
     Theme
@@ -68,6 +68,12 @@ target_link_libraries(DeferInFunction
     Threads::Threads
 )
 
+add_executable(String Type/String.c)
+target_link_libraries(String
+    NeoC
+    Threads::Threads
+)
+
 add_executable(Bit Type/Bit.c)
 target_link_libraries(Bit
     NeoC
@@ -76,12 +82,6 @@ target_link_libraries(Bit
 
 add_executable(Bool Type/Bool.c)
 target_link_libraries(Bool
-    NeoC
-    Threads::Threads
-)
-
-add_executable(String Type/String.c)
-target_link_libraries(String
     NeoC
     Threads::Threads
 )

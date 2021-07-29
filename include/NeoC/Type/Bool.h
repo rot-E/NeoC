@@ -15,8 +15,10 @@ class Bool_t {
 	public self_t *(* Not)(self_t *);
 	public self_t *(* And)(self_t *, self_t *);
 	public self_t *(* Or)(self_t *, self_t *);
+	public self_t *(* Xor)(self_t *, self_t *);
 	public self_t *(* Nand)(self_t *, self_t *);
-	public self_t *(* Nor)(self_t *, self_t *);} Bool_t;
+	public self_t *(* Nor)(self_t *, self_t *);
+} Bool_t;
 
 class _Bool_ {
 	public Bool_t *(* Init)(Bool_t *, bool bl);
@@ -29,6 +31,7 @@ class _Bool_ {
 	public self_t *(* Not)(self_t *);
 	public self_t *(* And)(self_t *, self_t *);
 	public self_t *(* Or)(self_t *, self_t *);
+	public self_t *(* Xor)(self_t *, self_t *);
 	public self_t *(* Nand)(self_t *, self_t *);
 	public self_t *(* Nor)(self_t *, self_t *);
 } _Bool_;
