@@ -1,6 +1,6 @@
 #include <NeoC/Base/Defer.h>
 #include <NeoC/Base/Environment.h>
-#include <NeoC/String.h>
+#include <NeoC/Type/String.h>
 #include <NeoC/Console.h>
 
 String_t *fn() {

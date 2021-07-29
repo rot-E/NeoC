@@ -1,5 +1,5 @@
 #include <NeoC/Base/Environment.h>
-#include <NeoC/String.h>
+#include <NeoC/Type/String.h>
 #include <NeoC/SPEC/CC.h>
 #include <NeoC/SPEC/SGR.h>
 #include <NeoC/Console.h>

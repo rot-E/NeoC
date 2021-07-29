@@ -25,7 +25,9 @@ target_sources(NeoC
     SPEC/CSI.c
     SPEC/SGR.c
 
-    String.c
+    #Type/Bool.c
+    Type/String.c
+
     Console.c
     System.c
     Socket.c

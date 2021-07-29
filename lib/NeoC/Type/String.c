@@ -1,4 +1,4 @@
-#include "NeoC/String.h"
+#include "NeoC/Type/String.h"
 
 method static void _Setup() {
 	String.Exception signal;
@@ -47,7 +47,7 @@ method static int32_t LastIndexOf(self_t *str, const uint8_t ch) throws (String.
 	throw (Signal.New(String.Failure));
 }
 
-method static String_t *Substring(self_t *str, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception) {
+method static self_t *Substring(self_t *str, const int32_t beginIndex, const int32_t lastIndex) throws (String.Exception) {
 	if (   String.GetLength(str) + 1 < beginIndex
 		|| String.GetLength(str) + 1 < lastIndex
 		|| beginIndex > lastIndex ) throw (Signal.New(String.Exception));
@@ -61,11 +61,11 @@ method static String_t *Substring(self_t *str, const int32_t beginIndex, const i
 	return String.New(s);
 }
 
-method static String_t *DropLastChar(self_t *str) throws (String.Exception) {
+method static self_t *DropLastChar(self_t *str) throws (String.Exception) {
 	return String.Substring(str, 0, String.GetLength(str));
 }
 
-method static String_t *ReplaceWithChar(self_t *str, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception) {
+method static self_t *ReplaceWithChar(self_t *str, const uint8_t oldChar, const uint8_t newChar) throws (String.Exception) {
 	uint8_t *s = (uint8_t *)(
 		_Memory.CountedAllocate(String.GetLength(str) + 1, sizeof(uint8_t))
 	);
@@ -76,7 +76,7 @@ method static String_t *ReplaceWithChar(self_t *str, const uint8_t oldChar, cons
 	return String.New(s);
 }
 
-method static String_t *Concat(self_t *str, String_t *str2) {
+method static self_t *Concat(self_t *str, self_t *str2) {
 	uint8_t *s = (uint8_t *)(
 		_Memory.CountedAllocate(String.GetLength(str) + String.GetLength(str2) + 1, sizeof(uint8_t))
 	);
@@ -87,7 +87,7 @@ method static String_t *Concat(self_t *str, String_t *str2) {
 	return String.New(s);
 }
 
-method static String_t *ConcatChar(self_t *str, const uint8_t ch) {
+method static self_t *ConcatChar(self_t *str, const uint8_t ch) {
 	uint8_t *s = (uint8_t *)(
 		_Memory.CountedAllocate(1 + String.GetLength(str) + 1, sizeof(uint8_t))
 	);
@@ -104,7 +104,7 @@ method static bool IsEmpty(self_t *str) {
 	return String.GetLength(str) == 0;
 }
 
-method static bool Equals(self_t *str, String_t *anString) {
+method static bool Equals(self_t *str, self_t *anString) {
 	return !strncmp(
 		String.Unpack(str),
 		String.Unpack(anString),
@@ -113,7 +113,7 @@ method static bool Equals(self_t *str, String_t *anString) {
 	) == 1;
 }
 
-method static bool StartsWith(self_t *str, String_t *prefix) throws (String.Exception) {
+method static bool StartsWith(self_t *str, self_t *prefix) throws (String.Exception) {
 	if (String.GetLength(str) < String.GetLength(prefix))
 		throw (Signal.New(String.Exception));
 
@@ -128,7 +128,7 @@ method static bool StartsWithChar(self_t *str, const uint8_t ch) throws (String.
 	return String.GetHeadChar(str) == ch;
 }
 
-method static bool EndsWith(self_t *str, String_t *suffix) throws (String.Exception) {
+method static bool EndsWith(self_t *str, self_t *suffix) throws (String.Exception) {
 	if (String.GetLength(str) < String.GetLength(suffix))
 		throw (Signal.New(String.Exception));
 

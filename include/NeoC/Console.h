@@ -5,7 +5,7 @@
 #include "NeoC/SPEC/CC.h"
 #include "NeoC/SPEC/CSI.h"
 #include "NeoC/SPEC/SGR.h"
-#include "NeoC/String.h"
+#include "NeoC/Type/String.h"
 
 class _Console {
 	public void (* SetState)(uint8_t *escSeq);

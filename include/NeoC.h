@@ -14,7 +14,9 @@
 #include "NeoC/SPEC/CSI.h"
 #include "NeoC/SPEC/SGR.h"
 
-#include "NeoC/String.h"
+#include "NeoC/Type/String.h"
+#include "NeoC/Type/Bool.h"
+
 #include "NeoC/Console.h"
 #include "NeoC/System.h"
 #include "NeoC/Socket.h"

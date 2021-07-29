@@ -10,7 +10,9 @@ add_dependencies(examples
     Defer
     DeferInFunction
 
+    #Bool
     String
+
     Console
     Theme
     Theme2
@@ -65,7 +67,7 @@ target_link_libraries(DeferInFunction
     Threads::Threads
 )
 
-add_executable(String String.c)
+add_executable(String Type/String.c)
 target_link_libraries(String
     NeoC
     Threads::Threads

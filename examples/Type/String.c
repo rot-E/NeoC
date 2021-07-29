@@ -1,7 +1,7 @@
 #include <NeoC/Base/Environment.h>
 #include <NeoC/Base/Exception/Signal.h>
 #include <NeoC/Base/Exception/Exception.h>
-#include <NeoC/String.h>
+#include <NeoC/Type/String.h>
 #include <NeoC/Console.h>
 
 void main() $_ {

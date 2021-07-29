@@ -10,7 +10,7 @@
 #include "NeoC/Base/Exception/Signal.h"
 #include "NeoC/Base/Exception/Exception.h"
 #include "NeoC/Base/Defer.h"
-#include "NeoC/String.h"
+#include "NeoC/Type/String.h"
 
 class Socket_t {
 	extends (Object_t);
