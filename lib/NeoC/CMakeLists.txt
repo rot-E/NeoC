@@ -29,6 +29,7 @@ target_sources(NeoC
     Type/Bit.c
     Type/Bool.c
     Type/Int32.c
+    Type/UInt32.c
 
     Console.c
     System.c

@@ -26,10 +26,10 @@ method static Int32_t *New(const int32_t i32) {
 	return Int32.Init(new (Int32_t), i32);
 }
 
-method static void Delete(Int32_t *i32) {
-	if (i32 == NULL) return;
+method static void Delete(Int32_t *int32) {
+	if (int32 == NULL) return;
 
-	delete (i32);
+	delete (int32);
 }
 
 _Int32 Int32 = {
