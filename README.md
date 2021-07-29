@@ -15,17 +15,17 @@ void main() $_ {
    uint8_t target = 'i';
    try {
       defer {
-         Map_t *map = Map.New() in (String_t *, Bool_t *);
+         Map_t *map = Map.New() in (String_t *, Int32_t *);
 
-         map->Put(map, String.New(u8"NeoC!    "), Bool.New(false));
-         map->Put(map, String.New(u8"NeoC!!!  "), Bool.New(false));
-         map->Put(map, String.New(u8"NeoC!!!!!"), Bool.New(true));
+         map->Put(map, String.New(u8"NeoC!    "), Int32.New(1));
+         map->Put(map, String.New(u8"NeoC!!!  "), Int32.New(3));
+         map->Put(map, String.New(u8"NeoC!!!!!"), Int32.New(5));
 
          for (int32_t i = 0; i < map->GetLength(map); i++) {
             Console.WriteLine(String.NewFormat(
                u8"%s : %s",
                String.Unpack( map->Get(map, i).Key ),
-               Bool.GetExpr( map->Get(map, i).Value )
+               Int32.GetExpr( map->Get(map, i).Value )
             ));
          }
       } set
