@@ -18,6 +18,7 @@
 #include "NeoC/Type/Bit.h"
 #include "NeoC/Type/Bool.h"
 #include "NeoC/Type/Int32.h"
+#include "NeoC/Type/UInt32.h"
 
 #include "NeoC/Console.h"
 #include "NeoC/System.h"
