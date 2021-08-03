@@ -126,7 +126,7 @@ GCC拡張を使用しているため、コンパイラにはGCCを使用する�
 <br><br>
 
 ## Installation
-`NeoC/include/` `NeoC/build/lib/libNeoC.a` を任意のディレクトリに配置する。
+`NeoC/include/` `NeoC/build/lib/libNeoC.a` を任意のディレクトリに配置する方法は次の通り。
 
 インストールする場合、ビルド環境の作成の際に `CMAKE_BUILD_TYPE` には `Release` を、`CMAKE_INSTALL_PREFIX` には配置先のディレクトリを指定することを推奨する。
 ```fish
@@ -136,7 +136,7 @@ GCC拡張を使用しているため、コンパイラにはGCCを使用する�
 <br>
 
 ## Usage
-### 1. 一時凌ぎの場合...
+### 1. 一時凌ぎの場合
 ```fish
 $ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthread Source.c -o Exec
 ```
