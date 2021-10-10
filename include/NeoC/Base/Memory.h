@@ -24,7 +24,9 @@ class __Memory {
 	public any *(* ReAllocate)(any *ptr, const size_t size);
 
 	/* 解放系 */
-	public void (* Free)(void *ptr);
+	public void (* Free)(any *ptr);
+	public void (* SharedFree)(any *ptr, const size_t size);
+	public void (* Delete)(any *ptr);
 } __Memory;
 
 extern __Memory _Memory;
