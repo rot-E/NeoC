@@ -45,9 +45,13 @@ method static void Delete(any *ptr) {
 }
 
 __Memory _Memory = {
-	.Allocate					= Allocate,
-	.CountedAllocate			= CountedAllocate,
-	.SharedAllocate				= SharedAllocate,
-	.ReAllocate					= ReAllocate,
-	.Free						= Free,
+	.Allocate			= Allocate,
+	.CountedAllocate	= CountedAllocate,
+	.SharedAllocate		= SharedAllocate,
+
+	.ReAllocate			= ReAllocate,
+
+	.Free				= Free,
+	.SharedFree			= SharedFree,
+	.Delete				= Delete,
 };
