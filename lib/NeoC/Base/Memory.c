@@ -37,13 +37,6 @@ method static void SharedFree(any *ptr, const size_t size) {
 	munmap(ptr, size);
 }
 
-method static void Delete(any *ptr) {
-	if (ptr == NULL) return;
-
-	free(ptr);
-	ptr = NULL;
-}
-
 __Memory _Memory = {
 	.Allocate			= Allocate,
 	.CountedAllocate	= CountedAllocate,
@@ -53,5 +46,4 @@ __Memory _Memory = {
 
 	.Free				= Free,
 	.SharedFree			= SharedFree,
-	.Delete				= Delete,
 };
