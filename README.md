@@ -138,7 +138,8 @@ GCC拡張を使用しているため、コンパイラにはGCCを使用する�
 ## Usage
 ### 1. 一時凌ぎの場合
 ```fish
-$ gcc -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthread Source.c -o Exec
+$ gcc Source.c -Ipath-to-NeoC-include-directory -Lpath-to-NeoC-archive-file -lNeoC -lpthread -o Exec
+$ gcc String.c -I ~/.local/include -L ~/.local/lib -l NeoC -l pthread -o String
 ```
 **→** `./Exec`
 <br><br>
